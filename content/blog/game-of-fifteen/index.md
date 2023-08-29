@@ -9,10 +9,10 @@ math = false
 image = "banner.jpg"
 +++
 
-## How to play
-
 The Game of Fifteen is a sliding puzzle that consists of a square with tiles numbered from 1 to 15 in random order with one tile missing.
 To solve the puzzle, you must place the tiles in order by moving tiles to the empty space.
+
+## How to play
 
 Play the game online by clicking/tapping on the tile you want to move.
 Only tiles neighboring the empty space can be moved.
