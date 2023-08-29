@@ -1,0 +1,17 @@
+{
+  "name": "zolarwind",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "css:build": "npx tailwindcss -i ./css/main.css -o ./static/css/generated.css --minify",
+    "css:watch": "npx tailwindcss -i ./css/main.css -o ./static/css/generated.css --watch",
+    "server": "zola serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
+  }
+}

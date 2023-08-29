@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="{{ config.default_language }}">
+<head>
+  {# Initialize language resources #}
+  {% set res         = load_data(path=config.extra.path_language_resources ~ config.default_language ~ '.toml') %}
+  {% set locale      = res.settings_locale      | default(value="en")        %}
+  {% set date_locale = res.settings_date_locale | default(value="en_US")     %}
+  {% set date_format = res.settings_date_format | default(value="%B %d, %Y") %}
+
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name=generator content="{{ config.extra.generator | default(value='Zola') }}">
+
+  <title>{{ config.extra.title }}</title>
+  <link rel="stylesheet" href="/css/generated.css">
+  <link rel="icon" href="{{ config.extra.favicon_svg }}" />
+  {% if page.extra.math %}
+    <!-- Calculate sha384: openssl dgst -sha384 -binary FILENAME.EXT | openssl base64 -A -->
+    <link rel="stylesheet" href="/js/katex/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn">
+    <script defer src="/js/katex/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx"></script>
+    <script defer src="/js/katex/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"></script>
+    <script defer src="/js/katex-config.js" integrity="sha384-nvMU92JREtcI6oa8M5sYH7zIpj3Sj8Lm+jqpbEM3qFFZnbRTncJiX0qgBmStmTdZ"></script>
+  {% endif %}
+</head>
+<body>
+  {% include "partials/header.html" %}
+  <div id="content">
+    {% block content %}{% endblock content %}
+  </div>
+  {% include "partials/footer.html" %}
+</body>
+</html>

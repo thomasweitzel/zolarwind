@@ -1,0 +1,19 @@
+# Misc
+logs/
+*.zip
+*~
+*.lock
+
+# Project
+node_modules/
+public/
+target/
+
+# Mac
+.DS_Store
+
+# JetBrains
+.idea/*
+.fleet/*
+*.iws
+*.iml

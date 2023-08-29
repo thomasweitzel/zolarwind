@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% set banner = page.extra.image | default(value="/img/default-banner.jpg") %}
+
+  <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+    <article class="prose">
+      <div class="h-48 bg-center bg-no-repeat bg-cover rounded-md" style="background-image: url('{{ banner }}')"></div>
+      <h1>{{ page.title | default(value=res.empty_page_title) | striptags }}</h1>
+      <div>
+        <p>
+          <span class="mr-2 text-sm">
+            {{ page.date | date(locale=date_locale, format=date_format) }} &middot;
+            {{ page.word_count | num_format(locale=locale) }} {{ page.word_count | pluralize(singular=res.words.one, plural=res.words.other) }} &middot;
+            {{ page.reading_time | num_format(locale=locale) }} {{ page.reading_time | pluralize(singular=res.minutes.one, plural=res.minutes.other) }} {{ res.reading_time }}
+          </span>
+          {% include "partials/tags.html" %}
+        </p>
+      </div>
+
+      <div>
+        {{ page.content | safe }}
+      </div>
+    </article>
+  </div>
+
+{% endblock %}

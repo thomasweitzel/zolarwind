@@ -1,0 +1,83 @@
+{% set current_path = "" %}
+{% if page is defined %}
+  {% set current_path = page.path %}
+{% elif section is defined %}
+  {% set current_path = section.path %}
+{% endif %}
+
+<header class="sticky top-0 w-full z-10">
+  <nav class="bg-gray-600">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <a href="/" aria-label="{{ res.aria_to_homepage }}">
+              <div class="h-8 w-8 text-gray-200 hover:text-white fill-current">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
+                  <path d="M3 12L5 10M5 10L12 3L19 10M5 10V20C5 20.5523 5.44772 21 6 21H9M19 10L21 12M19 10V20C19 20.5523 18.5523 21 18 21H15M9 21C9.55228 21 10 20.5523 10 20V16C10 15.4477 10.4477 15 11 15H13C13.5523 15 14 15.4477 14 16V20C14 20.5523 14.4477 21 15 21M9 21H15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </a>
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-8 flex items-baseline">
+              {% for entry in config.extra.menu_pages %}
+                {% if entry.url == current_path %}
+                  <span class="px-3 py-2 ml-2 rounded-md font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-600">{{ entry.title }}</span>
+                {% else %}
+                  <a class="px-3 py-2 ml-2 rounded-md font-medium text-gray-200 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-600" href="{{ entry.url | safe }}" title="{{ entry.title }}">{{ entry.title }}</a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="-mr-2 flex md:hidden">
+          <a href="javascript:void(0);" class="icon" onclick="toggleMobileMenu()">
+            <button class="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white" aria-label="{{ res.aria_menu }}">
+              <span id="mobile-icon-menu-unselected" class="block">
+                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </span>
+              <span id="mobile-icon-menu-selected" class="hidden">
+                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </span>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <span id="mobile-menu" class="hidden">
+      <div class="block md:hidden">
+        <div class="px-2 pt-2 pb-3 sm:px-3">
+          {% for entry in config.extra.menu_pages %}
+            {% if entry.url == current_path %}
+              <span class="block px-3 py-2 rounded-md font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-600">{{ entry.title }}</span>
+            {% else %}
+              <a class="mt-1 block px-3 py-2 rounded-md font-medium text-gray-200 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-600" href="{{ entry.url | safe }}" title="{{ entry.title }}">{{ entry.title }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </span>
+  </nav>
+</header>
+
+<script>
+  // Toggle the mobile menu on small screens (dropdown)
+  function toggleMobileMenu() {
+    const ids = ['mobile-menu', 'mobile-icon-menu-unselected', 'mobile-icon-menu-selected'];
+    ids.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) {
+        if (element.className === 'hidden') {
+          element.className = 'block';
+        } else {
+          element.className = 'hidden';
+        }
+      }
+    });
+  }
+</script>

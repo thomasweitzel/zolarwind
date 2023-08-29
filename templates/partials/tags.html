@@ -1,0 +1,9 @@
+<span class="text-sm leading-5 font-medium text-indigo-600">
+{% if page.taxonomies %}
+  {% if page.taxonomies.tags %}
+    {% for tag in page.taxonomies.tags %}
+      <span class="mr-2 badge badge-green"><a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">{{ tag }}</a></span>
+    {% endfor %}
+  {% endif %}
+{% endif %}
+</span>

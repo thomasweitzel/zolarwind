@@ -1,0 +1,34 @@
+# Global settings
+settings_locale = "en"
+settings_date_locale = "en_US"
+settings_date_format = "%B %d, %Y"
+
+# Simple language resources
+empty_page_title = "Empty title"
+empty_page_description = "Empty description"
+read_more = "Read more"
+previous_posts = "Previous posts"
+next_posts = "Next posts"
+reading_time = "reading time"
+aria_to_homepage = "Go to homepage"
+aria_menu = "Menu"
+with_tag = "with tag"
+not_found_header = "The page you requested could not be found."
+not_found_text = "Oops! Seems like this page vanished into the internet abyss. Maybe it's on vacation? Please check the URL or ping me, and I'll see if I can locate it, or at least send out a search party."
+
+# Nouns with singular and plural
+[words]
+one = "word"
+other = "words"
+
+[minutes]
+one = "minute"
+other = "minutes"
+
+[posts]
+one = "post"
+other = "posts"
+
+[tags]
+one = "tag"
+other = "tags"

@@ -1,0 +1,121 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+    .badge {
+        @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium leading-4
+    }
+
+    .badge-gray {
+        @apply bg-gray-100 text-gray-800
+    }
+
+    .badge-red {
+        @apply bg-red-100 text-red-800
+    }
+
+    .badge-orange {
+        @apply bg-orange-100 text-orange-800
+    }
+
+    .badge-yellow {
+        @apply bg-yellow-100 text-yellow-800
+    }
+
+    .badge-green {
+        @apply bg-green-100 text-green-800
+    }
+
+    .badge-teal {
+        @apply bg-teal-100 text-teal-800
+    }
+
+    .badge-blue {
+        @apply bg-blue-100 text-blue-800
+    }
+
+    .badge-indigo {
+        @apply bg-indigo-100 text-indigo-800
+    }
+
+    .badge-purple {
+        @apply bg-purple-100 text-purple-800
+    }
+
+    .badge-pink {
+        @apply bg-pink-100 text-pink-800
+    }
+
+    .prose {
+        @apply leading-normal;
+    }
+    .prose > * + * {
+            @apply mt-4;
+    }
+    .prose strong {
+        @apply text-black font-bold;
+    }
+    .prose strong a {
+        @apply font-bold;
+    }
+    .prose h1 {
+        @apply text-xl font-bold mt-8;
+    }
+    .prose h2 {
+        @apply text-lg font-bold mt-8;
+    }
+    .prose h3 {
+        @apply font-bold mt-8;
+    }
+    .prose p {
+        @apply mt-4;
+    }
+    .prose blockquote {
+        @apply border-l-4 border-gray-600 pl-4 italic;
+    }
+    .prose p code, .prose ol code, .prose ul code {
+        @apply px-1 font-mono text-sm border border-gray-200 bg-indigo-50 rounded-sm
+    }
+    .prose pre {
+        @apply block my-4 p-4 rounded-md font-mono text-sm shadow-md overflow-x-hidden
+    }
+    .prose ul {
+        @apply pl-4 list-disc;
+        @apply sm:pl-8
+    }
+    .prose ol {
+        @apply pl-4 list-decimal;
+        @apply sm:pl-8
+    }
+    .prose td, .prose th {
+        @apply px-2 py-1 border border-gray-200;
+    }
+    .prose tbody tr:nth-child(odd) {
+        @apply bg-gray-100;
+    }
+    .prose table {
+        @apply my-4;
+    }
+
+    body {
+        @apply text-gray-700 bg-gray-50 antialiased
+    }
+
+    h1 {
+        @apply text-2xl font-bold;
+    }
+    h2 {
+        @apply text-xl font-bold;
+    }
+    h3 {
+        @apply text-lg font-bold;
+    }
+
+    a {
+        @apply text-blue-600 no-underline;
+    }
+    a:hover {
+        @apply text-blue-400;
+    }
+}

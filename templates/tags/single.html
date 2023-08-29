@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% set tag_item_count = term.pages | length %}
+<div class="max-w-7xl mx-auto pt-8 px-4 sm:px-6 lg:px-8">
+  <h1 class="text-center lg:text-left">
+    <span>{{ tag_item_count | num_format(locale=locale) }} {{ tag_item_count | pluralize(singular=res.posts.one, plural=res.posts.other) }} {{ res.with_tag }}</span>
+    <span class="px-4 py-2 bg-green-100 rounded-full">{{ term.name }}</span>
+  </h1>
+</div>
+{% include "partials/list.html" %}
+{% endblock %}
