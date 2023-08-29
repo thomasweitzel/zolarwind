@@ -51,7 +51,7 @@
         @apply leading-normal;
     }
     .prose > * + * {
-            @apply mt-4;
+        @apply mt-4;
     }
     .prose strong {
         @apply text-black font-bold;
