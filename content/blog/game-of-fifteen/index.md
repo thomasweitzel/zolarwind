@@ -72,16 +72,14 @@ Because we do not want to present an unsolvable game.
 Here is a fragment of source code that calculates the parity and checks if it's even for the examples from above.
 
 ``` js
-const size = 3;
-
 // for (let i = 0; i < limit; i += 1) {...} vs
-// range0(size).forEach((i) => {...})
+// range0(limit).forEach((i) => {...})
 const range0 = (limit) => [...Array(limit).keys()];
 
 const isEvenPermutation = (p) => parity(p) % 2 === 0;
 
-const parity = (p) => range0(size)
-  .map((i) => range0(size)
+const parity = (p) => range0(p.length)
+  .map((i) => range0(p.length)
     .filter((j) => i < j && p[i] > p[j])
     .length
   )
