@@ -4,7 +4,7 @@ title = "The Game of Fifteen"
 description = "A playable online game. Not every possible starting position is solvable, so we have to take special care."
 authors = ["Thomas Weitzel"]
 [taxonomies]
-tags=["javascript"]
+tags = ["javascript"]
 [extra]
 math = false
 image = "banner.jpg"

@@ -4,7 +4,7 @@ title = "Internal Rate of Return Calculation"
 description = "Deconstructing the math of investment: estimate the annualized rate of return with the IRR algorithm and its Rust implementation."
 authors = ["Thomas Weitzel"]
 [taxonomies]
-tags=["rust", "math"]
+tags = ["rust", "math"]
 [extra]
 math = true
 image = "banner.jpg"

@@ -4,7 +4,7 @@ title = "Tail Recursion with Trampoline"
 description = "Node.js does not support tail call optimization, but a trampoline has the same effect."
 authors = ["Thomas Weitzel"]
 [taxonomies]
-tags=["javascript"]
+tags = ["javascript"]
 [extra]
 math = true
 image = "banner.jpg"
