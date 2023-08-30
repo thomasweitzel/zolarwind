@@ -3,6 +3,7 @@ date = 2020-01-08
 title = "Terms"
 description = "The terms of use for this site"
 template = "page.html"
+authors = ["Thomas Weitzel"]
 +++
 
 _These terms have been last updated on January 8, 2020_.

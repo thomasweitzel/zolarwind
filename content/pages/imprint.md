@@ -3,6 +3,7 @@ date = 2019-03-11
 title = "Imprint"
 description = "Necessary legal stuff"
 template = "page.html"
+authors = ["Thomas Weitzel"]
 +++
 
 <!-- Add two spaces after each line to enforce line break -->

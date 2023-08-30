@@ -3,6 +3,7 @@ date = 2019-03-11
 title = "Privacy Policy"
 description = "My privacy rules"
 template = "page.html"
+authors = ["Thomas Weitzel"]
 +++
 
 ### Data protection
