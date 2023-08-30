@@ -316,6 +316,8 @@ That way, your local web browser will automatically reload  the page with the up
 
 ## Remarks
 
+### Typography for markdown
+
 I'm not using `@tailwindcss/typography` for styling of markdown files.
 I don't like how it looks.
 Instead, I use `@apply` in the `css/main.css` file.
@@ -327,6 +329,31 @@ But it gives me fine-grained control over how the end result looks like.
 While it is time-consuming, I prefer this solution over the `@tailwindcss/typography` plugin.
  
 Yes, I'm reinventing the wheel here, because for common typographic patterns, I'm just recreating what's already provided by the typography plugin.
+
+### Serve KaTex files locally
+
+All KaTex files are included in the `static` directory for this theme.
+Using KaTeX (or any other library) by serving it from a Content Delivery Network (CDN) has implications concerning the General Data Protection Regulation (GDPR) and the use of cookies:
+
+- **Third-Party Requests & Data Privacy**: When you load resources from a CDN, it triggers third-party requests to the CDN's servers.
+  These servers might log your IP address, user agent, and other request-related metadata.
+  Under GDPR, IP addresses can be considered personal data.
+  By serving KaTeX from your domain, you reduce third-party data transfers, limiting the amount of personal data you expose to external entities.
+
+- **Cookies**: Many CDNs set cookies for various reasons, including analytics or performance optimizations.
+  These cookies can track users across different websites that use the same CDN, potentially infringing on their privacy rights.
+  By hosting KaTeX on your domain, you have full control over the cookies set and can ensure compliance with GDPR.
+
+- **Consent**: If you're using a CDN that sets cookies or collects data, you might need to get explicit user consent before loading resources from that CDN.
+  This can complicate user experience and lead to a reduced site performance for users who opt-out.
+  By self-hosting, you circumvent this issue.
+
+- **Transparency & Control**: By self-hosting, you know exactly which version of KaTeX you're using and can ensure there are no modifications or unexpected behaviors.
+  With CDNs, there's a minor risk of the library being compromised, which could affect all sites using that resource.
+
+- **Data Transfer Outside the EU**: If the CDN servers are located outside the European Union, you might be transferring data out of the EU,
+  which adds another layer of GDPR compliance requirements.
+  By self-hosting, you ensure that user data doesn't leave the region unless you specifically choose a hosting solution outside the EU.
 
 ---
 
