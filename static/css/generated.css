@@ -580,6 +580,16 @@ video {
   border-radius: 0.375rem;
 }
 
+.prose .footnote-definition {
+  margin-top: 1rem;
+}
+
+.prose .footnote-definition sup, .prose .footnote-definition p {
+  display: inline;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 body {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));

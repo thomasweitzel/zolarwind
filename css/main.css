@@ -90,6 +90,12 @@
     .prose img {
         @apply my-4 rounded-md;
     }
+    .prose .footnote-definition {
+        @apply mt-4;
+    }
+    .prose .footnote-definition sup, .prose .footnote-definition p {
+        @apply inline text-sm;
+    }
 
     body {
         @apply text-gray-700 bg-gray-50 antialiased
