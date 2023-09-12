@@ -11,7 +11,7 @@
       <div>
         <p>
           <span class="mr-2 text-sm">
-            {{ page.date | date(locale=date_locale, format=date_format) }} &middot;
+            <time datetime="{{ page.date | date(format='%Y-%m-%d') }}">{{ page.date | date(locale=date_locale, format=date_format) }}</time> &middot;
             {{ page.word_count | num_format(locale=locale) }} {{ page.word_count | pluralize(singular=res.words.one, plural=res.words.other) }} &middot;
             {{ page.reading_time | num_format(locale=locale) }} {{ page.reading_time | pluralize(singular=res.minutes.one, plural=res.minutes.other) }} {{ res.reading_time }}
           </span>
