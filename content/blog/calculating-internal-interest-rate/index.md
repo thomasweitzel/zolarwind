@@ -72,7 +72,7 @@ $$y_i = \frac{d_i - d_1}{365}$$
 The NPV is the sum of all payments, where the correct interest rate $irr$ is applied.
 Its value is 0 after all transaction have been concluded:
 
-$$\mathit{NPV} = \sum_{i = 1}^{n} \frac{p_i}{(1 + irr)^{y_i}}$$
+$$\mathit{NPV} = \sum_{i = 1}^{m} \frac{p_i}{(1 + irr)^{y_i}}$$
 
 When you [plot](https://www.wolframalpha.com/input?i=plot+-10000*%281%2F%281+%2B+x%29%5E%280.0000%29%29+%2B+2750*%281%2F%281+%2B+x%29%5E%280.1644%29%29+%2B+4250*%281%2F%281+%2B+x%29%5E%280.8301%29%29+%2B+3250*%281%2F%281+%2B+x%29%5E%281.1260%29%29+%2B+2750*%281%2F%281+%2B+x%29%5E%281.2493%29%29+from+x%3D-0.1+to+0.9) the NPV function as a function of $irr$,
 you are essentially varying the interest rate and observing how it affects the NPV.
@@ -86,7 +86,7 @@ Here's what you see on the graph below, which plots the NPV as a function of the
   This is because as you increase the interest rate $irr$, the present value of future cash flows decreases.
   Higher interest rates mean that future cash flows are being discounted more heavily, which reduces their present value.
 - **Break-even point**: There will be a point on the graph where the NPV curve intersects the x-axis.
-It's where our $irr$ satisfies the condition $\mathit{NPV} = 0$.
+  It's where our $irr$ satisfies the condition $\mathit{NPV} = 0$.
   For our data, it is somewhere between $0.35$ and $0.40$, or $35\\%$ and $40\\%$.
 
 ![Plot of the NPV as a function of the rate with the values from the table](irr-npv-function.png)
@@ -148,7 +148,7 @@ The method begins with an initial estimate $x_n$, which is then refined into a m
 This stage is where the NPV and its derivative come into play.
 Instead of solely employing $f_i(x_n)$ and $f_i'(x_n)$ for a single cash flow, we incorporate all the cash flows by adding up the NPV terms and derivative terms respectively:
 
-$$x_{n+1} = x_{n} - \frac{\sum_{i = 1}^{n} f_i(x_n)}{\sum_{i = 1}^{n} f_i'(x_n)} $$
+$$x_{n+1} = x_{n} - \frac{\sum_{i = 1}^{m} f_i(x_n)}{\sum_{i = 1}^{m} f_i'(x_n)} $$
 
 ## Iterate until convergence
 
@@ -172,12 +172,8 @@ use chrono::prelude::*;
 
 // Function to calculate the number of days between two dates
 fn days_between(start_date: NaiveDate, end_date: NaiveDate) -> i64 {
-    // As Duration only works for same DateTime, Dates need to be converted to DateTime
-    let start_datetime = DateTime::<Utc>::from_utc(start_date.and_hms_opt(0, 0, 0).unwrap(), Utc);
-    let end_datetime = DateTime::<Utc>::from_utc(end_date.and_hms_opt(0, 0, 0).unwrap(), Utc);
-
-    // Calculate duration
-    let duration = end_datetime.signed_duration_since(start_datetime);
+    // Calculate the duration between the two dates
+    let duration = end_date.signed_duration_since(start_date);
 
     // Return the duration in days
     duration.num_days()
