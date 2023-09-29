@@ -2,7 +2,7 @@
 
 # The Zolarwind Theme for Zola
 
-Welcome to Zolarwind, the simple Zola blog theme with Tailwind CSS, Mermaid, and KaTex support.
+Welcome to Zolarwind, the simple Zola blog theme with Tailwind CSS and KaTex support.
 This theme is for Zola users aiming to have a nice blog design powered by Tailwind CSS.
 It seamlessly integrates with [Mermaid](https://mermaid.js.org), enabling the creation of various diagrams
 directly within your blog posts using a Markdown-inspired syntax.
@@ -175,7 +175,7 @@ If you do not provide an image under `extra.image`, a default image is used inst
   If the entry is omitted or set to `false`, the post will not have KaTex support.
 
 - **extra.diagram**: either `false` (default) or `true`.
-  Controls loading of the necessary JavaScript to render the Mermaid diagram,
+  Controls loading of the necessary JavaScript to render the Mermaid diagram.
   If set to `true`, the post will be rendered with Mermaid support for displaying diagrams
   by using the `diagram()` shortcode.
 
