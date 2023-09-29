@@ -67,7 +67,10 @@
     .prose p code, .prose ol code, .prose ul code {
         @apply px-1 font-mono text-sm border border-gray-200 bg-indigo-50 rounded-sm
     }
-    .prose pre {
+    .prose pre.mermaid {
+        @apply block my-4 font-mono text-sm overflow-x-hidden
+    }
+    .prose pre:not(.mermaid) {
         @apply block my-4 p-4 rounded-md font-mono text-sm shadow-md overflow-x-hidden
     }
     .prose ul {

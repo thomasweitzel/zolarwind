@@ -1,0 +1,6 @@
+<pre class="mermaid">
+  {% if init %}
+    %%{ init: {{ init | safe }} }%%
+  {% endif %}
+  {{ body | safe }}
+</pre>
