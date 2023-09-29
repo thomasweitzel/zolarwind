@@ -95,7 +95,7 @@ In this example, we're using the `forest` theme and changing the primary color t
 **Note**: Ensure that you use single quotes inside the double quotes for the configuration to work correctly.
 
 ### Putting it all together
-Use the shortcode by enclosing your Mermaid diagram code with `{​% diagram %​} ... {% end %}`.
+Use the shortcode by enclosing your Mermaid diagram code with `{​% diagram() %​} ... {% end %}`.
 To change the look of the Mermaid theme, provide values for the init parameter.
 Always enclose the init value with double quotes, and use single quotes inside the configuration string.
 With this shortcode in place, integrating and customizing Mermaid diagrams in your blog posts becomes a breeze!
