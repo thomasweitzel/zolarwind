@@ -15,31 +15,36 @@ image = "banner.jpg"
 
 [Mermaid](https://mermaid.js.org) is a syntax similar to Markdown where you can use text to describe and automatically generate diagrams.
 With Mermaid, you can generate
-[flow charts](https://mermaid.js.org/syntax/flowchart.html),
-[UML diagrams](https://mermaid.js.org/syntax/zenuml.html),
-[pie charts](https://mermaid.js.org/syntax/pie.html),
+[Flow charts](https://mermaid.js.org/syntax/flowchart.html),
+[UML diagrams](https://mermaid.js.org/syntax/classDiagram.html),
+[Pie charts](https://mermaid.js.org/syntax/pie.html),
 [Gantt diagrams](https://mermaid.js.org/syntax/gantt.html),
-[Git diagrams](https://mermaid.js.org/syntax/gitgraph.html),
+[Entity Relationship diagrams](https://mermaid.js.org/syntax/entityRelationshipDiagram.html),
 and more.
 
-## A Git diagram example
+## An Entity Relationship diagram example
 
 {% diagram(init="{'theme': 'forest'}") %}
-gitGraph
-  commit id: "feat(api): ..."
-  commit id: "a"
-  commit id: "b"
-  commit id: "fix(client): .extra long label.."
-  branch c2
-  commit id: "feat(modules): ..."
-  commit id: "test(client): ..."
-  checkout main
-  commit id: "fix(api): ..."
-  commit id: "ci: ..."
-  branch b1
-  commit
-  branch b2
-  commit
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINEITEM : contains
+    PRODUCT ||--o{ LINEITEM : is_listed_in
+    CUSTOMER {
+        string Name
+        string Email
+        string Address
+    }
+    PRODUCT {
+        string ProductName
+        float Price
+    }
+    ORDER {
+        date DateOrdered
+        string Status
+    }
+    LINEITEM {
+        int Quantity
+    }
 {% end %}
 
 ## Using Mermaid in your blog post
@@ -107,21 +112,25 @@ Because it is the same code as the diagram above, extra care has to be taken to 
 
 ```javascript
 {​% diagram(init="{'theme': 'forest'}") %​}
-gitGraph
-  commit id: "feat(api): ..."
-  commit id: "a"
-  commit id: "b"
-  commit id: "fix(client): .extra long label.."
-  branch c2
-  commit id: "feat(modules): ..."
-  commit id: "test(client): ..."
-  checkout main
-  commit id: "fix(api): ..."
-  commit id: "ci: ..."
-  branch b1
-  commit
-  branch b2
-  commit
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINEITEM : contains
+    PRODUCT ||--o{ LINEITEM : is_listed_in
+    CUSTOMER {
+        string Name
+        string Email
+        string Address
+    }
+    PRODUCT {
+        string ProductName
+        float Price
+    }
+    ORDER {
+        date DateOrdered
+        string Status
+    }
+    LINEITEM {
+        int Quantity
+    }
 {% end %}
 ```
 
