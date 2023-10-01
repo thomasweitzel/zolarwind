@@ -1,0 +1,38 @@
+<script type="application/ld+json">
+{
+   "@context": "https://schema.org"
+  ,"@type": "BlogPosting"
+  ,"mainEntityOfPage": {
+     "@type": "WebPage"
+    ,"@id": "{{ page.permalink | safe }}"
+  }
+  ,"headline": "{{ page.title | default(value=res.empty_page_title) | striptags | safe }}"
+  ,"datePublished": "{{ page.date | date(format='%Y-%m-%d') }}"
+  ,"dateModified": "{% if page.updated %}{{ page.updated | date(format='%Y-%m-%d') }}{% else %}{{ page.date | date(format='%Y-%m-%d') }}{% endif %}"
+  {% if page.authors and page.authors | length > 0 %}
+  ,"author": [
+    {% for author in page.authors %}
+      {
+         "@type": "Person"
+        ,"name": "{{ author }}"
+      }
+      {% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+  ,"publisher": [
+    {% for author in page.authors %}
+      {
+         "@type": "Person"
+        ,"name": "{{ author }}"
+      }
+      {% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+  {% endif %}
+  ,"description": "{{ page.description | default(value=res.empty_page_description) | striptags | safe }}"
+  ,"articleBody": "{{ page.content | replace(from='"', to="'") | striptags | safe }}"
+  {% if page.extra.image %}
+    ,"image": "{{ config.base_url | safe }}{{ page.path | safe }}{{ page.extra.image | safe }}"
+  {% endif %}
+}
+</script>
