@@ -29,8 +29,8 @@
     {% endfor %}
   ]
   {% endif %}
-  ,"description": "{{ page.description | default(value=res.empty_page_description) | striptags | safe }}"
-  ,"articleBody": "{{ page.content | replace(from='"', to="'") | striptags | safe }}"
+  ,"description": "{{ page.description | default(value=res.empty_page_description) | striptags }}"
+  ,"articleBody": "{{ page.content | replace(from='"', to="'") | linebreaksbr | striptags }}"
   {% if page.extra.image %}
     ,"image": "{{ config.base_url | safe }}{{ page.path | safe }}{{ page.extra.image | safe }}"
   {% endif %}
