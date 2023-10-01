@@ -13,6 +13,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name=generator content="{{ config.extra.generator | default(value='Zola') }}">
 
+  {% if page.description %}
+    <meta name="description" content="{{ page.description }}">
+  {% elif config.description %}
+    <meta name="description" content="{{ config.description }}">
+  {% endif %}
+
   <title>{{ config.extra.title }}</title>
   <link rel="stylesheet" href="/css/generated.css">
   <link rel="icon" href="{{ config.extra.favicon_svg }}" />
