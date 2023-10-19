@@ -34,7 +34,7 @@
         <div class="-mr-2 flex md:hidden">
           <a href="javascript:void(0);" class="icon" onclick="toggleMobileMenu()">
             <button class="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white" aria-label="{{ res.aria_menu }}">
-              <span id="mobile-icon-menu-unselected" class="block">
+              <span id="mobile-icon-menu-unselected">
                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
@@ -49,19 +49,15 @@
         </div>
       </div>
     </div>
-    <span id="mobile-menu" class="hidden">
-      <div class="block md:hidden">
-        <div class="px-2 pt-2 pb-3 sm:px-3">
-          {% for entry in config.extra.menu_pages %}
-            {% if entry.url == current_path %}
-              <span aria-current="page" class="block px-3 py-2 rounded-md font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-600">{{ entry.title }}</span>
-            {% else %}
-              <a class="mt-1 block px-3 py-2 rounded-md font-medium text-gray-200 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-600" href="{{ entry.url | safe }}" title="{{ entry.title }}">{{ entry.title }}</a>
-            {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-    </span>
+    <div id="mobile-menu" class="hidden md:hidden px-2 pt-2 pb-3 sm:px-3">
+      {% for entry in config.extra.menu_pages %}
+        {% if entry.url == current_path %}
+          <span aria-current="page" class="block px-3 py-2 rounded-md font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-600">{{ entry.title }}</span>
+        {% else %}
+          <a class="mt-1 block px-3 py-2 rounded-md font-medium text-gray-200 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-600" href="{{ entry.url | safe }}" title="{{ entry.title }}">{{ entry.title }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
   </nav>
 </header>
 
@@ -72,10 +68,10 @@
     ids.forEach((id) => {
       const element = document.getElementById(id);
       if (element) {
-        if (element.className === 'hidden') {
-          element.className = 'block';
+        if (element.classList.contains('hidden')) {
+          element.classList.remove('hidden');
         } else {
-          element.className = 'hidden';
+          element.classList.add('hidden');
         }
       }
     });
