@@ -12,3 +12,7 @@ function toggleMobileMenu() {
     }
   });
 }
+
+document.getElementById("toggleMobileMenu").addEventListener("click", function() {
+  toggleMobileMenu();
+});
