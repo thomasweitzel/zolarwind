@@ -23,6 +23,10 @@
   <link rel="stylesheet" href="/css/generated.css">
   <link rel="icon" href="{{ config.extra.favicon_svg }}" />
 
+  {% if config.generate_feed %}
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed for {{ config.base_url | safe }}" href="/atom.xml" />
+  {% endif %}
+
   <script defer src="/js/zolarwind/logic.js" integrity="sha384-GYtsrgYVRYoxdEL+C+79KROm+MCl1ArSzQnqVnPTV78UNz5a1vFxAEiKbobXhQlw"></script>
   {% if page.extra.math %}
     <!-- Calculate sha384: openssl dgst -sha384 -binary FILENAME.EXT | openssl base64 -A -->
