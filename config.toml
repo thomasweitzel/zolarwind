@@ -32,7 +32,7 @@ highlight_theme = "1337"
 title = "Zolarwind"
 
 # The generator used for generating the static website
-generator = "Zola v0.17.2"
+generator = "Zola v0.18.0"
 
 # Path to the language resource files
 path_language_resources = "i18n/"

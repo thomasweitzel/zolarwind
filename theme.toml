@@ -2,7 +2,7 @@ name = "Zolarwind"
 description = "A localizable blog theme using Tailwind CSS for styling and KaTex for math"
 license = "MIT"
 homepage = "https://github.com/thomasweitzel/zolarwind"
-min_version = "0.17.0"
+min_version = "0.18.0"
 demo = "https://pureandroid.com"
 
 [extra]
