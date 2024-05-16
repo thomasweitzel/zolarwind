@@ -27,6 +27,9 @@ taxonomies = [
 highlight_code = true
 highlight_theme = "1337"
 
+# If Zola does not support the language you want to highlight, add additional syntax in this directory
+extra_syntaxes_and_themes=["syntaxes"]
+
 [extra]
 # Put all your custom variables here
 title = "Zolarwind"
