@@ -15,6 +15,13 @@ All notable changes to the *Zolarwind* theme for the Zola static site generator 
 - nothing yet
 
 
+## 2024-06-11
+
+### Fixed
+
+- Replaced `res.empty_page_summary` with `res.empty_page_description` in `list-element.html` template.
+  - Bug found by stalkerGH
+
 ## 2024-05-16
 
 ### Added
