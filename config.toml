@@ -14,7 +14,7 @@ default_language = "en"
 build_search_index = false
 
 # When set to "true", a feed is automatically generated
-generate_feed = true
+generate_feeds = true
 
 # The taxonomies to use for the site
 taxonomies = [
@@ -35,7 +35,7 @@ extra_syntaxes_and_themes=["syntaxes"]
 title = "Zolarwind"
 
 # The generator used for generating the static website
-generator = "Zola v0.18.0"
+generator = "Zola v0.19.0"
 
 # Path to the language resource files
 path_language_resources = "i18n/"

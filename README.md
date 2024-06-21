@@ -122,7 +122,7 @@ The `[extra]` section is where you can place any custom variables you want to be
 
 - **generator**: Optional.
   Specifies the generator used for creating the static website.
-  This site is generated using `Zola v0.18.0`.
+  This site is generated using `Zola v0.19.0`.
 
 - **path_language_resources**: The path to the directory containing language resource files.
   In this config, it's set to `i18n/`.
