@@ -21,7 +21,9 @@
 
   <title>{{ config.extra.title }}</title>
   <link rel="stylesheet" href="/css/generated.css">
-  <link rel="icon" href="{{ config.extra.favicon_svg }}" />
+  {% if config.extra.favicon_svg %}
+    <link rel="icon" href="{{ config.extra.favicon_svg }}" />
+  {% endif %}
 
   {% if config.generate_feed %}
     <link rel="alternate" type="application/atom+xml" title="Atom Feed for {{ config.base_url | safe }}" href="/atom.xml" />

@@ -21,13 +21,15 @@
           </div>
           <div class="hidden md:block">
             <div class="ml-8 flex items-baseline">
-              {% for entry in config.extra.menu_pages %}
-                {% if entry.url == current_path %}
-                  <span aria-current="page" class="px-3 py-2 ml-2 rounded-md font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-600">{{ entry.title }}</span>
-                {% else %}
-                  <a class="px-3 py-2 ml-2 rounded-md font-medium text-gray-200 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-600" href="{{ entry.url | safe }}" title="{{ entry.title }}">{{ entry.title }}</a>
-                {% endif %}
-              {% endfor %}
+              {% if config.extra.menu_pages %}
+                {% for entry in config.extra.menu_pages %}
+                  {% if entry.url == current_path %}
+                    <span aria-current="page" class="px-3 py-2 ml-2 rounded-md font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-600">{{ entry.title }}</span>
+                  {% else %}
+                    <a class="px-3 py-2 ml-2 rounded-md font-medium text-gray-200 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-600" href="{{ entry.url | safe }}" title="{{ entry.title }}">{{ entry.title }}</a>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
             </div>
           </div>
         </div>
@@ -47,14 +49,16 @@
         </div>
       </div>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden px-2 pt-2 pb-3 sm:px-3">
-      {% for entry in config.extra.menu_pages %}
-        {% if entry.url == current_path %}
-          <span aria-current="page" class="block px-3 py-2 rounded-md font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-600">{{ entry.title }}</span>
-        {% else %}
-          <a class="mt-1 block px-3 py-2 rounded-md font-medium text-gray-200 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-600" href="{{ entry.url | safe }}" title="{{ entry.title }}">{{ entry.title }}</a>
-        {% endif %}
-      {% endfor %}
-    </div>
+    {% if config.extra.menu_pages %}
+      <div id="mobile-menu" class="hidden md:hidden px-2 pt-2 pb-3 sm:px-3">
+        {% for entry in config.extra.menu_pages %}
+          {% if entry.url == current_path %}
+            <span aria-current="page" class="block px-3 py-2 rounded-md font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-600">{{ entry.title }}</span>
+          {% else %}
+            <a class="mt-1 block px-3 py-2 rounded-md font-medium text-gray-200 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-600" href="{{ entry.url | safe }}" title="{{ entry.title }}">{{ entry.title }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
   </nav>
 </header>

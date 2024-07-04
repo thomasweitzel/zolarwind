@@ -32,7 +32,14 @@ extra_syntaxes_and_themes=["syntaxes"]
 
 [extra]
 # Put all your custom variables here
+
+# The title of the blog
 title = "Zolarwind"
+
+# Path to the language resource files
+path_language_resources = "i18n/"
+
+# The variables after this line are optional
 
 # The generator used for generating the static website
 generator = "Zola v0.19.0"
