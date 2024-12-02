@@ -1,6 +1,6 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
     .badge {
@@ -58,14 +58,17 @@
     .prose h3 {
         @apply font-bold mt-8;
     }
+    .prose h4 {
+        @apply font-bold mt-4;
+    }
     .prose p {
         @apply mt-4;
     }
     .prose blockquote {
         @apply border-l-4 border-gray-600 pl-4 italic;
     }
-    .prose p code, .prose ol code, .prose ul code {
-        @apply px-1 font-mono text-sm border border-gray-200 bg-indigo-50 rounded-sm
+    .prose kbd, p code, .prose ol code, .prose ul code {
+        @apply mx-0.5 px-1 py-0.5 font-mono text-sm bg-gray-200 rounded shadow-sm ring-1 ring-gray-900/25;
     }
     .prose pre.mermaid {
         @apply block my-4 font-mono text-sm overflow-x-hidden
@@ -111,6 +114,9 @@
     }
     h3 {
         @apply text-lg font-bold;
+    }
+    h4 {
+        @apply text-base font-bold;
     }
     a {
         @apply text-blue-600 no-underline;
