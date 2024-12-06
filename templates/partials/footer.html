@@ -1,34 +1,33 @@
 <footer>
   <!-- Social Media Icons -->
   {% if config.extra.social_links %}
-    <div class="mt-4 flex justify-center">
+    <ul class="mt-4 flex justify-center space-x-8">
       {% for entry in config.extra.social_links %}
         {% if entry.enabled %}
-          <a
-            {% if entry.rel is defined %}
-              rel="{{ entry.rel }}"
-            {% endif %}
-            href="{{ entry.link }}" title="{{ entry.name | capitalize }}"
-            {% if loop.index == 1 %}
+          <li>
+            <a
+              {% if entry.rel is defined %}
+                rel="{{ entry.rel }}"
+              {% endif %}
+              href="{{ entry.link }}" title="{{ entry.name | capitalize }}"
               class="text-gray-400 hover:text-gray-500">
-            {% else %}
-              class="ml-8 text-gray-400 hover:text-gray-500">
-            {% endif %}
-            <span class="sr-only">{{ entry.name }}</span>
-            {{ entry.svg | safe }}
-          </a>
+              <span class="sr-only">{{ entry.name }}</span>
+              {{ entry.svg | safe }}
+            </a>
+          </li>
         {% endif %}
       {% endfor %}
-    </div>
+    </ul>
   {% endif %}
-  <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center">
+  <div class="max-w-7xl mx-auto py-4 text-center">
     {% if config.extra.footer_pages %}
-      <p class="text-center text-base leading-6">
-        {% for entry in config.extra.footer_pages %}
-          {% if loop.index > 1 %} &middot; {% endif %}
+    <ul class="text-center text-base leading-6 flex justify-center space-x-1">
+      {% for entry in config.extra.footer_pages %}
+        <li class="relative after:content-['·'] after:ml-1 last:after:content-['']">
           <a href="{{ entry.url }}">{{ entry.title }}</a>
-        {% endfor %}
-      </p>
+        </li>
+      {% endfor %}
+    </ul>
     {% endif %}
     {% if config.extra.copyright %}
     <div class="mt-4">
