@@ -19,15 +19,14 @@
       {% endfor %}
     </ul>
   {% endif %}
-  <div class="max-w-7xl mx-auto py-4 text-center">
+  <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center">
     {% if config.extra.footer_pages %}
-    <ul class="text-center text-base leading-6 flex justify-center space-x-1">
-      {% for entry in config.extra.footer_pages %}
-        <li class="relative after:content-['·'] after:ml-1 last:after:content-['']">
+      <p class="text-center text-base leading-6">
+        {% for entry in config.extra.footer_pages %}
+          {% if loop.index > 1 %} &middot; {% endif %}
           <a href="{{ entry.url }}">{{ entry.title }}</a>
-        </li>
-      {% endfor %}
-    </ul>
+        {% endfor %}
+      </p>
     {% endif %}
     {% if config.extra.copyright %}
     <div class="mt-4">
