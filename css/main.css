@@ -50,16 +50,16 @@
         @apply font-bold;
     }
     .prose h1 {
-        @apply text-xl font-bold mt-8;
+        @apply text-2xl font-bold mt-8;
     }
     .prose h2 {
-        @apply text-lg font-bold mt-8;
+        @apply text-xl font-bold mt-8;
     }
     .prose h3 {
-        @apply font-bold mt-8;
+        @apply text-lg font-bold mt-8;
     }
     .prose h4 {
-        @apply font-bold mt-4;
+        @apply text-base font-bold mt-4;
     }
     .prose p {
         @apply mt-4;
