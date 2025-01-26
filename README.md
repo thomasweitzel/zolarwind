@@ -313,17 +313,17 @@ path_language_resources = "themes/zolarwind/i18n/"
 
 ## Development
 
-If you want to adjust the CSS of the theme to your needs, you will need to edit the files in the `templates` and `css` directories.
-While you do this, you should make sure that the CSS file `static/css/generated.css` is up to date.
-This file is generated from the file `css/main.css`, and all the files that are configured as a pattern in `tailwind.config.js`:
+If you want to adjust the CSS of the theme to your needs, you will need to edit the files in the `templates` and `css`
+directories. While you do this, you should make sure that the CSS file `static/css/generated.css` is up to date. This
+file is generated from the file `css/main.css`, and all the files that Tailwind automatically identifies via automatic
+content detection.
 
-- `css/main.css`
+If you ever need to explicitly add a source file excluded by default, you can always add it with the `@source`
+directive, right in your `css/main.css` file:
 
-- `themes/**/*.html`
-
-- `templates/**/*.html`
-
-- `content/**/*.md`
+```css
+@source "../node_modules/@my-company/ui-lib";
+```
 
 So whenever one of these files changes, you need to run the script `css:build` from the `package.json` file.
 To achieve this, you need to have `Node.js` and all dependencies from `package.json` installed (with `npm install`).
