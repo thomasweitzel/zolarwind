@@ -57,7 +57,7 @@ To use the shortcode in your blog post, you would use the following format:
 ```javascript
 {​% diagram() %​}
 Your Mermaid diagram code here
-{% end %}
+{​% end %​}
 ```
 
 Replace *Your Mermaid diagram code here* with your actual Mermaid diagram code.
@@ -80,7 +80,7 @@ For example, to apply the `forest` theme:
 ```javascript
 {​% diagram(init="{'theme': 'forest'}") %​}
 Your Mermaid diagram code here
-{% end %}
+{​% end %​}
 ```
 
 ### Providing init Configuration
@@ -92,7 +92,7 @@ Here's a more advanced example with multiple configuration options:
 ```javascript
 {​% diagram(init="{'theme': 'forest', 'themeVariables': {'primaryColor': '#FF0000'}}") %​}
 Your Mermaid diagram code here
-{% end %}
+{​% end %​}
 ```
 
 In this example, we're using the `forest` theme and changing the primary color to red (`#FF0000`).
@@ -100,7 +100,7 @@ In this example, we're using the `forest` theme and changing the primary color t
 **Note**: Ensure that you use single quotes inside the double quotes for the configuration to work correctly.
 
 ### Putting it all together
-Use the shortcode by enclosing your Mermaid diagram code with `{​% diagram() %​} ... {% end %}`.
+Use the shortcode by enclosing your Mermaid diagram code with `{​% diagram() %​} ... {+ end %}`.
 To change the look of the Mermaid theme, provide values for the init parameter.
 Always enclose the init value with double quotes, and use single quotes inside the configuration string.
 With this shortcode in place, integrating and customizing Mermaid diagrams in your blog posts becomes a breeze!
@@ -131,7 +131,7 @@ Because it is the same code as the diagram above, extra care has to be taken to 
     LINEITEM {
         int Quantity
     }
-{% end %}
+{​% end %​}
 ```
 
 If you want to mention it in your blog post text,
