@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../static/giallo.css";
 
 @layer utilities {
     .badge {
@@ -99,6 +100,13 @@
     }
     .prose .footnote-definition sup, .prose .footnote-definition p {
         @apply inline text-sm;
+    }
+    /* Since Zola v0.22.0: needed for `extra_grammars` and/or `extra_themes` */
+    .prose .giallo-l {
+        @apply inline-block w-full min-h-[1lh];
+    }
+    .prose .giallo-ln {
+        @apply inline-block select-none text-right opacity-80 mr-[0.4em] p-[0.4em] min-w-[3ch];
     }
 
     body {
