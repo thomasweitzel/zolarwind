@@ -23,6 +23,12 @@ you can choose your preferred language setting for a consistent blog experience.
 - **Localization Support**: All theme-specific strings are available in multiple languages; choose the one that's right for you.
   If your language isn't supported yet, just create the resource file with your translations.
 
+## IMPORTANT NOTE
+
+As of Zola v0.22.0 from 2026-01-09, color syntax highlighting has changed and requires a different configuration.
+I have updated the theme to reflect this change.
+This also means that the theme is no longer compatible with Zola v0.21.0 and earlier.
+
 ---
 
 ## Table of Contents:
