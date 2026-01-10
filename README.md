@@ -107,13 +107,18 @@ Here's a breakdown of the configuration settings tailored for this theme:
 - **taxonomies**: An array of taxonomies (classification systems) used for the site.
   Here, a taxonomy for `tags` is defined, with a pagination limit of 6 and an enabled feed.
 
-### Markdown Configuration:
+- **ignored_static**: An array of GLOB patterns (files and directories) that Zola should ignore.
+  Here, a pattern is defined to ignore the `static/giallo*.css` file, which is included by Tailwind CSS and should not directly be used by the web site.
 
-- **highlight_code**: Indicates whether code snippets in Markdown files should be highlighted. Here, it's set to `true`.
+### Markdown Highlighting Configuration:
 
-- **highlight_theme**: Specifies the theme to be used for code highlighting. The chosen theme in this configuration is `1337`.
+- **theme**: The name of the theme to be used for code highlighting. The chosen theme in this configuration is `ayu-dark`.
 
-- **extra_syntaxes_and_themes**: directory for additional syntax highlighting configuration files for languages not directly supported by Zola.
+- **error_on_missing_language**: If the language to be highlighted is not found, how should Zola handle this? Set to `true` so missing languages cause a build error.
+
+- **style**: How to highlight code. Options are either `class` or `inline`. Here, we use the setting `class`.
+
+- **extra_grammars**: array of additional syntax highlighting configuration files in JSON format for languages not directly supported by Zola/Giallo.
 
 ### Extra Configuration:
 
@@ -130,7 +135,7 @@ The `[extra]` section is where you can place any custom variables you want to be
 
 - **generator**: Optional.
   Specify the generator used for creating the static website.
-  This site is generated using `Zola v0.19.0`.
+  This site is generated using `Zola v0.22.0`.
 
 - **favicon_svg**: Optional.
   Provides a path to the site's favicon in SVG format.
