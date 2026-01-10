@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="generator" content="{{ config.extra.generator | default(value='Zola') }}">
 
-  {% if page.description %}
+  {% if page is defined and page.description %}
     <meta name="description" content="{{ page.description }}">
   {% elif config.description %}
     <meta name="description" content="{{ config.description }}">
@@ -30,14 +30,14 @@
   {% endif %}
 
   <script defer src="/js/zolarwind/logic.js" integrity="sha384-GYtsrgYVRYoxdEL+C+79KROm+MCl1ArSzQnqVnPTV78UNz5a1vFxAEiKbobXhQlw"></script>
-  {% if page.extra.math %}
+  {% if page is defined and page.extra and page.extra.math %}
     <!-- Calculate sha384: openssl dgst -sha384 -binary FILENAME.EXT | openssl base64 -A -->
     <link rel="stylesheet" href="/js/katex/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn">
     <script defer src="/js/katex/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx"></script>
     <script defer src="/js/katex/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"></script>
     <script defer src="/js/katex-config.js" integrity="sha384-YTwoxG+UASh+luh6A7HRGGG9fiJpEYcH1r0/xbJP0wfpH/E4eU3lG9mg4U5OUz9S"></script>
   {% endif %}
-  {% if page.extra.diagram %}
+  {% if page is defined and page.extra and page.extra.diagram %}
     <script defer src="/js/diagram/mermaid.min.js" integrity="sha384-6YRSKOSMk3x6Bn7ihZ903Mt9EwSxoy5KrU1CkzT3d+j0C/qKp0DFgG4lKsnqH1Nm"></script>
     <script defer src="/js/diagram/mermaid-config.js" integrity="sha384-a2dvU77ShDwnty4gFDSjoOf0XwhvkFWC40MdpQWNfbFljoJNaGFYCpamXrQqClO1"></script>
   {% endif %}
