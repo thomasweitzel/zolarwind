@@ -2,7 +2,6 @@
 
 All notable changes to the *Zolarwind* theme for the Zola static site generator will be documented in this file.
 
-
 ## Unreleased
 
 ### Added
@@ -14,6 +13,13 @@ All notable changes to the *Zolarwind* theme for the Zola static site generator 
 ### Fixed
 - nothing yet
 
+## 2026-01-10
+
+### Fixed
+
+- With Zola release 0.22.0, the highlighting library changed from [syntect](https://github.com/trishume/syntect) to [Giallo](https://github.com/getzola/giallo) that produces the same output as VSCode.
+  That required some changes in the syntax highlighting configuration, that is not compatible with previous versions of Zola anymore.
+- Use of `json_encode` for structured data, where appropriate.
 
 ## 2024-06-11
 
