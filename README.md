@@ -23,6 +23,8 @@ you can choose your preferred language setting for a consistent blog experience.
 - **Localization Support**: All theme-specific strings are available in multiple languages; choose the one that's right for you.
   If your language isn't supported yet, just create the resource file with your translations.
 
+- **Dark/Light Mode**: The theme includes a dark/light mode toggle and persists the user preference.
+
 ## IMPORTANT NOTE
 
 As of Zola v0.22.0 from 2026-01-09, color syntax highlighting has changed and requires a different configuration.
@@ -170,6 +172,9 @@ The `[extra]` section is where you can place any custom variables you want to be
   An array of social media links.
   Each link has a name, a boolean indicating if it's enabled, a URL, and an SVG icon.
 
+- **displaymode.sun** and **displaymode.moon**: Optional.
+  Inline SVG icons used by the dark/light mode toggle.
+
 ---
 
 ## Front matter
@@ -206,6 +211,16 @@ If you do not provide an image under `extra.image`, a default image is used inst
 - **extra.image**: an optional image for the post.
   If omitted, a default image is used instead.
   The image is displayed on the blog's main page and on the post's detail page.
+
+- **Light/Dark Images**: if you want images that switch with the theme, wrap two images in a container
+  using class `light-dark-image`. The first image is shown in light mode, the second in dark mode:
+
+```html
+<div class="light-dark-image">
+  <img src="example-light.webp" alt="Example image" />
+  <img src="example-dark.webp" alt="Example image" />
+</div>
+```
 
 ---
 
@@ -328,6 +343,9 @@ If you want to adjust the CSS of the theme to your needs, you will need to edit 
 directories. While you do this, you should make sure that the CSS file `static/css/generated.css` is up to date. This
 file is generated from the file `css/main.css`, and all the files that Tailwind automatically identifies via automatic
 content detection.
+
+The theme uses a custom color palette (`neutral`, `primary`, `ok`, `warn`, `fail`) instead of the default Tailwind colors.
+When you add new classes in templates or content, rebuild the CSS so the generated palette classes are included.
 
 If you ever need to explicitly add a source file excluded by default, you can always add it with the `@source`
 directive, right in your `css/main.css` file:
