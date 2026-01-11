@@ -3,8 +3,7 @@
   {% set banner = page.path ~ page.extra.image %}
 {% endif %}
 
-{% set is_draft = page.draft | default(value=false) %}
-<div class="flex flex-col rounded-md shadow-md overflow-hidden shadow-neutral-800 {% if is_draft %}bg-neutral-700 border-fail-500 border-1{% else %}bg-neutral-900 border-neutral-900 border-1{% endif %}">
+<div class="flex flex-col rounded-md shadow-md overflow-hidden shadow-neutral-800 bg-neutral-900 border-neutral-900 border-1">
   <div class="flex-shrink-0">
     <a href="{{ page.permalink }}" aria-label="{{ page.title | default(value=res.empty_page_title) }}">
       <img class="h-48 w-full object-cover" src="{{ banner }}" alt="{{ page.title | default(value=res.empty_page_title) }}" />
