@@ -1,18 +1,16 @@
 {% if config.extra.quote or config.extra.site_description %}
-  <div class="bg-blue-500 text-white shadow-md">
-    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-      <div>
-        {% if config.extra.quote and config.extra.quote.text %}
-          <div><span class="text-lg font-bold">{{ config.extra.quote.text }}</span>
-          {% if config.extra.quote.author %}
-            <span class="font-normal"> &ndash; {{ config.extra.quote.author }}</span>
-          {% endif %}
-          </div>
+  <div class="relative bg-primary-400 text-neutral-950 xl:rounded-md xl:border-primary-600 xl:border-2 max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    <div>
+      {% if config.extra.quote and config.extra.quote.text %}
+        <div><span class="text-lg font-bold">{{ config.extra.quote.text }}</span>
+        {% if config.extra.quote.author %}
+          <span class="font-normal"> &ndash; {{ config.extra.quote.author }}</span>
         {% endif %}
-        {% if config.extra.site_description %}
-          <div><span class="font-normal">{{ config.extra.site_description }}</span></div>
-        {% endif %}
-      </div>
+        </div>
+      {% endif %}
+      {% if config.extra.site_description %}
+        <div><span class="font-normal">{{ config.extra.site_description }}</span></div>
+      {% endif %}
     </div>
   </div>
 {% endif %}

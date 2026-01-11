@@ -6,13 +6,13 @@
 {% endif %}
 
 <header class="sticky top-0 w-full z-10">
-  <nav class="bg-gray-600">
+  <nav class="bg-neutral-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
+      <div class="flex items-center justify-between h-16 border-b-1 border-neutral-700">
         <div class="flex items-center">
           <div class="flex-shrink-0">
             <a href="/" aria-label="{{ res.aria_to_homepage }}">
-              <div class="h-8 w-8 text-gray-200 hover:text-white fill-current">
+              <div class="h-8 w-8 text-neutral-200 hover:text-neutral-50 fill-current">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
                   <path d="M3 12L5 10M5 10L12 3L19 10M5 10V20C5 20.5523 5.44772 21 6 21H9M19 10L21 12M19 10V20C19 20.5523 18.5523 21 18 21H15M9 21C9.55228 21 10 20.5523 10 20V16C10 15.4477 10.4477 15 11 15H13C13.5523 15 14 15.4477 14 16V20C14 20.5523 14.4477 21 15 21M9 21H15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -20,21 +20,22 @@
             </a>
           </div>
           <div class="hidden md:block">
-            <div class="ml-8 flex items-baseline">
+            <div class="ml-8 flex items-center space-x-2">
               {% if config.extra.menu_pages %}
                 {% for entry in config.extra.menu_pages %}
                   {% if entry.url == current_path %}
-                    <span aria-current="page" class="px-3 py-2 ml-2 rounded-md font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-600">{{ entry.title }}</span>
+                    <span aria-current="page" class="px-3 py-2 rounded-md font-medium text-neutral-200 bg-neutral-800">{{ entry.title }}</span>
                   {% else %}
-                    <a class="px-3 py-2 ml-2 rounded-md font-medium text-gray-200 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-600" href="{{ entry.url | safe }}" title="{{ entry.title }}">{{ entry.title }}</a>
+                    <a class="px-3 py-2 rounded-md font-medium text-neutral-200 hover:text-neutral-50 hover:bg-neutral-700 focus:outline-none focus:text-neutral-700 focus:bg-neutral-200" href="{{ entry.url | safe }}" title="{{ entry.title }}">{{ entry.title }}</a>
                   {% endif %}
                 {% endfor %}
               {% endif %}
+              {% include "partials/toggle-theme.html" %}
             </div>
           </div>
         </div>
         <div class="-mr-2 flex md:hidden">
-          <button id="toggleMobileMenu" class="icon inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white" aria-label="{{ res.aria_menu }}">
+          <button id="toggleMobileMenu" class="icon inline-flex items-center justify-center p-2 rounded-md text-neutral-200 hover:text-neutral-50 hover:bg-neutral-700 focus:outline-none focus:bg-neutral-200 focus:text-neutral-800" aria-label="{{ res.aria_menu }}">
             <span id="mobile-icon-menu-unselected">
               <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -53,11 +54,12 @@
       <div id="mobile-menu" class="hidden md:hidden px-2 pt-2 pb-3 sm:px-3">
         {% for entry in config.extra.menu_pages %}
           {% if entry.url == current_path %}
-            <span aria-current="page" class="block px-3 py-2 rounded-md font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-600">{{ entry.title }}</span>
+            <span aria-current="page" class="block px-3 py-2 rounded-md font-medium text-neutral-200 bg-neutral-800 focus:outline-none focus:text-neutral-950 focus:bg-neutral-300">{{ entry.title }}</span>
           {% else %}
-            <a class="mt-1 block px-3 py-2 rounded-md font-medium text-gray-200 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-600" href="{{ entry.url | safe }}" title="{{ entry.title }}">{{ entry.title }}</a>
+            <a class="mt-1 block px-3 py-2 rounded-md font-medium text-neutral-200 hover:text-neutral-50 hover:bg-neutral-700 focus:outline-none focus:text-neutral-800 focus:bg-neutral-200" href="{{ entry.url | safe }}" title="{{ entry.title }}">{{ entry.title }}</a>
           {% endif %}
         {% endfor %}
+        {% include "partials/toggle-theme.html" %}
       </div>
     {% endif %}
   </nav>

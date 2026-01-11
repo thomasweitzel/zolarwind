@@ -26,10 +26,10 @@
   {% endif %}
 
   {% if config.generate_feeds %}
-    <link rel="alternate" type="application/atom+xml" title="Atom Feed for {{ config.base_url | safe }}" href="/atom.xml" />
+    <link rel="alternate" type="application/atom+xml" title="{{ res.atom_feed_title | replace(from="{url}", to=config.base_url) }}" href="/atom.xml" />
   {% endif %}
 
-  <script defer src="/js/zolarwind/logic.js" integrity="sha384-GYtsrgYVRYoxdEL+C+79KROm+MCl1ArSzQnqVnPTV78UNz5a1vFxAEiKbobXhQlw"></script>
+  <script defer src="/js/zolarwind/logic.js" integrity="sha384-1w+9+134UtQQq3IrRTyjFo8CqpK6PTOGWwkDCPcQHi/VjE2Y09ObwZwJSvedQW/F"></script>
   {% if page is defined and page.extra and page.extra.math %}
     <!-- Calculate sha384: openssl dgst -sha384 -binary FILENAME.EXT | openssl base64 -A -->
     <link rel="stylesheet" href="/js/katex/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn">

@@ -1,39 +1,151 @@
 @import "tailwindcss";
 @import "../static/giallo.css";
 
+@theme {
+    --color-*: initial;
+
+    --color-stone-200: oklch(.923 .003 48.717);
+    --color-stone-400: oklch(.709 .01 56.259);
+
+    /* Light-BEGIN */
+    --color-neutral-50:  oklch(0.147 0.004  49.250);
+    --color-neutral-100: oklch(0.216 0.006  56.043);
+    --color-neutral-200: oklch(0.268 0.007  34.298);
+    --color-neutral-300: oklch(0.374 0.010  67.558);
+    --color-neutral-400: oklch(0.444 0.011  73.639);
+    --color-neutral-500: oklch(0.553 0.013  58.071);
+    --color-neutral-600: oklch(0.709 0.010  56.259);
+    --color-neutral-700: oklch(0.869 0.005  56.366);
+    --color-neutral-800: oklch(0.923 0.003  48.717);
+    --color-neutral-900: oklch(0.970 0.001 106.424);
+    --color-neutral-950: oklch(0.985 0.001 106.423);
+    --color-primary-50:  oklch(0.293 0.066 243.157);
+    --color-primary-100: oklch(0.391 0.090 240.876);
+    --color-primary-200: oklch(0.443 0.110 240.790);
+    --color-primary-300: oklch(0.500 0.134 242.749);
+    --color-primary-400: oklch(0.588 0.158 241.966);
+    --color-primary-500: oklch(0.685 0.169 237.323);
+    --color-primary-600: oklch(0.746 0.160 232.661);
+    --color-primary-700: oklch(0.828 0.111 230.318);
+    --color-primary-800: oklch(0.901 0.058 230.902);
+    --color-primary-900: oklch(0.951 0.026 236.824);
+    --color-primary-950: oklch(0.977 0.013 236.620);
+    --color-ok-50:       oklch(0.266 0.065 152.934);
+    --color-ok-100:      oklch(0.393 0.095 152.535);
+    --color-ok-200:      oklch(0.448 0.119 151.328);
+    --color-ok-300:      oklch(0.527 0.154 150.069);
+    --color-ok-400:      oklch(0.627 0.194 149.214);
+    --color-ok-500:      oklch(0.723 0.219 149.579);
+    --color-ok-600:      oklch(0.792 0.209 151.711);
+    --color-ok-700:      oklch(0.871 0.150 154.449);
+    --color-ok-800:      oklch(0.925 0.084 155.995);
+    --color-ok-900:      oklch(0.962 0.044 156.743);
+    --color-ok-950:      oklch(0.982 0.018 155.826);
+    --color-warn-50:     oklch(0.286 0.066  53.813);
+    --color-warn-100:    oklch(0.421 0.095  57.708);
+    --color-warn-200:    oklch(0.476 0.114  61.907);
+    --color-warn-300:    oklch(0.554 0.135  66.442);
+    --color-warn-400:    oklch(0.681 0.162  75.834);
+    --color-warn-500:    oklch(0.795 0.184  86.047);
+    --color-warn-600:    oklch(0.852 0.199  91.936);
+    --color-warn-700:    oklch(0.905 0.182  98.111);
+    --color-warn-800:    oklch(0.945 0.129 101.540);
+    --color-warn-900:    oklch(0.973 0.071 103.193);
+    --color-warn-950:    oklch(0.987 0.026 102.212);
+    --color-fail-50:     oklch(0.258 0.092  26.042);
+    --color-fail-100:    oklch(0.396 0.141  25.723);
+    --color-fail-200:    oklch(0.444 0.177  26.899);
+    --color-fail-300:    oklch(0.505 0.213  27.518);
+    --color-fail-400:    oklch(0.577 0.245  27.325);
+    --color-fail-500:    oklch(0.637 0.237  25.331);
+    --color-fail-600:    oklch(0.704 0.191  22.216);
+    --color-fail-700:    oklch(0.808 0.114  19.571);
+    --color-fail-800:    oklch(0.885 0.062  18.334);
+    --color-fail-900:    oklch(0.936 0.032  17.717);
+    --color-fail-950:    oklch(0.971 0.013  17.380);
+    /* Light-END */
+}
+
+@layer base {
+    [data-theme="dark"] {
+        /* Dark-BEGIN */
+        --color-neutral-50:  oklch(0.985 0.001 106.423);
+        --color-neutral-100: oklch(0.970 0.001 106.424);
+        --color-neutral-200: oklch(0.923 0.003  48.717);
+        --color-neutral-300: oklch(0.869 0.005  56.366);
+        --color-neutral-400: oklch(0.709 0.010  56.259);
+        --color-neutral-500: oklch(0.553 0.013  58.071);
+        --color-neutral-600: oklch(0.444 0.011  73.639);
+        --color-neutral-700: oklch(0.374 0.010  67.558);
+        --color-neutral-800: oklch(0.268 0.007  34.298);
+        --color-neutral-900: oklch(0.216 0.006  56.043);
+        --color-neutral-950: oklch(0.147 0.004  49.250);
+        --color-primary-50:  oklch(0.977 0.013 236.620);
+        --color-primary-100: oklch(0.951 0.026 236.824);
+        --color-primary-200: oklch(0.901 0.058 230.902);
+        --color-primary-300: oklch(0.828 0.111 230.318);
+        --color-primary-400: oklch(0.746 0.160 232.661);
+        --color-primary-500: oklch(0.685 0.169 237.323);
+        --color-primary-600: oklch(0.588 0.158 241.966);
+        --color-primary-700: oklch(0.500 0.134 242.749);
+        --color-primary-800: oklch(0.443 0.110 240.790);
+        --color-primary-900: oklch(0.391 0.090 240.876);
+        --color-primary-950: oklch(0.293 0.066 243.157);
+        --color-ok-50:       oklch(0.982 0.018 155.826);
+        --color-ok-100:      oklch(0.962 0.044 156.743);
+        --color-ok-200:      oklch(0.925 0.084 155.995);
+        --color-ok-300:      oklch(0.871 0.150 154.449);
+        --color-ok-400:      oklch(0.792 0.209 151.711);
+        --color-ok-500:      oklch(0.723 0.219 149.579);
+        --color-ok-600:      oklch(0.627 0.194 149.214);
+        --color-ok-700:      oklch(0.527 0.154 150.069);
+        --color-ok-800:      oklch(0.448 0.119 151.328);
+        --color-ok-900:      oklch(0.393 0.095 152.535);
+        --color-ok-950:      oklch(0.266 0.065 152.934);
+        --color-warn-50:     oklch(0.987 0.026 102.212);
+        --color-warn-100:    oklch(0.973 0.071 103.193);
+        --color-warn-200:    oklch(0.945 0.129 101.540);
+        --color-warn-300:    oklch(0.905 0.182  98.111);
+        --color-warn-400:    oklch(0.852 0.199  91.936);
+        --color-warn-500:    oklch(0.795 0.184  86.047);
+        --color-warn-600:    oklch(0.681 0.162  75.834);
+        --color-warn-700:    oklch(0.554 0.135  66.442);
+        --color-warn-800:    oklch(0.476 0.114  61.907);
+        --color-warn-900:    oklch(0.421 0.095  57.708);
+        --color-warn-950:    oklch(0.286 0.066  53.813);
+        --color-fail-50:     oklch(0.971 0.013  17.380);
+        --color-fail-100:    oklch(0.936 0.032  17.717);
+        --color-fail-200:    oklch(0.885 0.062  18.334);
+        --color-fail-300:    oklch(0.808 0.114  19.571);
+        --color-fail-400:    oklch(0.704 0.191  22.216);
+        --color-fail-500:    oklch(0.637 0.237  25.331);
+        --color-fail-600:    oklch(0.577 0.245  27.325);
+        --color-fail-700:    oklch(0.505 0.213  27.518);
+        --color-fail-800:    oklch(0.444 0.177  26.899);
+        --color-fail-900:    oklch(0.396 0.141  25.723);
+        --color-fail-950:    oklch(0.258 0.092  26.042);
+        /* Dark-END */
+    }
+}
+
 @layer utilities {
     .badge {
         @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium leading-4
     }
-    .badge-gray {
-        @apply bg-gray-100 text-gray-800
+    .badge-neutral {
+        @apply bg-neutral-800 text-neutral-100
     }
-    .badge-red {
-        @apply bg-red-100 text-red-800
+    .badge-fail {
+        @apply bg-fail-800 text-fail-800
     }
-    .badge-orange {
-        @apply bg-orange-100 text-orange-800
+    .badge-warn {
+        @apply bg-warn-800 text-warn-800
     }
-    .badge-yellow {
-        @apply bg-yellow-100 text-yellow-800
+    .badge-ok {
+        @apply bg-ok-800 text-ok-800
     }
-    .badge-green {
-        @apply bg-green-100 text-green-800
-    }
-    .badge-teal {
-        @apply bg-teal-100 text-teal-800
-    }
-    .badge-blue {
-        @apply bg-blue-100 text-blue-800
-    }
-    .badge-indigo {
-        @apply bg-indigo-100 text-indigo-800
-    }
-    .badge-purple {
-        @apply bg-purple-100 text-purple-800
-    }
-    .badge-pink {
-        @apply bg-pink-100 text-pink-800
+    .badge-primary {
+        @apply bg-primary-800 text-primary-800
     }
 
     .prose {
@@ -43,7 +155,7 @@
         @apply mt-4;
     }
     .prose strong {
-        @apply text-black font-bold;
+        @apply text-neutral-50 font-bold;
     }
     .prose strong a {
         @apply font-bold;
@@ -64,16 +176,16 @@
         @apply mt-4;
     }
     .prose blockquote {
-        @apply border-l-4 border-gray-600 pl-4 italic;
+        @apply border-l-4 border-neutral-300 pl-4 italic;
     }
     .prose kbd, p code, .prose ol code, .prose ul code {
-        @apply mx-0.5 px-1 py-0.5 font-mono text-sm bg-gray-200 rounded shadow-sm ring-1 ring-gray-900/25;
+        @apply mx-0.5 px-1 py-0.5 font-mono text-sm bg-neutral-700 rounded shadow-sm ring-1 ring-neutral-100/25;
     }
     .prose pre.mermaid {
-        @apply block my-4 font-mono text-sm overflow-x-hidden
+        @apply block my-4 font-mono text-sm overflow-x-auto
     }
     .prose pre:not(.mermaid) {
-        @apply block my-4 p-4 rounded-md font-mono text-sm shadow-md overflow-x-hidden
+        @apply block my-4 p-4 rounded-md font-mono text-sm shadow-md overflow-x-auto
     }
     .prose ul {
         @apply pl-4 list-disc;
@@ -84,10 +196,10 @@
         @apply sm:pl-8
     }
     .prose td, .prose th {
-        @apply px-2 py-1 border border-gray-200;
+        @apply px-2 py-1 border border-neutral-700;
     }
     .prose tbody tr:nth-child(odd) {
-        @apply bg-gray-100;
+        @apply bg-neutral-800;
     }
     .prose table {
         @apply my-4;
@@ -101,6 +213,9 @@
     .prose .footnote-definition sup, .prose .footnote-definition p {
         @apply inline text-sm;
     }
+    .prose p.inline-block img {
+        display: inline-block;
+    }
     /* Since Zola v0.22.0: needed for `extra_grammars` and/or `extra_themes` */
     .prose .giallo-l {
         @apply inline-block w-full min-h-[1lh];
@@ -110,7 +225,7 @@
     }
 
     body {
-        @apply text-gray-700 bg-gray-50 antialiased
+        @apply text-neutral-200 bg-neutral-950 antialiased
     }
     h1 {
         @apply text-2xl font-bold;
@@ -125,9 +240,63 @@
         @apply text-base font-bold;
     }
     a {
-        @apply text-blue-600 no-underline;
+        @apply text-primary-300 no-underline;
     }
     a:hover {
-        @apply text-blue-400;
+        @apply text-primary-200;
     }
+}
+
+:root {
+    background-color: var(--color-neutral-950);
+}
+
+html {
+    --scrollbar-bg: var(--color-neutral-950);
+    --scrollbar-thumb: var(--color-neutral-700);
+    --scrollbar-thumb-hover: var(--color-neutral-500);
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
+}
+
+/* See https://github.com/mermaid-js/mermaid/issues/2644#issuecomment-2313201033 */
+[data-theme='dark'] .mermaid {
+    filter: invert(0.85) hue-rotate(45deg);
+}
+
+/* WebKit */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 6px;
+    border: 3px solid var(--scrollbar-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+}
+
+/* Used for light-dark-image, default: show light image, hide dark image; light images comes first */
+.light-dark-image img:nth-child(1) {
+  display: block;
+}
+
+.light-dark-image img:nth-child(2) {
+  display: none;
+}
+
+/* Dark mode: Show dark image, hide light image */
+html[data-theme="dark"] .light-dark-image img:nth-child(1) {
+  display: none;
+}
+
+html[data-theme="dark"] .light-dark-image img:nth-child(2) {
+  display: block;
 }

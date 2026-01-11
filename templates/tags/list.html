@@ -9,7 +9,7 @@
     {% for term in terms %}
       {% set tag_item_count = term.pages | length %}
         <div class="py-4">
-          <span class="px-4 py-2 badge badge-green leading-5 font-bold text-indigo-600"><a href="{{ term.permalink }}">{{ term.name }}</a></span>
+          <span class="px-4 py-2 badge badge-primary leading-5 font-bold"><a href="{{ term.permalink }}">{{ term.name }}</a></span>
           <span class="ml-2">{{ tag_item_count | num_format(locale=locale) }} {{ tag_item_count | pluralize(singular=res.posts.one, plural=res.posts.other) }}</span>
         </div>
     {% endfor %}
