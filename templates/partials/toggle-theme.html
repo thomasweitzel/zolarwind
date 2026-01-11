@@ -1,0 +1,12 @@
+<button aria-label="{{ res.aria_toggle_theme }}" class="flex items-center justify-center cursor-pointer p-2 rounded-full text-neutral-200 hover:text-neutral-50 hover:bg-neutral-700 focus:outline-none focus:text-neutral-700 focus:bg-neutral-200 transition ease-in-out duration-250">
+  {% if config.extra.displaymode and config.extra.displaymode.sun %}
+    <span class="hidden theme-icon-sun w-6 h-6" title="{{ res.switch_light }}">
+      {{ config.extra.displaymode.sun.svg | safe }}
+    </span>
+  {% endif %}
+  {% if config.extra.displaymode and config.extra.displaymode.moon %}
+    <span class="theme-icon-moon w-6 h-6" title="{{ res.switch_dark }}">
+      {{ config.extra.displaymode.moon.svg | safe }}
+    </span>
+  {% endif %}
+</button>
