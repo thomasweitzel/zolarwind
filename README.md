@@ -25,6 +25,8 @@ you can choose your preferred language setting for a consistent blog experience.
 
 - **Dark/Light Mode**: The theme includes a dark/light mode toggle and persists the user preference.
 
+---
+
 ## IMPORTANT NOTE
 
 As of Zola v0.22.0 from 2026-01-09, color syntax highlighting has changed and requires a different configuration.
@@ -212,8 +214,12 @@ If you do not provide an image under `extra.image`, a default image is used inst
   If omitted, a default image is used instead.
   The image is displayed on the blog's main page and on the post's detail page.
 
-- **Light/Dark Images**: if you want images that switch with the theme, wrap two images in a container
-  using class `light-dark-image`. The first image is shown in light mode, the second in dark mode:
+---
+
+## Light/Dark Images
+
+If you want images that switch with the theme, wrap two images in a container using class `light-dark-image`.
+The first image is shown in light mode, the second in dark mode:
 
 ```html
 <div class="light-dark-image">
