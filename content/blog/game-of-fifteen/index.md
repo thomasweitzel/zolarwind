@@ -45,7 +45,7 @@ Hint: if your browser doesn't display the board correctly, try clearing your bro
     </div>
 </div>
 <div class="mt-4">
-    <button id="playButton" class="py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-600 shadow-sm hover:bg-blue-500 focus:outline-none focus:shadow-outline active:bg-blue-600 transition duration-150 ease-in-out" onclick="play()" >
+    <button id="playButton" class="py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-neutral-950 bg-primary-300 shadow-sm hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-neutral-950 active:bg-primary-600 transition duration-150 ease-in-out">
         new game
     </button>
 </div>
@@ -100,126 +100,6 @@ It runs in the browser and uses just [Tailwind CSS](https://tailwindcss.com) for
 The source code can be used for all square board sizes, not only 4 by 4.
 You have to adjust the boards GUI or dynamically generate it - it's easy. 
 
-<script>
-  const size = 16;
-  const boardSize = 4;
-  const tileClasses = 'p-2 h-full w-full text-center align-middle text-3xl leading-normal text-red-900 font-bold bg-white border rounded shadow cursor-pointer select-none';
-  const winClasses = 'mt-4 bg-yellow-300 inline-block border border-gray-500 rounded-lg shadow-lg';
-  const playClasses = 'mt-4 bg-blue-300 inline-block border border-gray-500 rounded-lg shadow-lg';
-  const boardDiv = document.getElementById('board');
-  const emptyClasses = '';
-  const Direction = {
-    RIGHT: 1,
-    UP: 2,
-    LEFT: 3,
-    DOWN: 4,
-  };
-  const range0 = (limit) => [...Array(limit).keys()];
-  const init = () => {
-    range0(size).forEach((i) => document.getElementById(`f${i}`).addEventListener("click", move(i)));
-  };
-  const move = (id) => (_) => {
-    if (!hasWon()) {
-      const emptyIndex = getEmptyIndex();
-      swapIfPossible(id, emptyIndex, Direction.UP);
-      swapIfPossible(id, emptyIndex, Direction.LEFT);
-      swapIfPossible(id, emptyIndex, Direction.DOWN);
-      swapIfPossible(id, emptyIndex, Direction.RIGHT);
-      drawElement(id);
-      drawElement(emptyIndex);
-      drawBoard();
-    }
-  };
-  const swapIfPossible = (id, emptyId, direction) => {
-    const emptyCoords = indexToCoords(emptyId);
-    const neighborCoords = getNeighbor(direction, emptyCoords);
-    if (neighborCoords !== null && coordsToIndex(neighborCoords) === id) {
-      const temp = permutation[emptyId];
-      permutation[emptyId] = permutation[id];
-      permutation[id] = temp;
-    }
-  };
-  const drawElement = (id) => {
-    const element = document.getElementById(`f${id}`);
-    if (permutation[id] === size - 1) {
-      element.innerHTML = '';
-      element.className = emptyClasses;
-    } else {
-      element.innerHTML = `${permutation[id] + 1}`;
-      element.className = tileClasses;
-    }
-  };
-  const hasWon = () => range0(size).every((i) => permutation[i] === i);
-  const drawBoard = () => {
-    if (hasWon()) {
-      boardDiv.className = winClasses;
-    } else {
-      boardDiv.className = playClasses;
-    }
-  };
-  const draw = () => {
-    drawBoard();
-    range0(size).forEach((i) => drawElement(i));
-  };
-  const getRandomPermutation = () => {
-    const permutation = [];
-    const set = new Set(range0(size - 1));
-    while (set.size !== 0) {
-      const randomIndex = Math.floor(Math.random() * Math.floor(set.size));
-      const element = [...set][randomIndex];
-      permutation.push(element);
-      set.delete(element);
-    }
-    permutation.push(size - 1);
-    return permutation;
-  };
-  const parity = (p) => range0(size)
-    .map((i) => range0(size)
-      .filter((j) => i < j && p[i] > p[j])
-      .length
-    )
-    .reduce((agg, v) => agg + v, 0);
-  const isEvenPermutation = (p) => parity(p) % 2 === 0;
-  const getEvenPermutation = () => {
-    let p;
-    do {
-      p = getRandomPermutation();
-    } while (!isEvenPermutation(p))
-    return p;
-  };
-  const indexToCoords = (i) => ({ row: Math.trunc(i / boardSize), column: i % boardSize });
-  const coordsToIndex = (coords) => coords.row * boardSize + coords.column;
-  const getCellOrNull = (coords) => {
-    if (coords.row < 0 || coords.row >= boardSize || coords.column < 0 || coords.column >= boardSize) {
-      return null;
-    }
-    return coords;
-  };
-  const getNeighbor = (direction, coords) => {
-    let result;
-    switch (direction) {
-      case Direction.RIGHT:
-        result = getCellOrNull({ row: coords.row - 1, column: coords.column });
-        break;
-      case Direction.UP:
-        result = getCellOrNull({ row: coords.row + 1, column: coords.column });
-        break;
-      case Direction.LEFT:
-        result = getCellOrNull({ row: coords.row, column: coords.column + 1 });
-        break;
-      case Direction.DOWN:
-        result = getCellOrNull({ row: coords.row, column: coords.column - 1 });
-        break;
-    }
-    return result;
-  };
-  const getEmptyIndex = () => range0(size).filter((i) => permutation[i] === size - 1)[0];
-  const play = () => {
-    permutation = getEvenPermutation();
-    draw();
-  }
-  // Lets play ...
-  let permutation;
-  init();
-  play();
-</script>
+<div class="hidden bg-neutral-50 bg-neutral-100 bg-neutral-200 bg-neutral-300 bg-neutral-400 bg-neutral-500 bg-neutral-600 bg-neutral-700 bg-neutral-800 bg-neutral-900 bg-neutral-950 bg-primary-50 bg-primary-100 bg-primary-200 bg-primary-300 bg-primary-400 bg-primary-500 bg-primary-600 bg-primary-700 bg-primary-800 bg-primary-900 bg-primary-950 bg-ok-50 bg-ok-100 bg-ok-200 bg-ok-300 bg-ok-400 bg-ok-500 bg-ok-600 bg-ok-700 bg-ok-800 bg-ok-900 bg-ok-950 bg-warn-50 bg-warn-100 bg-warn-200 bg-warn-300 bg-warn-400 bg-warn-500 bg-warn-600 bg-warn-700 bg-warn-800 bg-warn-900 bg-warn-950 bg-fail-50 bg-fail-100 bg-fail-200 bg-fail-300 bg-fail-400 bg-fail-500 bg-fail-600 bg-fail-700 bg-fail-800 bg-fail-900 bg-fail-950 text-neutral-50 text-neutral-100 text-neutral-200 text-neutral-300 text-neutral-400 text-neutral-500 text-neutral-600 text-neutral-700 text-neutral-800 text-neutral-900 text-neutral-950 text-primary-50 text-primary-100 text-primary-200 text-primary-300 text-primary-400 text-primary-500 text-primary-600 text-primary-700 text-primary-800 text-primary-900 text-primary-950 text-ok-50 text-ok-100 text-ok-200 text-ok-300 text-ok-400 text-ok-500 text-ok-600 text-ok-700 text-ok-800 text-ok-900 text-ok-950 text-warn-50 text-warn-100 text-warn-200 text-warn-300 text-warn-400 text-warn-500 text-warn-600 text-warn-700 text-warn-800 text-warn-900 text-warn-950 text-fail-50 text-fail-100 text-fail-200 text-fail-300 text-fail-400 text-fail-500 text-fail-600 text-fail-700 text-fail-800 text-fail-900 text-fail-950 border-neutral-50 border-neutral-100 border-neutral-200 border-neutral-300 border-neutral-400 border-neutral-500 border-neutral-600 border-neutral-700 border-neutral-800 border-neutral-900 border-neutral-950 border-primary-50 border-primary-100 border-primary-200 border-primary-300 border-primary-400 border-primary-500 border-primary-600 border-primary-700 border-primary-800 border-primary-900 border-primary-950 border-ok-50 border-ok-100 border-ok-200 border-ok-300 border-ok-400 border-ok-500 border-ok-600 border-ok-700 border-ok-800 border-ok-900 border-ok-950 border-warn-50 border-warn-100 border-warn-200 border-warn-300 border-warn-400 border-warn-500 border-warn-600 border-warn-700 border-warn-800 border-warn-900 border-warn-950 border-fail-50 border-fail-100 border-fail-200 border-fail-300 border-fail-400 border-fail-500 border-fail-600 border-fail-700 border-fail-800 border-fail-900 border-fail-950"></div>
+
+<script src="game-of-fifteen.js" integrity="sha384-JxrdBI5c+wPKQv/3jeIZHhvFK5u658hFW/SaEFvVQZkE3Obo6boo+t3mu8dXS/ts"></script>
