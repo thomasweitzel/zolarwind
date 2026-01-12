@@ -32,7 +32,7 @@
   ,"description": {{ page.description | default(value=res.empty_page_description) | striptags | json_encode | safe }}
   ,"articleBody": {{ page.content | striptags | json_encode | safe }}
   {% if page.extra.image %}
-    ,"image": "{{ config.base_url | safe }}{{ page.path | safe }}{{ page.extra.image | safe }}"
+    ,"image": "{{ get_url(path=page.path ~ page.extra.image, absolute=true) }}"
   {% endif %}
 }
 </script>

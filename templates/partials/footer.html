@@ -24,7 +24,7 @@
       <p class="text-center text-base leading-6">
         {% for entry in config.extra.footer_pages %}
           {% if loop.index > 1 %} &middot; {% endif %}
-          <a href="{{ entry.url }}">{{ entry.title }}</a>
+          <a href="{{ get_url(path=entry.url) }}">{{ entry.title }}</a>
         {% endfor %}
       </p>
     {% endif %}

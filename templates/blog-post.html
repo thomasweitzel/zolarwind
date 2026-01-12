@@ -2,12 +2,15 @@
 
 {% block content %}
 
-  {% set banner = page.extra.image | default(value="/img/default-banner.jpg") %}
+  {% set banner_path = "/img/default-banner.jpg" %}
+  {% if page.extra.image is defined %}
+    {% set banner_path = page.path ~ page.extra.image %}
+  {% endif %}
 
   <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
     <article class="prose">
       <div class="h-48 rounded-md shadow-md">
-        <img class="h-48 w-full object-cover" src="{{ banner }}" alt="{{ page.title | default(value=res.empty_page_title) | striptags }}">
+        <img class="h-48 w-full object-cover" src="{{ get_url(path=banner_path) }}" alt="{{ page.title | default(value=res.empty_page_title) | striptags }}">
       </div>
       <h1>{{ page.title | default(value=res.empty_page_title) | striptags }}</h1>
       <div>
