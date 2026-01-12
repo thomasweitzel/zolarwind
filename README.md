@@ -179,6 +179,33 @@ The `[extra]` section is where you can place any custom variables you want to be
 
 ---
 
+## Subpath base_url support
+
+This theme is safe to run under a subpath (for example `https://example.org/blog/`), as long as all internal links and
+assets are resolved with Zola's `get_url` helper. That is why the templates use `get_url` for CSS, JS, images, and menu
+links. Keep internal links in `config.toml` root-relative (for example `"/pages/about/"`), so Zola can prefix the
+`base_url` subpath reliably.
+
+If you add or adjust templates, avoid hardcoded `href="/..."` or `src="/..."`. Always prefer:
+
+```tera
+{{ get_url(path="/img/example.jpg") }}
+```
+
+### Local testing with a subpath
+
+`zola serve` always mounts at `/`, so it does not exercise subpath behavior. To test subpaths locally, build into a
+subdirectory and serve the output from there:
+
+```bash
+zola build --base-url http://127.0.0.1:1111/subpath -o public/subpath
+python -m http.server --directory public 1111
+```
+
+Then open `http://127.0.0.1:1111/subpath/` in your browser.
+
+---
+
 ## Front matter
 
 For blog posts (Markdown files in folder `content/blog`), this theme uses a directory structure where each post has its own folder.
