@@ -19,15 +19,10 @@
       {% if not loop.last %},{% endif %}
     {% endfor %}
   ]
-  ,"publisher": [
-    {% for author in page.authors %}
-      {
-         "@type": "Person"
-        ,"name": "{{ author }}"
-      }
-      {% if not loop.last %},{% endif %}
-    {% endfor %}
-  ]
+  ,"publisher": {
+     "@type": "Person"
+    ,"name": "{{ page.authors[0] }}"
+  }
   {% endif %}
   ,"description": {{ page.description | default(value=res.empty_page_description) | striptags | json_encode | safe }}
   ,"articleBody": {{ page.content | striptags | json_encode | safe }}
