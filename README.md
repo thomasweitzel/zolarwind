@@ -176,6 +176,7 @@ The `[extra]` section is where you can place any custom variables you want to be
 
 - **displaymode.sun** and **displaymode.moon**: Optional.
   Inline SVG icons used by the dark/light mode toggle.
+  Define both to enable the toggle; if either is missing, the toggle is not rendered.
 
 ---
 
