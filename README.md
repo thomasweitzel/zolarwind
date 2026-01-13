@@ -281,6 +281,9 @@ To localize your blog with this theme:
    But that is your responsibility.
    The theme will not translate your content.
 
+This theme uses `default_language` as a build-time switch for a single locale per build.
+It does not target Zola's multi-language output in a single build.
+
 If you need to define your own date format, look [here](https://docs.rs/chrono/latest/chrono/format/strftime/index.html) for supported specifiers.
 
 ---
