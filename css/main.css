@@ -136,16 +136,16 @@
         @apply bg-neutral-800 text-neutral-100
     }
     .badge-fail {
-        @apply bg-fail-800 text-fail-800
+        @apply bg-fail-800 text-fail-100
     }
     .badge-warn {
-        @apply bg-warn-800 text-warn-800
+        @apply bg-warn-800 text-warn-100
     }
     .badge-ok {
-        @apply bg-ok-800 text-ok-800
+        @apply bg-ok-800 text-ok-100
     }
     .badge-primary {
-        @apply bg-primary-800 text-primary-800
+        @apply bg-primary-800 text-primary-100
     }
 
     .prose {
