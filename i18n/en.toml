@@ -13,12 +13,27 @@ reading_time = "reading time"
 aria_to_homepage = "Go to homepage"
 aria_menu = "Menu"
 aria_toggle_theme = "Toggle dark/light mode"
+aria_search = "Search"
 atom_feed_title = "Atom Feed"
 switch_light = "Switch to light mode"
 switch_dark = "Switch to dark mode"
 with_tag = "with tag"
 not_found_header = "The page you requested could not be found."
 not_found_text = "Oops! Seems like this page vanished into the internet abyss. Maybe it's on vacation? Please check the URL or ping me, and I'll see if I can locate it, or at least send out a search party."
+search_title = "Search"
+search_placeholder = "Search posts ..."
+search_input_label = "Search posts"
+search_clear_label = "Clear search"
+search_pagination_label = "Search results pages"
+search_page_label = "Page"
+search_no_results = "No results found"
+search_index_disabled = "Search index is disabled. Set build_search_index = true in config.toml."
+search_error = "Search index could not be loaded."
+search_loading = "Loading search index ..."
+
+# Phrases with singular/plural variants
+search_results_one = "Found {count} result"
+search_results_other = "Found {count} results"
 
 # Nouns with singular and plural
 [words]

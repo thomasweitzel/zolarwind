@@ -13,12 +13,27 @@ reading_time = "Lesezeit"
 aria_to_homepage = "Zur Homepage"
 aria_menu = "Menü"
 aria_toggle_theme = "Dunklen/hellen Modus wechseln"
+aria_search = "Suche"
 atom_feed_title = "Atom-Feed"
 switch_light = "Zu hellem Modus wechseln"
 switch_dark = "Zu dunklem Modus wechseln"
 with_tag = "mit Kennzeichen"
 not_found_header = "Die angefragte Seite konnte nicht gefunden werden."
 not_found_text = "Oops! Sieht so aus, als wäre diese Seite abgetaucht. Vielleicht ist sie im Urlaub? Bitte überprüfe die URL oder kontaktiere mich, und ich werde sehen, ob ich sie finden oder zumindest einen Suchtrupp losschicken kann."
+search_title = "Suche"
+search_placeholder = "Beiträge durchsuchen ..."
+search_input_label = "Beiträge durchsuchen"
+search_clear_label = "Suche leeren"
+search_pagination_label = "Suchergebnisseiten"
+search_page_label = "Seite"
+search_no_results = "Keine Ergebnisse gefunden"
+search_index_disabled = "Der Suchindex ist deaktiviert. Setze build_search_index = true in config.toml."
+search_error = "Der Suchindex konnte nicht geladen werden."
+search_loading = "Suchindex wird geladen ..."
+
+# Phrases with singular/plural variants
+search_results_one = "{count} Ergebnis gefunden"
+search_results_other = "{count} Ergebnisse gefunden"
 
 # Nouns with singular and plural
 [words]

@@ -2,11 +2,11 @@
 
 # The Zolarwind Theme for Zola
 
-Welcome to Zolarwind, the simple Zola blog theme with Tailwind CSS and KaTex support.
+Welcome to Zolarwind, the simple Zola blog theme with Tailwind CSS and KaTeX support.
 This theme is for Zola users aiming to have a nice blog design powered by Tailwind CSS.
 It seamlessly integrates with [Mermaid](https://mermaid.js.org), enabling the creation of various diagrams
 directly within your blog posts using a Markdown-inspired syntax.
-Additionally, the theme smoothly integrates math formulas using [KaTex](https://katex.org).
+Additionally, the theme smoothly integrates math formulas using [KaTeX](https://katex.org).
 Most importantly, while the theme is designed to be easily localizable,
 you can choose your preferred language setting for a consistent blog experience.
 
@@ -18,12 +18,14 @@ you can choose your preferred language setting for a consistent blog experience.
 
 - **Mermaid Integration**: Create diverse diagrams using simple text.
 
-- **KaTex Integration**: Integrate and display math formulas seamlessly in your blog posts.
+- **KaTeX Integration**: Integrate and display math formulas seamlessly in your blog posts.
 
 - **Localization Support**: All theme-specific strings are available in multiple languages; choose the one that's right for you.
   If your language isn't supported yet, just create the resource file with your translations.
 
 - **Dark/Light Mode**: The theme includes a dark/light mode toggle and persists the user preference.
+
+- **Client-side Search**: Built-in search page powered by Zola's index and MiniSearch.
 
 ---
 
@@ -109,7 +111,7 @@ Here's a breakdown of the configuration settings tailored for this theme:
   If you move the theme to the `themes/zolarwind` directory, use `zolarwind` for this entry.
 
 - **build_search_index**: If set to `true`, a search index will be built from the pages and section content for the `default_language`.
-  In this configuration and for this theme, it's disabled (`false`).
+  In this configuration and for this theme, it's enabled (`true`).
 
 - **generate_feed**: Determines if an Atom feed (file `atom.xml`) is automatically generated.
   It's set to `true`, meaning a feed will be generated.
@@ -402,6 +404,35 @@ In one terminal, run `npm run server` - or just `zola serve` - to start the Zola
 In the other terminal, run `npm run css:watch` to start the CSS generation whenever a relevant file changes.
 
 That way, your local web browser will automatically reload the page with the updated CSS whenever you change a file.
+
+---
+
+## Search
+
+This theme ships with a local, client-side search page powered by Zola's search index (Elasticlunr output) and MiniSearch.
+
+1. Enable the search index in `config.toml`:
+   ```toml
+   build_search_index = true
+   ```
+2. Create a page that uses the search template (for example `content/pages/search.md`). If your `content/pages/_index.md`
+   uses `sort_by = "date"`, the page needs a `date` (or `weight`) to avoid being ignored. You can optionally set
+   `extra.results_per_page` to control pagination and `extra.pagination_window` to control the number of pages shown on each side of the current page.
+   ```toml
+   +++
+   date = 2026-01-14
+   title = "Search"
+   template = "search.html"
+   [extra]
+   results_per_page = 5
+   pagination_window = 2
+   +++
+   ```
+3. A search icon appears in the header and links to `/pages/search/`.
+
+When using this theme in another Zola site, add `content/pages/search.md` in that site repository. Theme `content/` is not loaded by Zola.
+
+The search index is built for the current `default_language` only.
 
 ---
 

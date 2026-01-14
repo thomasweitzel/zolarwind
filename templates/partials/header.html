@@ -30,11 +30,27 @@
                   {% endif %}
                 {% endfor %}
               {% endif %}
+              {% if config.build_search_index %}
+                <a href="{{ get_url(path='/pages/search/') }}" aria-label="{{ res.aria_search }}" title="{{ res.search_title }}" class="flex items-center justify-center cursor-pointer p-2 rounded-full text-neutral-200 hover:text-neutral-50 hover:bg-neutral-700 focus:outline-none focus:text-neutral-700 focus:bg-neutral-200 transition ease-in-out duration-250">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7" />
+                    <line x1="16.5" y1="16.5" x2="21" y2="21" />
+                  </svg>
+                </a>
+              {% endif %}
               {% include "partials/toggle-theme.html" %}
             </div>
           </div>
         </div>
-        <div class="-mr-2 flex md:hidden">
+        <div class="-mr-2 flex items-center md:hidden">
+          {% if config.build_search_index %}
+            <a href="{{ get_url(path='/pages/search/') }}" aria-label="{{ res.aria_search }}" title="{{ res.search_title }}" class="mr-1 inline-flex items-center justify-center p-2 rounded-md text-neutral-200 hover:text-neutral-50 hover:bg-neutral-700 focus:outline-none focus:bg-neutral-200 focus:text-neutral-800">
+              <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7" stroke-width="2" />
+                <line x1="16.5" y1="16.5" x2="21" y2="21" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </a>
+          {% endif %}
           <button id="toggleMobileMenu" class="icon inline-flex items-center justify-center p-2 rounded-md text-neutral-200 hover:text-neutral-50 hover:bg-neutral-700 focus:outline-none focus:bg-neutral-200 focus:text-neutral-800" aria-label="{{ res.aria_menu }}">
             <span id="mobile-icon-menu-unselected">
               <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">

@@ -258,6 +258,18 @@ html {
     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
 }
 
+input[type="search"] {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+}
+
+
 /* See https://github.com/mermaid-js/mermaid/issues/2644#issuecomment-2313201033 */
 [data-theme='dark'] .mermaid {
     filter: invert(0.85) hue-rotate(45deg);
