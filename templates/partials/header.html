@@ -42,15 +42,16 @@
             </div>
           </div>
         </div>
-        <div class="-mr-2 flex items-center md:hidden">
+        <div class="-mr-2 flex items-center space-x-1 md:hidden">
           {% if config.build_search_index %}
-            <a href="{{ get_url(path='/pages/search/') }}" aria-label="{{ res.aria_search }}" title="{{ res.search_title }}" class="mr-1 inline-flex items-center justify-center p-2 rounded-md text-neutral-200 hover:text-neutral-50 hover:bg-neutral-700 focus:outline-none focus:bg-neutral-200 focus:text-neutral-800">
+            <a href="{{ get_url(path='/pages/search/') }}" aria-label="{{ res.aria_search }}" title="{{ res.search_title }}" class="inline-flex items-center justify-center p-2 rounded-md text-neutral-200 hover:text-neutral-50 hover:bg-neutral-700 focus:outline-none focus:bg-neutral-200 focus:text-neutral-800">
               <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="7" stroke-width="2" />
-                <line x1="16.5" y1="16.5" x2="21" y2="21" stroke-width="2" stroke-linecap="round" />
+                <circle cx="11" cy="11" r="7" stroke-width="1.5" />
+                <line x1="16.5" y1="16.5" x2="21" y2="21" stroke-width="1.5" stroke-linecap="round" />
               </svg>
             </a>
           {% endif %}
+          {% include "partials/toggle-theme.html" %}
           <button id="toggleMobileMenu" class="icon inline-flex items-center justify-center p-2 rounded-md text-neutral-200 hover:text-neutral-50 hover:bg-neutral-700 focus:outline-none focus:bg-neutral-200 focus:text-neutral-800" aria-label="{{ res.aria_menu }}">
             <span id="mobile-icon-menu-unselected">
               <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -75,7 +76,6 @@
             <a class="mt-1 block px-3 py-2 rounded-md font-medium text-neutral-200 hover:text-neutral-50 hover:bg-neutral-700 focus:outline-none focus:text-neutral-800 focus:bg-neutral-200" href="{{ get_url(path=entry.url) }}" title="{{ entry.title }}">{{ entry.title }}</a>
           {% endif %}
         {% endfor %}
-        {% include "partials/toggle-theme.html" %}
       </div>
     {% endif %}
   </nav>

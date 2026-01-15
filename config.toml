@@ -1,5 +1,4 @@
 # The URL the site will be built for
-# base_url = "http://127.0.0.1:1111/demo/zolarwind"
 base_url = "https://example.org"
 
 # Whether to automatically compile all Sass files in the sass directory

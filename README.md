@@ -201,11 +201,11 @@ If you add or adjust templates, avoid hardcoded `href="/..."` or `src="/..."`. A
 subdirectory and serve the output from there:
 
 ```bash
-zola build --base-url http://127.0.0.1:1111/subpath -o public/subpath
+zola build --base-url http://127.0.0.1:1111/demo/zolarwind -o public/demo/zolarwind
 python -m http.server --directory public 1111
 ```
 
-Then open `http://127.0.0.1:1111/subpath/` in your browser.
+Then open `http://127.0.0.1:1111/demo/zolarwind/` in your browser.
 
 ---
 
