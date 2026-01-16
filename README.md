@@ -494,3 +494,12 @@ Use the file `en.toml` as a template for your own translations.
 
 This theme is under the MIT License.
 For details, please refer to the LICENSE file.
+
+### Third-Party Notices
+
+- Heroicons (MIT License): https://heroicons.com
+- KaTeX (MIT License): https://katex.org
+- Mermaid (MIT License): https://mermaid.js.org
+- MiniSearch (MIT License): https://lucaong.github.io/minisearch/
+- mhchem (Apache 2.0 License): https://mhchem.github.io/MathJax-mhchem/
+- Unsplash images (Unsplash License): https://unsplash.com/license
