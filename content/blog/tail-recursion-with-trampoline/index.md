@@ -221,7 +221,7 @@ const trampolineFactorial = trampoline(thunkFactorial);
 trampolineFactorial(5);
 ```
 
-All this is for Node.js and JavaScript. For Java 8 you might have a look at this [article](https://blog.knoldus.com/tail-recursion-in-java-8).
+All this is for Node.js and JavaScript.
 
 ## Tail recursive Fibonacci numbers
 
