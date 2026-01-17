@@ -436,6 +436,12 @@ The search index is built for the current `default_language` only.
 
 ---
 
+## Privacy
+
+This theme sets no cookies and does not load resources from third-party sites. The dark/light mode preference is stored in `localStorage` only after a user explicitly toggles the theme.
+
+---
+
 ## Remarks
 
 ### Typography for Markdown

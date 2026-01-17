@@ -73,11 +73,13 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  const toggleTheme = (clickedElements, hiddenElements, theme) => {
+  const toggleTheme = (clickedElements, hiddenElements, theme, persist = false) => {
     clickedElements.forEach((element) => element.classList.add("hidden"));
     hiddenElements.forEach((element) => element.classList.remove("hidden"));
     htmlElement.setAttribute("data-theme", theme);
-    saveTheme(theme);
+    if (persist) {
+      saveTheme(theme);
+    }
   };
 
   const mobileButton = document.getElementById("toggleMobileMenu");
@@ -93,11 +95,11 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     suns.forEach((sun) => sun.addEventListener("click", () => {
-      toggleTheme(suns, moons, lightTheme);
+      toggleTheme(suns, moons, lightTheme, true);
     }));
 
     moons.forEach((moon) => moon.addEventListener("click", () => {
-      toggleTheme(moons, suns, darkTheme);
+      toggleTheme(moons, suns, darkTheme, true);
     }));
   }
 });
