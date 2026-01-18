@@ -234,6 +234,13 @@ If you do not provide an image under `extra.image`, a default image is used inst
 - **extra.math**: either `false` (default) or `true`.
   If set to `true`, the post will be rendered with KaTex support for displaying math formulas.
   If the entry is omitted or set to `false`, the post will not have KaTex support.
+  To avoid Markdown conflicts (for example `*` italics or backslash escaping), use the safe KaTeX shortcode.
+  Omit `$` and `$$` delimiters inside the shortcode body:
+
+  ```text
+  {% katex() %} a^2 + b^2 {% end %}
+  {% katex(inline=true) %} 1*2+3*4 {% end %}
+  ```
 
 - **extra.diagram**: either `false` (default) or `true`.
   Controls loading of the necessary JavaScript to render the Mermaid diagram.

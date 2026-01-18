@@ -1,0 +1,20 @@
+{# KaTeX shortcode
+   Usage:
+     {% katex() %} ... {% end %}
+     {% katex(inline=true) %} ... {% end %}
+
+   Notes:
+     - The body is raw (not Markdown), so * and backslashes stay intact.
+     - We wrap the body in $...$ / $$...$$ so KaTeX auto-render picks it up.
+     - Do not include delimiters inside the shortcode body.
+     - We intentionally do NOT use |safe to keep HTML escaping intact.
+#}
+
+{% set inline = inline | default(value=false) %}
+{% set class = class | default(value="") %}
+{% set content = body | trim %}
+{% if inline %}
+<span class="math math-inline{% if class %} {{ class }}{% endif %}">${{ content }}$</span>
+{% else %}
+<div class="math math-display{% if class %} {{ class }}{% endif %}">$${{ content }}$$</div>
+{% endif %}
