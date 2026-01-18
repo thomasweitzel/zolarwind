@@ -251,7 +251,9 @@ Like in the example above, the original function becomes an inner function of th
 
 As I recently found out, Fibonacci numbers also have a [closed-form expression](https://en.wikipedia.org/wiki/Fibonacci_number#Matrix_form):
 
-$$F_{n}={\cfrac {1}{\sqrt {5}}}\left({\cfrac {1+{\sqrt {5}}}{2}}\right)^{n}-{\cfrac {1}{\sqrt {5}}}\left({\cfrac {1-{\sqrt {5}}}{2}}\right)^{n}$$
+{% katex() %}
+F_{n}={\cfrac {1}{\sqrt {5}}}\left({\cfrac {1+{\sqrt {5}}}{2}}\right)^{n}-{\cfrac {1}{\sqrt {5}}}\left({\cfrac {1-{\sqrt {5}}}{2}}\right)^{n}
+{% end %}
 
 As an aside: we were [estimating story points](https://www.mountaingoatsoftware.com/agile/planning-poker) during a sprint planing.
 Story points roughly follow the Fibonacci numbers, so it's natural that the topic pops up from time to time.

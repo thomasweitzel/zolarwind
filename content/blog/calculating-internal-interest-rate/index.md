@@ -28,7 +28,7 @@ While Microsoft uses the name XIRR for its Excel function, I will use the term I
 A crucial part of implementing a financial algorithm like IRR is validation -- that is, making sure that your algorithm is producing correct and expected results.
 One effective way to validate your implementation is by comparing its outputs to those of [Microsoft Excel's XIRR function](https://support.microsoft.com/en-gb/office/xirr-function-de1242ec-6477-445b-b11b-a303ad9adc9d).
 I will use the data from the Excel example.
-Using Excel's XIRR function to compute the internal rate of return for this specific data set yields a result of $37.34\\%$.
+Using Excel's XIRR function to compute the internal rate of return for this specific data set yields a result of {% katex(inline=true) %}37.34\%{% end %}.
 
 | $\textbf{i}$ | ISO Date $\textbf{d}$ | Years since first cash flow $\textbf{y}$ | Payment $\textbf{p}$ |
 |-------------:|-----------------------|-----------------------------------------:|---------------------:|
@@ -49,7 +49,7 @@ The derivative of the NPV is the rate of change of the NPV with respect to the i
 The IRR algorithm is an instance of the [Newton-Raphson method](https://en.wikipedia.org/wiki/Newton%27s_method),
 which is a root-finding algorithm that produces successively better approximations to the roots (or zeroes) of a real-valued function.
 To calculate the IRR, you need an array with pairs of data: one is the date of a cash flow, and the other is its payment amount.
-You also need an initial guess for the IRR rate, which is often set as $10\\%$ or $0.1$.
+You also need an initial guess for the IRR rate, which is often set as {% katex(inline=true) %}10\%{% end %} or $0.1$.
 
 Here's the general process of the algorithm:
 
@@ -79,7 +79,7 @@ you are essentially varying the interest rate and observing how it affects the N
 Here's what you see on the graph below, which plots the NPV as a function of the rate with the values from the table above:
 
 - **X-axis**: The x-axis represents the interest rate $irr$.
-  It typically ranges from $0\\%$ to a reasonable upper limit, depending on the context of your problem.
+  It typically ranges from {% katex(inline=true) %}0\%{% end %} to a reasonable upper limit, depending on the context of your problem.
 - **Y-axis**: The y-axis represents the net present value NPV.
   It's the cumulative sum of the discounted cash flows according to the given formula.
 - **Shape of the curve**: The curve of the NPV function will generally be downward-sloping.
@@ -87,7 +87,7 @@ Here's what you see on the graph below, which plots the NPV as a function of the
   Higher interest rates mean that future cash flows are being discounted more heavily, which reduces their present value.
 - **Break-even point**: There will be a point on the graph where the NPV curve intersects the x-axis.
   It's where our $irr$ satisfies the condition $\mathit{NPV} = 0$.
-  For our data, it is somewhere between $0.35$ and $0.40$, or $35\\%$ and $40\\%$.
+  For our data, it is somewhere between $0.35$ and $0.40$, or {% katex(inline=true) %}35\%{% end %} and {% katex(inline=true) %}40\%{% end %}.
 
 <div class="light-dark-image">
   <img src="irr-npv-function-light.webp" alt="Plot of the NPV as a function of the rate with the values from the table" />
@@ -125,7 +125,7 @@ It ensures that future cash flows are appropriately weighed against the potentia
 
 ### But what happens if ...
 
-The expression $(1 + x)^{y_i}$ can become a problem if $x < -1$ (less than $-100\\%$), because raising a negative number to a non-integer power will result in a complex number.
+The expression $(1 + x)^{y_i}$ can become a problem if $x < -1$ (less than {% katex(inline=true) %}-100\%{% end %}), because raising a negative number to a non-integer power will result in a complex number.
 Within the realm of real numbers, this operation is undefined.
 For example, consider a case where $x = -1.1$ and $y_i$ is a floating point number like $0.4$.
 Then, $(1 + x)$ will be negative, and raising it to the $y_i$ power [produces a complex value](https://www.wolframalpha.com/input?i=%281+-+1.1%29%5E%280.4%29):
