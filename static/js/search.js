@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const errorText = root.dataset.error || "";
   const loadingText = root.dataset.loading || "";
   const pageSize = Math.max(1, parseInt(root.dataset.pageSize || "10", 10) || 10);
-  const pageLabel = root.dataset.pageLabel || "Page";
+  const pageLabel = root.dataset.pageLabel || "";
   const pageWindow = Math.max(1, parseInt(root.dataset.pageWindow || "3", 10) || 3);
 
   const setStatus = (text) => {
@@ -142,7 +142,8 @@ document.addEventListener("DOMContentLoaded", () => {
         page === currentPage
           ? "inline-flex items-center px-3 py-2 rounded-md font-medium text-neutral-200 bg-neutral-800"
           : "inline-flex items-center px-3 py-2 rounded-md font-medium text-neutral-200 hover:text-neutral-50 hover:bg-neutral-700 focus:outline-none focus:text-neutral-700 focus:bg-neutral-200";
-      button.setAttribute("aria-label", `${pageLabel} ${page}`);
+      const label = pageLabel ? `${pageLabel} ${page}` : String(page);
+      button.setAttribute("aria-label", label);
       button.textContent = String(page);
       button.addEventListener("click", () => {
         updateQueryString(query, page);

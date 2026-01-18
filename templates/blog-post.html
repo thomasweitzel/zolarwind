@@ -8,7 +8,12 @@
   {% endif %}
 
   <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-    <article class="prose">
+    <article
+      class="prose"
+      data-clipboard-copy="{{ res.clipboard_copy }}"
+      data-clipboard-copied="{{ res.clipboard_copied }}"
+      data-clipboard-error="{{ res.clipboard_error }}"
+    >
       <div class="h-48 rounded-md shadow-md">
         <img class="h-48 w-full object-cover" src="{{ get_url(path=banner_path) }}" alt="{{ page.title | default(value=res.empty_page_title) | striptags }}">
       </div>
