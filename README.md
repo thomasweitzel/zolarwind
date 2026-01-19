@@ -7,12 +7,12 @@ This theme is for Zola users aiming to have a nice blog design powered by Tailwi
 It seamlessly integrates with [Mermaid](https://mermaid.js.org), enabling the creation of various diagrams
 directly within your blog posts using a Markdown-inspired syntax.
 Additionally, the theme smoothly integrates math formulas using [KaTeX](https://katex.org).
-Most importantly, while the theme is designed to be easily localizable,
+Most importantly, while the theme is designed to be easily localized,
 you can choose your preferred language setting for a consistent blog experience.
 
 ---
 
-## Features:
+## Features
 
 - **Tailwind CSS**: Utilize the utility-first CSS framework for rapid UI development.
 
@@ -29,7 +29,7 @@ you can choose your preferred language setting for a consistent blog experience.
 
 ---
 
-## IMPORTANT NOTE
+## Important Note
 
 As of Zola v0.22.0 from 2026-01-09, color syntax highlighting has changed and requires a different configuration.
 I have updated the theme to reflect this change.
@@ -37,15 +37,21 @@ This also means that the theme is no longer compatible with Zola v0.21.0 and ear
 
 ---
 
-## Table of Contents:
+## Table of Contents
+- [Features](#features)
+- [Important Note](#important-note)
 - [Demo Website](#demo-website)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [Front Matter](#front-matter)
+- [Subpath base_url support](#subpath-base_url-support)
+- [Front matter](#front-matter)
+- [Light/Dark Images](#lightdark-images)
+- [Search](#search)
 - [Localization](#localization)
 - [Integrating the theme folder](#integrating-the-theme-folder)
 - [Development](#development)
+- [Privacy](#privacy)
 - [Remarks](#remarks)
 - [Contributing](#contributing)
 - [License](#license)
@@ -120,7 +126,7 @@ Here's a breakdown of the configuration settings tailored for this theme:
   Here, a taxonomy for `tags` is defined, with a pagination limit of 6 and an enabled feed.
 
 - **ignored_static**: An array of GLOB patterns (files and directories) that Zola should ignore.
-  Here, a pattern is defined to ignore the `static/giallo*.css` file, which is included by Tailwind CSS and should not directly be used by the web site.
+  Here, a pattern is defined to ignore the `static/giallo*.css` file, which is included by Tailwind CSS and should not directly be used by the website.
 
 ### Markdown Highlighting Configuration:
 
@@ -232,8 +238,8 @@ If you do not provide an image under `extra.image`, a default image is used inst
   You can omit it, but then the post will not show up under `tags`. 
 
 - **extra.math**: either `false` (default) or `true`.
-  If set to `true`, the post will be rendered with KaTex support for displaying math formulas.
-  If the entry is omitted or set to `false`, the post will not have KaTex support.
+  If set to `true`, the post will be rendered with KaTeX support for displaying math formulas.
+  If the entry is omitted or set to `false`, the post will not have KaTeX support.
   To avoid Markdown conflicts (for example `*` italics or backslash escaping), use the safe KaTeX shortcode.
   Omit `$` and `$$` delimiters inside the shortcode body:
 
@@ -264,6 +270,35 @@ The first image is shown in light mode, the second in dark mode:
   <img src="example-dark.webp" alt="Example image" />
 </div>
 ```
+
+---
+
+## Search
+
+This theme ships with a local, client-side search page powered by Zola's search index (Elasticlunr output) and MiniSearch.
+
+1. Enable the search index in `config.toml`:
+   ```toml
+   build_search_index = true
+   ```
+2. Create a page that uses the search template (for example `content/pages/search.md`). If your `content/pages/_index.md`
+   uses `sort_by = "date"`, the page needs a `date` (or `weight`) to avoid being ignored. You can optionally set
+   `extra.results_per_page` to control pagination and `extra.pagination_window` to control the number of pages shown on each side of the current page.
+   ```toml
+   +++
+   date = 2026-01-14
+   title = "Search"
+   template = "search.html"
+   [extra]
+   results_per_page = 5
+   pagination_window = 2
+   +++
+   ```
+3. A search icon appears in the header and links to `/pages/search/`.
+
+When using this theme in another Zola site, add `content/pages/search.md` in that site repository. Theme `content/` is not loaded by Zola.
+
+The search index is built for the current `default_language` only.
 
 ---
 
@@ -306,6 +341,10 @@ All other files stay in the root directory.
 If you have your own files there, you need to merge them with the ones from this theme.
 You also need to adjust the `config.toml` and `package.json` files in the root accordingly.
 
+All `extra.*` settings are optional, but if you omit them the related UI elements won’t render (menu, footer links, social icons, or the theme toggle).
+Also add `content/pages/search.md` in your site repository if you want the built-in search page.
+Theme `content/` is not loaded by Zola (see the Search section above).
+
 I will only show you the relevant directories that need to be moved.
 This is the directory structure of the stand-alone site, where the theme is in the root directory:
 
@@ -343,6 +382,7 @@ Create a new directory `themes/zolarwind` and move the following files and direc
 The `static/css` directory is a special case.
 It contains the generated Tailwind CSS file with the name `generated.css`.
 It will stay in its original location.
+Zola always serves the site’s `static/` directory, even when a theme is used.
 This file is generated from the file `css/main.css`, which is the input for the CSS generation.
 The generation process can be triggered with a script in the `package.json` file.
 **You only need to adjust and run the script** in `package.json` if you make changes to the theme's template files or use new Tailwind CSS classes directly in your content files.
@@ -414,38 +454,32 @@ That way, your local web browser will automatically reload the page with the upd
 
 ---
 
-## Search
-
-This theme ships with a local, client-side search page powered by Zola's search index (Elasticlunr output) and MiniSearch.
-
-1. Enable the search index in `config.toml`:
-   ```toml
-   build_search_index = true
-   ```
-2. Create a page that uses the search template (for example `content/pages/search.md`). If your `content/pages/_index.md`
-   uses `sort_by = "date"`, the page needs a `date` (or `weight`) to avoid being ignored. You can optionally set
-   `extra.results_per_page` to control pagination and `extra.pagination_window` to control the number of pages shown on each side of the current page.
-   ```toml
-   +++
-   date = 2026-01-14
-   title = "Search"
-   template = "search.html"
-   [extra]
-   results_per_page = 5
-   pagination_window = 2
-   +++
-   ```
-3. A search icon appears in the header and links to `/pages/search/`.
-
-When using this theme in another Zola site, add `content/pages/search.md` in that site repository. Theme `content/` is not loaded by Zola.
-
-The search index is built for the current `default_language` only.
-
----
-
 ## Privacy
 
 This theme sets no cookies and does not load resources from third-party sites. The dark/light mode preference is stored in `localStorage` only after a user explicitly toggles the theme.
+
+KaTeX, Mermaid, and MiniSearch are bundled in `static/` so they can be served from your own domain and remain pinned to known versions.
+If you instead load them from a Content Delivery Network (CDN), consider the following GDPR implications:
+
+- **Third-Party Requests & Data Privacy**: When you load resources from a CDN, it triggers third-party requests to the CDN's servers.
+  These servers might log your IP address, user agent, and other request-related metadata.
+  Under GDPR, IP addresses can be considered personal data.
+  By serving these libraries from your domain, you reduce third-party data transfers, limiting the amount of personal data you expose to external entities.
+
+- **Cookies**: Many CDNs set cookies for various reasons, including analytics or performance optimizations.
+  These cookies can track users across different websites that use the same CDN, potentially infringing on their privacy rights.
+  By hosting these libraries on your domain, you have full control over cookies and can ensure compliance with GDPR.
+
+- **Consent**: If you're using a CDN that sets cookies or collects data, you might need to get explicit user consent before loading resources from that CDN.
+  This can complicate user experience and lead to a reduced site performance for users who opt-out.
+  By self-hosting, you circumvent this issue.
+
+- **Transparency & Control**: By self-hosting, you know exactly which versions of these libraries you're using and can ensure there are no modifications or unexpected behaviors.
+  With CDNs, there's a minor risk of the library being compromised, which could affect all sites using that resource.
+
+- **Data Transfer Outside the EU**: If the CDN servers are located outside the European Union, you might be transferring data out of the EU,
+  which adds another layer of GDPR compliance requirements.
+  By self-hosting, you ensure that user data doesn't leave the region unless you specifically choose a hosting solution outside the EU.
 
 ---
 
@@ -464,31 +498,6 @@ But it gives me fine-grained control over how the result looks like.
 While it is time-consuming, I prefer this solution over the `@tailwindcss/typography` plugin.
  
 Yes, I'm reinventing the wheel here, because for common typographic patterns, I'm just recreating what's already provided by the typography plugin.
-
-### Serve KaTex files locally
-
-All KaTex files are included in the `static` directory for this theme.
-Using KaTeX (or any other library) by serving it from a Content Delivery Network (CDN) has implications concerning the General Data Protection Regulation (GDPR) and the use of cookies:
-
-- **Third-Party Requests & Data Privacy**: When you load resources from a CDN, it triggers third-party requests to the CDN's servers.
-  These servers might log your IP address, user agent, and other request-related metadata.
-  Under GDPR, IP addresses can be considered personal data.
-  By serving KaTeX from your domain, you reduce third-party data transfers, limiting the amount of personal data you expose to external entities.
-
-- **Cookies**: Many CDNs set cookies for various reasons, including analytics or performance optimizations.
-  These cookies can track users across different websites that use the same CDN, potentially infringing on their privacy rights.
-  By hosting KaTeX on your domain, you have full control over cookies and can ensure compliance with GDPR.
-
-- **Consent**: If you're using a CDN that sets cookies or collects data, you might need to get explicit user consent before loading resources from that CDN.
-  This can complicate user experience and lead to a reduced site performance for users who opt-out.
-  By self-hosting, you circumvent this issue.
-
-- **Transparency & Control**: By self-hosting, you know exactly which version of KaTeX you're using and can ensure there are no modifications or unexpected behaviors.
-  With CDNs, there's a minor risk of the library being compromised, which could affect all sites using that resource.
-
-- **Data Transfer Outside the EU**: If the CDN servers are located outside the European Union, you might be transferring data out of the EU,
-  which adds another layer of GDPR compliance requirements.
-  By self-hosting, you ensure that user data doesn't leave the region unless you specifically choose a hosting solution outside the EU.
 
 ---
 
