@@ -301,6 +301,8 @@ When using this theme in another Zola site, add `content/pages/search.md` in tha
 
 The search index is built for the current `default_language` only.
 
+Note: If `build_search_index = true` but you don’t create `content/pages/search.md`, the search link will 404.
+
 ---
 
 ## Localization
@@ -344,8 +346,7 @@ You also need to adjust the `config.toml` and `package.json` files in the root a
 
 Most `extra.*` settings are optional (except `title` and `path_language_resources`), 
 but if you omit them the related UI elements won’t render (menu, footer links, social icons, or the theme toggle).
-Also add `content/pages/search.md` in your site repository if you want the built-in search page.
-Theme `content/` is not loaded by Zola (see the Search section above).
+If you enable search, add `content/pages/search.md` in your site repository. Theme `content/` is not loaded by Zola (see the [Search](#search) section).
 
 I will only show you the relevant directories that need to be moved.
 This is the directory structure of the stand-alone site, where the theme is in the root directory:
