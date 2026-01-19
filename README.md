@@ -119,14 +119,15 @@ Here's a breakdown of the configuration settings tailored for this theme:
 - **build_search_index**: If set to `true`, a search index will be built from the pages and section content for the `default_language`.
   In this configuration and for this theme, it's enabled (`true`).
 
-- **generate_feed**: Determines if an Atom feed (file `atom.xml`) is automatically generated.
+- **generate_feeds**: Determines if an Atom feed (file `atom.xml`) is automatically generated.
   It's set to `true`, meaning a feed will be generated.
 
 - **taxonomies**: An array of taxonomies (classification systems) used for the site.
   Here, a taxonomy for `tags` is defined, with a pagination limit of 6 and an enabled feed.
 
 - **ignored_static**: An array of GLOB patterns (files and directories) that Zola should ignore.
-  Here, a pattern is defined to ignore the `static/giallo*.css` file, which is included by Tailwind CSS and should not directly be used by the website.
+  Here, a pattern is defined to ignore `giallo*.css` under the site’s root `static/` directory, which is included by Tailwind CSS and should not directly be used by the website.
+  The patterns are relative to the site’s root `static/` directory and do not apply to theme assets.
 
 ### Markdown Highlighting Configuration:
 
@@ -341,7 +342,8 @@ All other files stay in the root directory.
 If you have your own files there, you need to merge them with the ones from this theme.
 You also need to adjust the `config.toml` and `package.json` files in the root accordingly.
 
-All `extra.*` settings are optional, but if you omit them the related UI elements won’t render (menu, footer links, social icons, or the theme toggle).
+Most `extra.*` settings are optional (except `title` and `path_language_resources`), 
+but if you omit them the related UI elements won’t render (menu, footer links, social icons, or the theme toggle).
 Also add `content/pages/search.md` in your site repository if you want the built-in search page.
 Theme `content/` is not loaded by Zola (see the Search section above).
 
@@ -355,18 +357,21 @@ This is the directory structure of the stand-alone site, where the theme is in t
 ├── static
 │   ├── css
 │   ├── img
-│   └── js
+│   ├── js
+│   └── giallo.css
 ├── syntaxes
 ├── templates
 └── theme.toml
 ```
 
-Create a new directory `themes/zolarwind` and move the following files and directories there:
+Create a new directory `themes/zolarwind` and move the theme-specific files there. The tree below shows what stays in the site root and what moves under `themes/zolarwind`:
 
 ```
 /
 ├── static
-│   └── css
+│   ├── css
+│   └── giallo.css
+├── syntaxes
 └── themes
     └── zolarwind
         ├── css
@@ -374,18 +379,31 @@ Create a new directory `themes/zolarwind` and move the following files and direc
         ├── static
         │   ├── img
         │   └── js
-        ├── syntaxes
         ├── templates
         └── theme.toml
 ```
+
+The directory `syntaxes` stays in its original location. If you want to move it, you have to adjust the `extra_grammars` entries in `config.toml`.
 
 The `static/css` directory is a special case.
 It contains the generated Tailwind CSS file with the name `generated.css`.
 It will stay in its original location.
 Zola always serves the site’s `static/` directory, even when a theme is used.
 This file is generated from the file `css/main.css`, which is the input for the CSS generation.
+
+The reference to `giallo.css` in `themes/zolarwind/css/main.css` has to be adjusted accordingly, since it has moved, while the file `giallo.css` stayed in its original location.
+Make this change to `themes/zolarwind/css/main.css`. Before: 
+```css
+@import "../static/giallo.css";
+```
+
+After:
+```css
+@import "../../../static/giallo.css";
+```
+
 The generation process can be triggered with a script in the `package.json` file.
-**You only need to adjust and run the script** in `package.json` if you make changes to the theme's template files or use new Tailwind CSS classes directly in your content files.
+You **only** need to adjust and run the script in `package.json` if you make changes to the theme's template files or use new Tailwind CSS classes directly in your content files.
 Since the source file `css/main.css` has moved to the directory `themes/zolarwind/css/main.css`, we need to adjust the script in `package.json` accordingly.
 
 This is what the relevant part of it looks like for the stand-alone site:
