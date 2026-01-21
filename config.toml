@@ -5,7 +5,7 @@ base_url = "https://example.org"
 compile_sass = false
 
 # The default language ("de" also included in i18n directory)
-default_language = "de"
+default_language = "en"
 
 # The site theme to use
 # theme = "zolarwind"
