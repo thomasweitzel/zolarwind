@@ -27,6 +27,8 @@ you can choose your preferred language setting for a consistent blog experience.
 
 - **Client-side Search**: Built-in search page powered by Zola's index and MiniSearch.
 
+- **Series Support**: Group posts into series via a taxonomy, with ordered series navigation on series posts.
+
 ---
 
 ## Important Note
@@ -46,6 +48,7 @@ This also means that the theme is no longer compatible with Zola v0.21.0 and ear
 - [Configuration](#configuration)
 - [Subpath base_url support](#subpath-base_url-support)
 - [Front matter](#front-matter)
+- [Series](#series)
 - [Light/Dark Images](#lightdark-images)
 - [Search](#search)
 - [Localization](#localization)
@@ -234,9 +237,8 @@ If you do not provide an image under `extra.image`, a default image is used inst
 - **authors**: an optional array of all the post's authors, e.g. `["Thomas Weitzel"]`.
   You can leave it empty, but then the first author will show up as `Unknown` in the feed (`atom.xml`).
 
-- **taxonomies**: only the optional `tags` taxonomy is used by this theme.
-  I tend to list programming languages used in the post, e.g. `["rust", "javascript"]`.
-  You can omit it, but then the post will not show up under `tags`. 
+- **taxonomies**: optional `tags` and `series` taxonomies are supported.
+  Tags are shown on posts and tag index pages, series are shown on series pages and the series navigation at the bottom of series posts.
 
 - **extra.math**: either `false` (default) or `true`.
   If set to `true`, the post will be rendered with KaTeX support for displaying math formulas.
@@ -257,6 +259,31 @@ If you do not provide an image under `extra.image`, a default image is used inst
 - **extra.image**: an optional image for the post.
   If omitted, a default image is used instead.
   The image is displayed on the blog's main page and on the post's detail page.
+
+---
+
+## Series
+
+Zolarwind supports series via Zola taxonomies. Series navigation appears at the bottom of posts that belong to a series.
+
+1. Enable the taxonomy in `config.toml`:
+   ```toml
+   taxonomies = [
+       { name = "tags", paginate_by = 6, feed = true },
+       { name = "series", paginate_by = 6, feed = false },
+   ]
+   ```
+   Series feeds are less commonly consumed than post/tag feeds, so the default disables it to keep output minimal; enable it if you want subscribers to follow series pages.
+
+2. Assign a post to a series:
+   ```toml
+   [taxonomies]
+   series = ["my-series"]
+   ```
+
+3. Optional ordering: set `extra.series_order` in the post front matter. When omitted, the series list falls back to the post date.
+
+Series index pages are available at `/series/` and `/series/<name>/`.
 
 ---
 
