@@ -3,10 +3,6 @@
 
 @theme {
     --color-*: initial;
-
-    --color-stone-200: oklch(.923 .003 48.717);
-    --color-stone-400: oklch(.709 .01 56.259);
-
     /* Light-BEGIN */
     --color-neutral-50:  oklch(0.147 0.004  49.250);
     --color-neutral-100: oklch(0.216 0.006  56.043);
