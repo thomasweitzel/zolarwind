@@ -10,6 +10,9 @@ Localization is built in for a single-locale build.
 
 ## Features
 
+- **GDPR-clean by default**: No third-party requests, no cookies, no tracking.
+  All JS/CSS is self-hosted, so no consent banner is required for a default Zolarwind site.
+
 - **Tailwind CSS**: Use Tailwind for layout and UI.
 
 - **Mermaid Integration**: Render diagrams from text.
