@@ -1,6 +1,7 @@
 {% set banner_path = "/img/default-banner.jpg" %}
-{% if page.extra.image is defined %}
-  {% set banner_path = page.path ~ page.extra.image %}
+{% set banner_image = page.extra | get(key="image", default="") %}
+{% if banner_image | length > 0 %}
+  {% set banner_path = page.path ~ banner_image %}
 {% endif %}
 
 <div class="flex flex-col rounded-md shadow-md overflow-hidden shadow-neutral-800 bg-neutral-900 border-neutral-900 border-1">

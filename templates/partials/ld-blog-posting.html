@@ -9,7 +9,7 @@
   ,"headline": {{ page.title | default(value=res.empty_page_title) | striptags | json_encode | safe }}
   ,"datePublished": "{{ page.date | date(format='%Y-%m-%d') }}"
   ,"dateModified": "{% if page.updated %}{{ page.updated | date(format='%Y-%m-%d') }}{% else %}{{ page.date | date(format='%Y-%m-%d') }}{% endif %}"
-  {% if page.authors and page.authors | length > 0 %}
+{% if page.authors %}
   ,"author": [
     {% for author in page.authors %}
       {

@@ -5,7 +5,7 @@ base_url = "https://example.org"
 compile_sass = false
 
 # The default language ("de" also included in i18n directory)
-default_language = "en"
+default_language = "de"
 
 # The site theme to use
 # theme = "zolarwind"
@@ -19,6 +19,7 @@ generate_feeds = true
 # The taxonomies to use for the site
 taxonomies = [
     { name = "tags", paginate_by = 6, feed = true},
+    { name = "series", paginate_by = 6, feed = false},
 ]
 
 # Since it's imported into the Tailwind CSS, we don't need it

@@ -2,10 +2,11 @@
 
 {% block content %}
 
-  {% set banner_path = "/img/default-banner.jpg" %}
-  {% if page.extra.image is defined %}
-    {% set banner_path = page.path ~ page.extra.image %}
-  {% endif %}
+{% set banner_path = "/img/default-banner.jpg" %}
+{% set banner_image = page.extra | get(key="image", default="") %}
+{% if banner_image | length > 0 %}
+  {% set banner_path = page.path ~ banner_image %}
+{% endif %}
 
   <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
     <article
@@ -35,6 +36,7 @@
     </article>
   </div>
 
+  {% include "partials/series-nav.html" %}
   {% include "partials/ld-blog-posting.html" %}
 
 {% endblock %}

@@ -1,0 +1,40 @@
+{% if page.taxonomies and page.taxonomies.series %}
+  {% set raw_series = page.taxonomies.series %}
+  {% if raw_series is string %}
+    {% set series_name = raw_series %}
+  {% else %}
+    {% set series_name = raw_series | first %}
+  {% endif %}
+  {% if series_name %}
+    {% set series_taxonomy = get_taxonomy(kind="series") %}
+  {% endif %}
+  {% if series_taxonomy and series_taxonomy.items %}
+    {% set_global series_pages = [] %}
+    {% for item in series_taxonomy.items %}
+      {% if item.name == series_name %}
+        {% set_global series_pages = item.pages %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% if series_pages and series_pages | length > 0 %}
+    {% set_global missing_series_order = false %}
+    {% for series_page in series_pages %}
+      {% if series_page.extra is not defined or series_page.extra.series_order is not defined %}
+        {% set_global missing_series_order = true %}
+      {% endif %}
+    {% endfor %}
+    {% if missing_series_order %}
+      {% set pages = series_pages | sort(attribute="date") %}
+    {% else %}
+      {% set pages = series_pages | sort(attribute="extra.series_order") %}
+    {% endif %}
+    <div class="max-w-7xl mx-auto pt-8 pb-2 px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-center gap-3">
+        <h2 class="text-lg font-semibold text-neutral-100">{{ res.series_nav_title }}</h2>
+        <span class="px-3 py-1 rounded-full bg-primary-300 text-neutral-950 text-sm font-medium">{{ series_name }}</span>
+      </div>
+    </div>
+    {% set current_permalink = page.permalink %}
+    {% include "partials/list-pages-compact.html" %}
+  {% endif %}
+{% endif %}

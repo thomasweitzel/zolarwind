@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% set taxonomy_title = res.tags.other | capitalize %}
+{% set taxonomy_title = res.series.other | capitalize %}
 {% include "partials/taxonomy-terms.html" %}
 {% endblock %}

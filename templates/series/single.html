@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% set series_pages = term.pages %}
+{% set missing_series_order = false %}
+{% for series_page in series_pages %}
+  {% if series_page.extra is not defined or series_page.extra.series_order is not defined %}
+    {% set missing_series_order = true %}
+  {% endif %}
+{% endfor %}
+{% if missing_series_order %}
+  {% set pages = series_pages | sort(attribute="date") %}
+{% else %}
+  {% set pages = series_pages | sort(attribute="extra.series_order") %}
+{% endif %}
+{% set taxonomy_with = res.with_series %}
+{% include "partials/taxonomy-heading.html" %}
+{% include "partials/list-pages.html" %}
+{% endblock %}
