@@ -374,6 +374,9 @@ Most `extra.*` settings are optional (except `title` and `path_language_resource
 but if you omit them the related UI elements won’t render (menu, footer links, social icons, or the theme toggle).
 If you enable search, add `content/pages/search.md` in your site repository. Theme `content/` is not loaded by Zola (see the [Search](#search) section).
 
+There is a helper script, `integrate-theme-folder.sh`, which performs the steps in this section on Linux with bash.
+Run it only on a fresh checkout, because it moves and edits files in place.
+
 I will only show you the relevant directories that need to be moved.
 This is the directory structure of the stand-alone site, where the theme is in the root directory:
 
