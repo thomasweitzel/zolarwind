@@ -126,13 +126,14 @@ Configuration settings used by this theme:
 - **taxonomies**: An array of taxonomies (classification systems) used for the site.
   Here, `tags` (feed enabled) and `series` (feed disabled) are defined, each with a pagination limit of 6.
 
-- **ignored_static**: An array of GLOB patterns (files and directories) that Zola should ignore.
-  Here, a pattern is defined to ignore `giallo*.css` under the site’s root `static/` directory, which is included by Tailwind CSS and should not directly be used by the website.
-  The patterns are relative to the site’s root `static/` directory and do not apply to theme assets.
-
 ### Markdown Highlighting Configuration:
 
-- **theme**: The name of the theme to be used for code highlighting. The chosen theme in this configuration is `ayu-dark`.
+- **light_theme** and **dark_theme**: The themes used for code highlighting in light and dark mode.
+  Zola writes `giallo-light.css` and `giallo-dark.css` into `static/`.
+  The base template loads both files and switches them based on the selected theme.
+  If you want the same style in both modes, set both to the same theme.
+  Zolarwind expects both values to be set, because the template loads both highlight files.
+  Note: If you change `light_theme` or `dark_theme`, delete `static/giallo-light.css` and `static/giallo-dark.css` and run `zola build` to regenerate them; Zola does not overwrite existing giallo files.
 
 - **error_on_missing_language**: If the language to be highlighted is not found, how should Zola handle this? Set to `true` so missing languages cause a build error.
 
@@ -391,7 +392,8 @@ This is the directory structure of the stand-alone site, where the theme is in t
 │   ├── css
 │   ├── img
 │   ├── js
-│   └── giallo.css
+│   ├── giallo-dark.css
+│   └── giallo-light.css
 ├── syntaxes
 ├── templates
 └── theme.toml
@@ -403,7 +405,8 @@ Create a new directory `themes/zolarwind` and move the theme-specific files ther
 /
 ├── static
 │   ├── css
-│   └── giallo.css
+│   ├── giallo-dark.css
+│   └── giallo-light.css
 ├── syntaxes
 └── themes
     └── zolarwind
@@ -424,16 +427,7 @@ It will stay in its original location.
 Zola always serves the site’s `static/` directory, even when a theme is used.
 This file is generated from the file `css/main.css`, which is the input for the CSS generation.
 
-The reference to `giallo.css` in `themes/zolarwind/css/main.css` has to be adjusted accordingly, since it has moved, while the file `giallo.css` stayed in its original location.
-Make this change to `themes/zolarwind/css/main.css`. Before: 
-```css
-@import "../static/giallo.css";
-```
-
-After:
-```css
-@import "../../../static/giallo.css";
-```
+The `giallo-dark.css` and `giallo-light.css` files also stay in the root `static/` directory, because the base template loads them from there.
 
 The generation process can be triggered with a script in the `package.json` file.
 You **only** need to adjust and run the script in `package.json` if you make changes to the theme's template files or use new Tailwind CSS classes directly in your content files.
