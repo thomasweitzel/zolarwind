@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "../static/giallo.css";
 
 @theme {
     --color-*: initial;

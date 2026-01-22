@@ -63,6 +63,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const suns = document.querySelectorAll(".theme-icon-sun");
   const moons = document.querySelectorAll(".theme-icon-moon");
+  const lightHighlight = document.getElementById("code-highlighting-light");
+  const darkHighlight = document.getElementById("code-highlighting-dark");
+
+  const setHighlightTheme = (theme) => {
+    if (!lightHighlight || !darkHighlight) {
+      return;
+    }
+    const useDark = theme === darkTheme;
+    lightHighlight.disabled = useDark;
+    darkHighlight.disabled = !useDark;
+  };
 
   const toggleMobileMenu = () => {
     const ids = ["mobile-menu", "mobile-icon-menu-unselected", "mobile-icon-menu-selected"];
@@ -86,6 +97,7 @@ window.addEventListener("DOMContentLoaded", () => {
     clickedElements.forEach((element) => element.classList.add("hidden"));
     hiddenElements.forEach((element) => element.classList.remove("hidden"));
     htmlElement.setAttribute("data-theme", theme);
+    setHighlightTheme(theme);
     if (persist) {
       saveTheme(theme);
     }
@@ -95,6 +107,8 @@ window.addEventListener("DOMContentLoaded", () => {
   if (mobileButton) {
     mobileButton.addEventListener("click", toggleMobileMenu);
   }
+
+  setHighlightTheme(savedTheme);
 
   if (suns.length || moons.length) {
     if (savedTheme === darkTheme) {

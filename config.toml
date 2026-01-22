@@ -22,11 +22,9 @@ taxonomies = [
     { name = "series", paginate_by = 6, feed = false},
 ]
 
-# Since it's imported into the Tailwind CSS, we don't need it
-ignored_static = ["giallo*.css"]
-
 [markdown.highlighting]
-theme  = "ayu-dark"
+light_theme = "github-light-default"
+dark_theme = "ayu-dark"
 error_on_missing_language = true
 style = "class"
 # If the language you want to highlight is not supported, add additional syntax in this directory
