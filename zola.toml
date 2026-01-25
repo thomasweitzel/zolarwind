@@ -45,7 +45,7 @@ path_language_resources = "i18n/"
 # The variables after this line are optional
 
 # The generator used for generating the static website
-generator = "Zola v0.22.0"
+generator = "Zola v0.22.1"
 
 # Favicon as SVG graphics
 favicon_svg = "/img/yin-yang.svg"

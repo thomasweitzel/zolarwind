@@ -156,7 +156,7 @@ The `[extra]` section is where you can place any custom variables you want to be
 
 - **generator**: Optional.
   Specify the generator used for creating the static website.
-  This site is generated using `Zola v0.22.0`.
+  This site is generated using `Zola v0.22.1`.
 
 - **favicon_svg**: Optional.
   Provides a path to the site's favicon in SVG format.
