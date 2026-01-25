@@ -32,7 +32,7 @@ clipboard_copy = "In Zwischenablage kopieren"
 clipboard_copied = "In Zwischenablage kopiert"
 clipboard_error = "Fehler beim Kopieren"
 search_no_results = "Keine Ergebnisse gefunden"
-search_index_disabled = "Der Suchindex ist deaktiviert. Setze build_search_index = true in config.toml."
+search_index_disabled = "Der Suchindex ist deaktiviert. Setze build_search_index = true in zola.toml."
 search_error = "Der Suchindex konnte nicht geladen werden."
 search_loading = "Suchindex wird geladen ..."
 

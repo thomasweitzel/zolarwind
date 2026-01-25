@@ -32,7 +32,7 @@ clipboard_copy = "Copy to clipboard"
 clipboard_copied = "Copied to clipboard"
 clipboard_error = "Error copying to clipboard"
 search_no_results = "No results found"
-search_index_disabled = "Search index is disabled. Set build_search_index = true in config.toml."
+search_index_disabled = "Search index is disabled. Set build_search_index = true in zola.toml."
 search_error = "Search index could not be loaded."
 search_loading = "Loading search index ..."
 

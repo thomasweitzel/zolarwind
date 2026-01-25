@@ -25,7 +25,7 @@ require_path() {
 }
 
 # Sanity checks: these paths exist in the standalone layout and are moved or referenced later.
-require_path "config.toml" "file"
+require_path "zola.toml" "file"
 require_path "package.json" "file"
 require_path "css" "dir"
 require_path "i18n" "dir"
@@ -61,21 +61,21 @@ else
 fi
 
 # Ensure Zola points at the moved theme and language files after relocation.
-if grep -q '^theme = ' config.toml; then
-  info "Setting theme = \"zolarwind\" in config.toml."
-  sed -i 's/^theme = .*/theme = "zolarwind"/' config.toml
-elif grep -q '^# theme = ' config.toml; then
-  info "Uncommenting and setting theme = \"zolarwind\" in config.toml."
-  sed -i 's/^# theme = .*/theme = "zolarwind"/' config.toml
+if grep -q '^theme = ' zola.toml; then
+  info "Setting theme = \"zolarwind\" in zola.toml."
+  sed -i 's/^theme = .*/theme = "zolarwind"/' zola.toml
+elif grep -q '^# theme = ' zola.toml; then
+  info "Uncommenting and setting theme = \"zolarwind\" in zola.toml."
+  sed -i 's/^# theme = .*/theme = "zolarwind"/' zola.toml
 else
-  die "No theme entry found in config.toml. Add 'theme = \"zolarwind\"' manually."
+  die "No theme entry found in zola.toml. Add 'theme = \"zolarwind\"' manually."
 fi
 
-if grep -q 'path_language_resources = "i18n/"' config.toml; then
+if grep -q 'path_language_resources = "i18n/"' zola.toml; then
   info "Updating path_language_resources to themes/zolarwind/i18n/."
-  sed -i 's@path_language_resources = "i18n/"@path_language_resources = "themes/zolarwind/i18n/"@' config.toml
+  sed -i 's@path_language_resources = "i18n/"@path_language_resources = "themes/zolarwind/i18n/"@' zola.toml
 else
-  die "No path_language_resources = \"i18n/\" entry found in config.toml. Update it manually."
+  die "No path_language_resources = \"i18n/\" entry found in zola.toml. Update it manually."
 fi
 
 info "Done. Review changes, then rebuild CSS if needed with:"

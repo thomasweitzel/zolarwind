@@ -88,7 +88,7 @@ To use the theme, you need the following software installed:
 1. Clone this theme repository with e.g. `git@github.com:thomasweitzel/zolarwind.git`.
    Or download it from `https://github.com/thomasweitzel/zolarwind`.
 
-2. Make adjustments to the `config.toml` file as needed.
+2. Make adjustments to the `zola.toml` file as needed.
    To run the theme as a standalone site, you need to adjust the `base_url` to your domain.
    If you want to try it out on your local machine, you can leave it as is.
    Just run `zola serve` from the theme's root directory. 
@@ -97,7 +97,7 @@ To use the theme, you need the following software installed:
 
 ## Configuration
 
-Your `config.toml` file controls customization for the Zola site.
+Your `zola.toml` file controls customization for the Zola site.
 Configuration settings used by this theme:
 
 ### Basic Configuration:
@@ -195,7 +195,7 @@ The `[extra]` section is where you can place any custom variables you want to be
 
 This theme is safe to run under a subpath (for example `https://example.org/blog/`), as long as all internal links and
 assets are resolved with Zola's `get_url` helper. That is why the templates use `get_url` for CSS, JS, images, and menu
-links. Keep internal links in `config.toml` root-relative (for example `"/pages/about/"`), so Zola can prefix the
+links. Keep internal links in `zola.toml` root-relative (for example `"/pages/about/"`), so Zola can prefix the
 `base_url` subpath reliably.
 
 If you add or adjust templates, avoid hardcoded `href="/..."` or `src="/..."`. Always prefer:
@@ -267,7 +267,7 @@ If you do not provide an image under `extra.image`, a default image is used inst
 
 Zolarwind supports series via Zola taxonomies. Series navigation appears at the bottom of posts that belong to a series.
 
-1. Enable the taxonomy in `config.toml`:
+1. Enable the taxonomy in `zola.toml`:
    ```toml
    taxonomies = [
        { name = "tags", paginate_by = 6, feed = true },
@@ -307,7 +307,7 @@ The first image is shown in light mode, the second in dark mode:
 
 This theme ships with a local, client-side search page powered by Zola's search index (Elasticlunr output) and MiniSearch.
 
-1. Enable the search index in `config.toml`:
+1. Enable the search index in `zola.toml`:
    ```toml
    build_search_index = true
    ```
@@ -345,7 +345,7 @@ This theme takes care of that.
 
 To localize your blog with this theme:
 
-1. Pick your desired language by setting the `default_language` in `config.toml`.
+1. Pick your desired language by setting the `default_language` in `zola.toml`.
    As of now, English (`en`) and German (`de`) have language resources available in the `i18n` directory.
    If your language is not supported yet, just create a new resource file with your translations.
    Use the file `en.toml` as a template for your own translations.
@@ -372,7 +372,7 @@ This section is for those who might want to integrate the theme into an existing
 You can do so by moving the relevant theme files to the `themes/zolarwind` directory.
 All other files stay in the root directory.
 If you have your own files there, you need to merge them with the ones from this theme.
-You also need to adjust the `config.toml` and `package.json` files in the root accordingly.
+You also need to adjust the `zola.toml` and `package.json` files in the root accordingly.
 
 Most `extra.*` settings are optional (except `title` and `path_language_resources`),
 but if you omit them the related UI elements won’t render (menu, footer links, social icons, or the theme toggle).
@@ -419,7 +419,7 @@ Create a new directory `themes/zolarwind` and move the theme-specific files ther
         └── theme.toml
 ```
 
-The directory `syntaxes` stays in its original location. If you want to move it, you have to adjust the `extra_grammars` entries in `config.toml`.
+The directory `syntaxes` stays in its original location. If you want to move it, you have to adjust the `extra_grammars` entries in `zola.toml`.
 
 The `static/css` directory is a special case.
 It contains the generated Tailwind CSS file with the name `generated.css`.
@@ -453,8 +453,8 @@ Now change it so that the input file `css/main.css` will be the file `themes/zol
 }
 ```
 
-Since you now use Zolarwind as a theme, you need to declare it in the `config.toml` file.
-The theme's files have moved to the directory `themes/zolarwind`, so you need to adjust the only reference to the theme's files in the `config.toml` file accordingly by changing the `path_language_resources` entry:
+Since you now use Zolarwind as a theme, you need to declare it in the `zola.toml` file.
+The theme's files have moved to the directory `themes/zolarwind`, so you need to adjust the only reference to the theme's files in the `zola.toml` file accordingly by changing the `path_language_resources` entry:
 
 ```toml
 # The site theme to use
