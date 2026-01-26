@@ -299,9 +299,6 @@ Zolarwind provides some shortcodes. Use them when you want the feature, not as f
 
 - **diagram**: render Mermaid diagrams. Use this when `extra.diagram = true` on the post.
 
-- **showcode**: render code fences that contain Zola/Tera syntax without it being parsed.
-  Use `SC_OPEN`/`SC_CLOSE` for `{%`/`%}` and `EX_OPEN`/`EX_CLOSE` for `{{`/`}}` inside the fenced block.
-
 ---
 
 ## Light/Dark Images

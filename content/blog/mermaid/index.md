@@ -54,13 +54,11 @@ The diagram shortcode allows you to easily embed Mermaid diagrams in your blog p
 ### Basic Usage
 To use the shortcode in your blog post, you would use the following format:
 
-{% showcode() %}
 ```javascript
-SC_OPEN diagram() SC_CLOSE
+{%/* diagram() */%}
 Your Mermaid diagram code here
-SC_OPEN end SC_CLOSE
+{%/* end */%}
 ```
-{% end %}
 
 Replace *Your Mermaid diagram code here* with your actual Mermaid diagram code.
 
@@ -79,13 +77,11 @@ particularly changing the appearance of the diagrams through the theme.
 
 For example, to apply the `forest` theme:
 
-{% showcode() %}
 ```javascript
-SC_OPEN diagram(init="{'theme': 'forest'}") SC_CLOSE
+{%/* diagram(init="{'theme': 'forest'}") */%}
 Your Mermaid diagram code here
-SC_OPEN end SC_CLOSE
+{%/* end */%}
 ```
-{% end %}
 
 ### Providing init Configuration
 When using the `init` parameter, the configuration should be a string wrapped in double quotes.
@@ -93,13 +89,11 @@ Inside this string, use single quotes for keys and values.
 
 Here's a more advanced example with multiple configuration options:
 
-{% showcode() %}
 ```javascript
-SC_OPEN diagram(init="{'theme': 'forest', 'themeVariables': {'primaryColor': '#FF0000'}}") SC_CLOSE
+{%/* diagram(init="{'theme': 'forest', 'themeVariables': {'primaryColor': '#FF0000'}}") */%}
 Your Mermaid diagram code here
-SC_OPEN end SC_CLOSE
+{%/* end */%}
 ```
-{% end %}
 
 In this example, we're using the `forest` theme and changing the primary color to red (`#FF0000`).
 
@@ -115,12 +109,11 @@ With this shortcode in place, integrating and customizing Mermaid diagrams in yo
 
 Here is how the diagram rendered above is embedded in this blog post as a code block.
 Because it is the same code as the diagram above, extra care has to be taken to prevent Mermaid from rendering it as a diagram.
-There is a `showcode()` shortcode to prevent Mermaid from rendering it as a diagram.
-Use `SC_OPEN`/`SC_CLOSE` for `{%`/`%}` and `EX_OPEN`/`EX_CLOSE` for `{{`/`}}` inside the fenced block.
+Use Zola’s [ignored shortcode syntax](https://www.getzola.org/documentation/content/shortcodes/#shortcodes-without-body) in the code block, so the code stays visible but is not executed.
+For example, use `{%/*` for displaying `{%`, and `*/%}` for displaying `%}`.   
 
-{% showcode() %}
 ```javascript
-SC_OPEN diagram(init="{'theme': 'forest'}") SC_CLOSE
+{%/* diagram(init="{'theme': 'forest'}") */%}
     CUSTOMER ||--o{ ORDER : places
     ORDER ||--|{ LINEITEM : contains
     PRODUCT ||--o{ LINEITEM : is_listed_in
@@ -140,6 +133,5 @@ SC_OPEN diagram(init="{'theme': 'forest'}") SC_CLOSE
     LINEITEM {
         int Quantity
     }
-SC_OPEN end SC_CLOSE
+{%/* end */%}
 ```
-{% end %}
