@@ -55,9 +55,9 @@ The diagram shortcode allows you to easily embed Mermaid diagrams in your blog p
 To use the shortcode in your blog post, you would use the following format:
 
 ```javascript
-{​% diagram() %​}
+{​% diagram() %}
 Your Mermaid diagram code here
-{​% end %​}
+{​% end %}
 ```
 
 Replace *Your Mermaid diagram code here* with your actual Mermaid diagram code.
@@ -78,9 +78,9 @@ particularly changing the appearance of the diagrams through the theme.
 For example, to apply the `forest` theme:
 
 ```javascript
-{​% diagram(init="{'theme': 'forest'}") %​}
+{​% diagram(init="{'theme': 'forest'}") %}
 Your Mermaid diagram code here
-{​% end %​}
+{​% end %}
 ```
 
 ### Providing init Configuration
@@ -90,9 +90,9 @@ Inside this string, use single quotes for keys and values.
 Here's a more advanced example with multiple configuration options:
 
 ```javascript
-{​% diagram(init="{'theme': 'forest', 'themeVariables': {'primaryColor': '#FF0000'}}") %​}
+{​% diagram(init="{'theme': 'forest', 'themeVariables': {'primaryColor': '#FF0000'}}") %}
 Your Mermaid diagram code here
-{​% end %​}
+{​% end %}
 ```
 
 In this example, we're using the `forest` theme and changing the primary color to red (`#FF0000`).
@@ -100,7 +100,7 @@ In this example, we're using the `forest` theme and changing the primary color t
 **Note**: Ensure that you use single quotes inside the double quotes for the configuration to work correctly.
 
 ### Putting it all together
-Use the shortcode by enclosing your Mermaid diagram code with `{​% diagram() %​} ... {+ end %}`.
+Use the shortcode by enclosing your Mermaid diagram code with `{​% diagram() %} ... {​% end %}`.
 To change the look of the Mermaid theme, provide values for the init parameter.
 Always enclose the init value with double quotes, and use single quotes inside the configuration string.
 With this shortcode in place, integrating and customizing Mermaid diagrams in your blog posts becomes a breeze!
@@ -111,7 +111,7 @@ Here is how the diagram rendered above is embedded in this blog post as a code b
 Because it is the same code as the diagram above, extra care has to be taken to prevent Mermaid from rendering it as a diagram.
 
 ```javascript
-{​% diagram(init="{'theme': 'forest'}") %​}
+{​% diagram(init="{'theme': 'forest'}") %}
     CUSTOMER ||--o{ ORDER : places
     ORDER ||--|{ LINEITEM : contains
     PRODUCT ||--o{ LINEITEM : is_listed_in
@@ -131,10 +131,10 @@ Because it is the same code as the diagram above, extra care has to be taken to 
     LINEITEM {
         int Quantity
     }
-{​% end %​}
+{​% end %}
 ```
 
 If you want to mention it in your blog post text,
-make sure to include a zero-width space (`ZWSP` or `U+200B`) after the opening and before the closing curly braces to prevent Mermaid from rendering it. 
+make sure to include a zero-width space (`ZWSP` or `U+200B`) after the opening curly braces to prevent Mermaid from rendering it. 
 
 ![How to write Mermaid digram code that is not rendered as a diagram](mermaid-in-blog-post.png)
