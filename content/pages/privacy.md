@@ -8,7 +8,7 @@ authors = ["Thomas Weitzel"]
 
 ### Data protection
 The use of my website is possible without providing personal data.
-If personal data can be entered (for example: name, address, or email addresses), this is on a voluntary basis.
+If you contact me by email, providing personal data is voluntary.
 These data will not be disclosed to third parties without your explicit consent.
 
 Data transmission in the Internet (e.g.
@@ -60,16 +60,13 @@ An encrypted connection can be recognized by the fact that the address in the ad
 If SSL encryption is enabled, the data you submit to me can not be read by third parties.
 
 ### Cookies {#cookies}
-This site uses functional cookies only on pages where math formulas are displayed with the help of the [MathJax](https://www.mathjax.org/) library.
-These cookies are only used in the context of MathJax and the display of math formulas.
-The readability of the website represents a legitimate interest within the meaning of Article 6(1)(f) GDPR.
-I do not use any other cookies on this website.
+This site does not use cookies.
+KaTeX and Mermaid are loaded locally and do not set cookies.
 
 ### Embedded content from other websites
-Posts on this site may contain embedded content (e.g. videos, pictures, comments, etc.).
-Embedded content from other websites behaves just as if the visitor had visited the other website.
-
-These websites may collect information about you, use cookies, embed additional third-party tracking services, and record your interaction with this embedded content, if you have an account and are logged in to this other site.
+This site does not embed third-party content by default.
+If I add embedded content (e.g. videos, pictures, comments, etc.), it behaves just as if you visited the other website.
+Those websites may collect information about you, use cookies, embed additional tracking services, and record your interaction with the embedded content, if you have an account and are logged in to that site.
 
 ### What rights do you have to your data?
 You may request that I export your personal information, including any data you have provided to me.
