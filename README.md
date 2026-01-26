@@ -48,6 +48,7 @@ This also means that the theme is no longer compatible with Zola v0.21.0 and ear
 - [Subpath base_url support](#subpath-base_url-support)
 - [Front matter](#front-matter)
 - [Series](#series)
+- [Shortcodes](#shortcodes)
 - [Light/Dark Images](#lightdark-images)
 - [Search](#search)
 - [Localization](#localization)
@@ -286,6 +287,20 @@ Zolarwind supports series via Zola taxonomies. Series navigation appears at the 
 
 Series index pages are available at `/series/` and `/series/<name>/`.
 Note: If no posts use the `series` taxonomy, Zola does not generate `/series/`, so it will 404.
+
+---
+
+## Shortcodes
+
+Zolarwind provides some shortcodes. Use them when you want the feature, not as formatting helpers.
+
+- **katex**: render math without Markdown interfering with characters like `*` or backslashes.
+  Use this when you want safe math and do not include `$`/`$$` delimiters inside the shortcode body.
+
+- **diagram**: render Mermaid diagrams. Use this when `extra.diagram = true` on the post.
+
+- **showcode**: render code fences that contain Zola/Tera syntax without it being parsed.
+  Use `SC_OPEN`/`SC_CLOSE` for `{%`/`%}` and `EX_OPEN`/`EX_CLOSE` for `{{`/`}}` inside the fenced block.
 
 ---
 
