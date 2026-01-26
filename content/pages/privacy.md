@@ -32,7 +32,7 @@ I have signed a data processing contract with netcup.
 This contract is required by privacy law and guarantees, that data of visitors of my website will be processed in compliance with the GDPR.
 
 ### Responsible controller
-The person responsible for data processing on this website is the person named in the [imprint]({{< relref "imprint" >}}).
+The person responsible for data processing on this website is the person named in the [imprint](@/pages/imprint.md).
 The "responsible controller" means the natural or legal person who decides on the processing of data (for example: name, address, or email addresses).
 
 ### Information, cancellation, deletion
