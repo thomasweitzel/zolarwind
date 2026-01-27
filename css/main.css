@@ -173,8 +173,16 @@
     .prose blockquote {
         @apply border-l-4 border-neutral-500 pl-4 italic;
     }
-    .prose kbd, p code, .prose ol code, .prose ul code {
-        @apply mx-0.5 px-1 py-0.5 font-mono text-sm bg-neutral-700 rounded shadow-sm ring-1 ring-neutral-100/25;
+    .prose kbd,
+    .prose p code,
+    .prose ol code,
+    .prose ul code,
+    .prose blockquote code,
+    .prose h1 code,
+    .prose h2 code,
+    .prose h3 code,
+    .prose h4 code {
+        @apply mx-0.5 px-1 py-0.5 font-mono bg-neutral-700 rounded shadow-sm ring-1 ring-neutral-100/25;
     }
     .prose pre.mermaid {
         @apply block my-4 font-mono text-sm overflow-x-auto
@@ -201,6 +209,36 @@
     }
     .prose img {
         @apply my-4 rounded-md;
+    }
+    .prose details {
+        @apply my-4 rounded-md border border-neutral-700 bg-neutral-900/40;
+    }
+    .prose summary {
+        @apply cursor-pointer select-none px-3 py-2 font-medium;
+    }
+    .prose details > *:not(summary) {
+        @apply px-3 pb-3;
+    }
+    .prose mark {
+        @apply mx-0.5 px-1 py-0.5 bg-primary-800 text-primary-100 rounded shadow-sm ring-1 ring-primary-800;
+    }
+    .prose del {
+        @apply text-neutral-500;
+    }
+    .prose dl {
+        @apply my-4;
+    }
+    .prose dt {
+        @apply font-semibold text-neutral-100;
+    }
+    .prose dd {
+        @apply ml-4 text-neutral-300;
+    }
+    .prose sup {
+        @apply text-xs align-text-top;
+    }
+    .prose sub {
+        @apply text-xs align-text-bottom;
     }
     .prose hr {
         @apply border-0 border-t border-neutral-700 my-4 h-0 p-0;
