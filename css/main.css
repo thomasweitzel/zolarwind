@@ -202,14 +202,32 @@
     .prose img {
         @apply my-4 rounded-md;
     }
-    .prose .footnote-definition {
-        @apply mt-4;
+    .prose hr {
+        @apply border-0 border-t border-neutral-700 my-4 h-0 p-0;
     }
-    .prose .footnote-definition sup, .prose .footnote-definition p {
-        @apply inline text-sm;
+    .prose .footnote-definition:first-of-type {
+        @apply mt-4 border-0 pt-0;
+    }
+    .prose hr + .footnote-definition {
+        @apply mt-0;
+    }
+    .prose .footnote-definition {
+        @apply mt-2 text-sm text-neutral-300 grid grid-cols-[max-content_1fr] gap-x-2 items-start;
+    }
+    .prose .footnote-definition-label {
+        @apply text-xs col-start-1 text-primary-300;
+    }
+    .prose .footnote-definition p {
+        @apply m-0 col-start-2;
+    }
+    .prose .footnote-definition p + p {
+        @apply mt-2;
+    }
+    .prose .footnote-reference {
+        @apply text-xs align-text-top;
     }
     .prose p.inline-block img {
-        display: inline-block;
+        @apply inline-block;
     }
     /* Since Zola v0.22.0: needed for `extra_grammars` and/or `extra_themes` */
     .prose .giallo-l {
