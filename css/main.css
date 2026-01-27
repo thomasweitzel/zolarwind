@@ -171,7 +171,7 @@
         @apply mt-4;
     }
     .prose blockquote {
-        @apply border-l-4 border-neutral-300 pl-4 italic;
+        @apply border-l-4 border-neutral-500 pl-4 italic;
     }
     .prose kbd, p code, .prose ol code, .prose ul code {
         @apply mx-0.5 px-1 py-0.5 font-mono text-sm bg-neutral-700 rounded shadow-sm ring-1 ring-neutral-100/25;
