@@ -194,6 +194,9 @@
         @apply pl-4 list-disc;
         @apply sm:pl-8
     }
+    .prose .tags-list {
+        @apply pl-0 list-none;
+    }
     .prose ol {
         @apply pl-4 list-decimal;
         @apply sm:pl-8

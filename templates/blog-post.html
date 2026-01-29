@@ -20,14 +20,14 @@
       </div>
       <h1>{{ page.title | default(value=res.empty_page_title) | striptags }}</h1>
       <div>
-        <p>
+        <div class="flex flex-wrap items-center">
           <span class="mr-2 text-sm">
             <time datetime="{{ page.date | date(format='%Y-%m-%d') }}">{{ page.date | date(locale=date_locale, format=date_format) }}</time> &middot;
             {{ page.word_count | num_format(locale=locale) }} {{ page.word_count | pluralize(singular=res.words.one, plural=res.words.other) }} &middot;
             {{ page.reading_time | num_format(locale=locale) }} {{ page.reading_time | pluralize(singular=res.minutes.one, plural=res.minutes.other) }} {{ res.reading_time }}
           </span>
           {% include "partials/tags.html" %}
-        </p>
+        </div>
       </div>
 
       <div>

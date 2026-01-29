@@ -1,9 +1,12 @@
-<span class="text-sm leading-5 font-medium text-primary-600">
 {% if page.taxonomies %}
   {% if page.taxonomies.tags %}
-    {% for tag in page.taxonomies.tags %}
-      <span class="mr-2 badge badge-primary"><a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">{{ tag }}</a></span>
-    {% endfor %}
+    {% set tag_count = page.taxonomies.tags | length %}
+    <ul class="tags-list text-sm leading-5 font-medium text-primary-600 flex flex-wrap gap-2 m-0 p-0 list-none" aria-label="{{ tag_count | pluralize(singular=res.tags.one, plural=res.tags.other) }}">
+      {% for tag in page.taxonomies.tags %}
+        <li class="badge badge-primary">
+          <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">{{ tag }}</a>
+        </li>
+      {% endfor %}
+    </ul>
   {% endif %}
 {% endif %}
-</span>

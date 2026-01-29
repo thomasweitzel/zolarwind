@@ -54,8 +54,8 @@ one = "Beitrag"
 other = "Beiträge"
 
 [tags]
-one = "Kennzeichen"
-other = "Kennzeichen"
+one = "Schlagwort"
+other = "Schlagwörter"
 
 [series]
 one = "Serie"
