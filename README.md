@@ -84,8 +84,8 @@ To use the theme, you need the following software installed:
 
 - [Git](https://git-scm.com/downloads), required for version control.
 
-- [Node.js](https://nodejs.org/en/download), an open-source, cross-platform JavaScript runtime environment. Node.js is *
-  *optional**. It is only needed if you want to change the CSS in `css/main.css`. The theme comes with pre-compiled CSS
+- [Node.js](https://nodejs.org/en/download), an open-source, cross-platform JavaScript runtime environment. Node.js is
+  **optional**. It is only needed if you want to change the CSS in `css/main.css`. The theme comes with pre-compiled CSS
   and is fully functional without Node.js.
 
 - [Zola](https://github.com/getzola/zola/releases), a static site generator. **This is the only absolute requirement**
@@ -557,14 +557,12 @@ If a source file is excluded by default, it can be added with the `@source` dire
 @source "../node_modules/@my-company/ui-lib";
 ```
 
-When these files change, run the `css:build` script from `package.json`.
-This requires `Node.js` and the dependencies from `package.json` (installed with `npm install`).
-Running `npm run css:watch` monitors the files and triggers CSS generation on changes.
-This ensures `static/css/generated.css` remains current.
-I recommend having two terminals open.
-Running `npm run server` (or `zola serve`) starts the Zola server.
-In another terminal, `npm run css:watch` handles CSS updates.
-The browser reloads with updated CSS when files are modified.
+When these files change, run the `css:build` script from `package.json`. This requires `Node.js` and the dependencies
+from `package.json` (installed with `npm install`). Running `npm run css:watch` monitors the files and triggers CSS
+generation on changes. This ensures `static/css/generated.css` remains current.
+
+It is recommended to have two terminals open: one for the Zola server (`zola serve`) and another for the CSS watch
+script (`npm run css:watch`). The browser reloads with updated CSS when files are modified.
 
 ---
 
