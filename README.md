@@ -114,8 +114,6 @@ If you want to use this repository as the base for your new blog, this is the fa
 3. **Configure:**
    Adjust `base_url` and other settings in `zola.toml` to your needs.
 
----
-
 ### As a Theme (Integration)
 
 If you already have a Zola site and want to use Zolarwind as a theme in your `themes/` folder, please refer to
