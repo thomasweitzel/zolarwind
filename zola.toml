@@ -90,21 +90,21 @@ enabled = false                         # Enable/disable comments globally.
 provider = "artalk"                     # Comment provider name (currently "artalk").
 
 # Artalk example configuration
-[extra.comments.artalk]
-server = "https://example.org/comments" # Artalk server base URL (scheme + host + optional port).
-site = "example"                        # Artalk site name (must exist in Artalk admin).
-list_sort = true                        # Show the "sort by" dropdown (Latest/Best/Oldest/Author).
-flat_mode = "auto"                      # Comment list layout: "auto", true, or false.
-preview = true                          # Enable editor live preview.
-emoticons = false                       # Enable emoticons panel (must also be enabled in Artalk server config).
-vote = true                             # Enable upvote.
-vote_down = false                       # Enable downvote (only if server allows it).
-page_size = 20                          # Comments per page (pagination size).
-read_more = true                        # Use "load more" mode (true) or pagination bar (false).
-auto_load = true                        # Auto-load next page when scrolling (ignored when read_more is false).
-placeholder = ""                        # Editor placeholder text (empty uses Artalk default).
-send_btn = ""                           # Send button label (empty uses Artalk default).
-no_comment = ""                         # Text when there are no comments (empty uses Artalk default).
-show_copyright = false                  # Show "Powered by Artalk" footer.
-show_sidebar_button = false             # Show the sidebar button for non-admin users ("Messages").
-avatar_url = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='26' fill='none' stroke='%239ca3af' stroke-width='5'/></svg>" # Override avatar URL (data URI avoids Gravatar).
+#[extra.comments.artalk]
+#server = "https://example.org/comments" # Artalk server base URL (scheme + host + optional port).
+#site = "example"                        # Artalk site name (must exist in Artalk admin).
+#list_sort = true                        # Show the "sort by" dropdown (Latest/Best/Oldest/Author).
+#flat_mode = "auto"                      # Comment list layout: "auto", true, or false.
+#preview = true                          # Enable editor live preview.
+#emoticons = false                       # Enable emoticons panel (must also be enabled in Artalk server config).
+#vote = true                             # Enable upvote.
+#vote_down = false                       # Enable downvote (only if server allows it).
+#page_size = 20                          # Comments per page (pagination size).
+#read_more = true                        # Use "load more" mode (true) or pagination bar (false).
+#auto_load = true                        # Auto-load next page when scrolling (ignored when read_more is false).
+#placeholder = ""                        # Editor placeholder text (empty uses Artalk default).
+#send_btn = ""                           # Send button label (empty uses Artalk default).
+#no_comment = ""                         # Text when there are no comments (empty uses Artalk default).
+#show_copyright = false                  # Show "Powered by Artalk" footer.
+#show_sidebar_button = false             # Show the sidebar button for non-admin users ("Messages").
+#avatar_url = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='26' fill='none' stroke='%239ca3af' stroke-width='5'/></svg>" # Override avatar URL (data URI avoids Gravatar).
