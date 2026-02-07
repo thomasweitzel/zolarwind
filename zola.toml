@@ -84,3 +84,27 @@ svg = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" s
 
 [extra.displaymode.moon]
 svg = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"></path></svg>'
+
+[extra.comments]
+enabled = false                         # Enable/disable comments globally.
+provider = "artalk"                     # Comment provider name (currently "artalk").
+
+# Artalk example configuration
+[extra.comments.artalk]
+server = "https://example.org/comments" # Artalk server base URL (scheme + host + optional port).
+site = "example"                        # Artalk site name (must exist in Artalk admin).
+list_sort = true                        # Show the "sort by" dropdown (Latest/Best/Oldest/Author).
+flat_mode = "auto"                      # Comment list layout: "auto", true, or false.
+preview = true                          # Enable editor live preview.
+emoticons = false                       # Enable emoticons panel (must also be enabled in Artalk server config).
+vote = true                             # Enable upvote.
+vote_down = false                       # Enable downvote (only if server allows it).
+page_size = 20                          # Comments per page (pagination size).
+read_more = true                        # Use "load more" mode (true) or pagination bar (false).
+auto_load = true                        # Auto-load next page when scrolling (ignored when read_more is false).
+placeholder = ""                        # Editor placeholder text (empty uses Artalk default).
+send_btn = ""                           # Send button label (empty uses Artalk default).
+no_comment = ""                         # Text when there are no comments (empty uses Artalk default).
+show_copyright = false                  # Show "Powered by Artalk" footer.
+show_sidebar_button = false             # Show the sidebar button for non-admin users ("Messages").
+avatar_url = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='26' fill='none' stroke='%239ca3af' stroke-width='5'/></svg>" # Override avatar URL (data URI avoids Gravatar).

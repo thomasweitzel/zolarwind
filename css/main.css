@@ -351,7 +351,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 /* Used for light-dark-image, default: show light image, hide dark image; light images comes first */
 .light-dark-image img:nth-child(1) {
-  display: block;
+    display: block;
 }
 
 .light-dark-image img:nth-child(2) {
@@ -364,5 +364,10 @@ html[data-theme="dark"] .light-dark-image img:nth-child(1) {
 }
 
 html[data-theme="dark"] .light-dark-image img:nth-child(2) {
-  display: block;
+    display: block;
+}
+
+/* Artalk */
+#Comments.atk-hide-copyright .atk-copyright {
+    display: none;
 }

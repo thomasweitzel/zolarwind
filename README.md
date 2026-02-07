@@ -28,6 +28,8 @@ Localization is built-in for a single-locale build.
 
 - **Series Support**: Group posts into a series taxonomy with ordered navigation on series posts.
 
+- **Artalk Comments**: Optional integration with a self-hosted Artalk server. See [docs/artalk.md](docs/artalk.md).
+
 ---
 
 ## Important Note
