@@ -35,6 +35,8 @@ search_no_results = "Keine Ergebnisse gefunden"
 search_index_disabled = "Der Suchindex ist deaktiviert. Setze build_search_index = true in zola.toml."
 search_error = "Der Suchindex konnte nicht geladen werden."
 search_loading = "Suchindex wird geladen ..."
+comments_consent_label = "Ich stimme zu, Kommentare zu laden und Local Storage zu verwenden."
+comments_consent_no_js = "Kommentare benötigen JavaScript."
 
 # Phrases with singular/plural variants
 search_results_one = "{count} Ergebnis gefunden"

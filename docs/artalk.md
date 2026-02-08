@@ -39,6 +39,17 @@ All options are in `zola.toml` under `[extra.comments.artalk]`.
 Each option has an inline comment that explains its purpose.
 Start with defaults and only override what you need.
 
+#### Consent gating (local storage)
+
+If you need explicit consent before any local storage or network requests,
+set `consent_required = true`. This delays loading Artalk until the user
+checks the consent box. Consent is stored in `localStorage`. When disabled,
+Artalk loads immediately as usual.
+
+The consent text uses i18n keys:
+- `comments_consent_label`
+- `comments_consent_no_js`
+
 #### Locale notes
 
 Artalk’s default runtime includes only `en` and `zh-CN`.

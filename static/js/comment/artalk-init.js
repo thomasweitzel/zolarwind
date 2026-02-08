@@ -1,6 +1,6 @@
 function initArtalkComments() {
   const root = document.getElementById("Comments");
-  if (!root || !window.Artalk) {
+  if (!root || root.dataset.artalkInitialized === "true" || !window.Artalk) {
     return;
   }
 
@@ -317,6 +317,118 @@ function initArtalkComments() {
   };
 
   startArtalk();
+  root.dataset.artalkInitialized = "true";
 }
 
-initArtalkComments();
+function loadArtalkAssets(root) {
+  const cssUrl = root.dataset.artalkCssUrl;
+  const jsUrl = root.dataset.artalkJsUrl;
+  const cssIntegrity = root.dataset.artalkCssIntegrity;
+  const jsIntegrity = root.dataset.artalkJsIntegrity;
+
+  if (cssUrl && !document.querySelector('link[data-artalk-asset="css"]')) {
+    const css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = cssUrl;
+    css.dataset.artalkAsset = "css";
+    if (cssIntegrity) {
+      css.integrity = cssIntegrity;
+      css.crossOrigin = "anonymous";
+    }
+    document.head.appendChild(css);
+  }
+
+  if (window.Artalk) {
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve, reject) => {
+    if (!jsUrl) {
+      reject(new Error("Missing Artalk JS URL"));
+      return;
+    }
+    const existing = document.querySelector('script[data-artalk-asset="js"]');
+    if (existing) {
+      existing.addEventListener("load", () => resolve());
+      existing.addEventListener("error", () => reject(new Error("Artalk JS load failed")));
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = jsUrl;
+    script.dataset.artalkAsset = "js";
+    script.defer = true;
+    if (jsIntegrity) {
+      script.integrity = jsIntegrity;
+      script.crossOrigin = "anonymous";
+    }
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("Artalk JS load failed"));
+    document.body.appendChild(script);
+  });
+}
+
+function initArtalkWithConsent(root) {
+  const consentRequired = root.dataset.artalkConsentRequired === "true";
+  if (!consentRequired) {
+    initArtalkComments();
+    return;
+  }
+
+  const server = root.dataset.artalkServer || "";
+  const site = root.dataset.artalkSite || "";
+  const consentKey = `artalk-consent:${server}|${site}`;
+  const consentToggle = document.querySelector('[data-artalk-consent-toggle="true"]');
+  const consentBox = consentToggle ? consentToggle.closest("div") : null;
+
+  const hasConsent = () => {
+    try {
+      return window.localStorage.getItem(consentKey) === "true";
+    } catch {
+      return false;
+    }
+  };
+
+  const setConsent = () => {
+    try {
+      window.localStorage.setItem(consentKey, "true");
+    } catch {
+      return;
+    }
+  };
+
+  const enableComments = () => {
+    if (consentBox) {
+      consentBox.style.display = "none";
+    }
+    loadArtalkAssets(root)
+      .then(() => initArtalkComments())
+      .catch(() => {});
+  };
+
+  if (hasConsent()) {
+    enableComments();
+    return;
+  }
+
+  if (consentToggle) {
+    consentToggle.checked = false;
+    consentToggle.addEventListener("change", () => {
+      if (consentToggle.checked) {
+        setConsent();
+        enableComments();
+      } else {
+        consentToggle.checked = false;
+      }
+    });
+  }
+}
+
+function bootArtalkComments() {
+  const root = document.getElementById("Comments");
+  if (!root) {
+    return;
+  }
+  initArtalkWithConsent(root);
+}
+
+bootArtalkComments();
