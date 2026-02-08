@@ -14,12 +14,12 @@
   {% set page_title = page.extra.comments_page_title | default(value=page.title | default(value="")) %}
   <div class="max-w-7xl mx-auto pt-8 pb-2 px-4 sm:px-6 lg:px-8">
     {% if consent_required %}
-      <div class="mb-4 rounded-md border border-neutral-700 bg-neutral-900/40 p-4 text-sm text-neutral-200">
+      <div class="mb-4 rounded-md bg-neutral-800 p-4 text-sm text-neutral-200">
         <label class="inline-flex items-center gap-2">
           <input
             type="checkbox"
             data-artalk-consent-toggle="true"
-            class="h-4 w-4 rounded border-neutral-600 bg-neutral-900 text-primary-600"
+            class="h-4 w-4 bg-neutral-900 text-primary-600"
           >
           <span>{{ res.comments_consent_label }}</span>
         </label>
