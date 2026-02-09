@@ -15,11 +15,11 @@
   <div class="max-w-7xl mx-auto pt-8 pb-2 px-4 sm:px-6 lg:px-8">
     {% if consent_required %}
       <div class="mb-4 rounded-md bg-neutral-800 p-4 text-sm text-neutral-200">
-        <label class="inline-flex items-center gap-2">
+        <label class="inline-flex items-start gap-2">
           <input
             type="checkbox"
             data-artalk-consent-toggle="true"
-            class="h-4 w-4 bg-neutral-900 text-primary-600"
+            class="mt-0.5 h-4 w-4 rounded-sm bg-neutral-900 text-primary-600"
           >
           <span>{{ res.comments_consent_label }}</span>
         </label>

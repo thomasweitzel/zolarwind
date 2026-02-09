@@ -6,9 +6,9 @@ const lightTheme = "light";
 
 const getSavedTheme = () => {
   try {
-    return localStorage.getItem(APPLICATION_NAME);
+    return sessionStorage.getItem(APPLICATION_NAME);
   } catch (error) {
-    console.warn("Failed to read theme from localStorage:", error);
+    console.warn("Failed to read theme from sessionStorage:", error);
     return null;
   }
 };
@@ -87,9 +87,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const saveTheme = (theme) => {
     try {
-      localStorage.setItem(APPLICATION_NAME, theme);
+      sessionStorage.setItem(APPLICATION_NAME, theme);
     } catch (error) {
-      console.warn("Failed to save theme to localStorage:", error);
+      console.warn("Failed to save theme to sessionStorage:", error);
     }
   };
 

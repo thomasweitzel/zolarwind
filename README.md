@@ -22,7 +22,7 @@ Localization is built-in for a single-locale build.
 - **Localization Support**: Theme strings live in language files; pick the one you want.
   If your language isn't supported yet, just create the resource file with your translations.
 
-- **Dark/Light Mode**: Includes a dark/light toggle and persists the preference after a user toggle.
+- **Dark/Light Mode**: Includes a dark/light toggle and persists the preference for the session after a user toggle.
 
 - **Client-side Search**: Built-in search page powered by Zola's index and MiniSearch.
 
@@ -570,7 +570,7 @@ script (`npm run css:watch`). The browser reloads with updated CSS when files ar
 
 ## Privacy
 
-This theme sets no cookies and does not load resources from third-party sites. The dark/light mode preference is stored in `localStorage` only after a user explicitly toggles the theme.
+This theme sets no cookies and does not load resources from third-party sites. The dark/light mode preference is stored in `sessionStorage` only after a user explicitly toggles the theme.
 
 KaTeX, Mermaid, and MiniSearch are bundled in `static/` so they can be served from your own domain and remain pinned to known versions.
 If you instead load them from a Content Delivery Network (CDN), consider the following GDPR implications:

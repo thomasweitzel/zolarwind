@@ -59,9 +59,10 @@ This site uses SSL encryption for security reasons and to protect the transmissi
 An encrypted connection can be recognized by the fact that the address in the address bar of the browser starts with `https://` and a lock symbol nearby.
 If SSL encryption is enabled, the data you submit to me can not be read by third parties.
 
-### Cookies {#cookies}
+### Cookies and storage {#cookies}
 This site does not use cookies.
 KaTeX and Mermaid are loaded locally and do not set cookies.
+The theme preference is stored in `sessionStorage` only after a user explicitly toggles the theme.
 
 ### Embedded content from other websites
 This site does not embed third-party content by default.
