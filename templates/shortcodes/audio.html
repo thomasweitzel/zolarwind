@@ -1,0 +1,46 @@
+{%- set id = id | default(value=1) -%}
+{%- set title = title | default(value="") -%}
+{%- set artist = artist | default(value="") -%}
+{%- set label = label | default(value="") -%}
+{%- set year = year | default(value="") -%}
+{%- set src = src | default(value="") -%}
+{%- set length = length | default(value="") -%}
+
+{%- set res = load_data(path=config.extra.path_language_resources ~ config.default_language ~ '.toml') -%}
+
+{%- set parts = [] -%}
+{%- if artist %}{%- set parts = parts | concat(with=[artist]) -%}{%- endif -%}
+{%- if label %}{%- set parts = parts | concat(with=[label]) -%}{%- endif -%}
+{%- if year %}{%- set parts = parts | concat(with=[year]) -%}{%- endif -%}
+{%- set subtitle = parts | join(sep=" | ") -%}
+
+<div
+  class="container max-w-md my-6 py-6 px-6 text-black dark:text-black bg-gradient-to-tr from-primary-600 to-warn-800 rounded-2xl overflow-hidden"
+  data-audio-id="{{ id }}"
+  data-audio-src="{{ src }}"
+>
+    <div class="text-center relative">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-16 w-16 inline-block">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+        </svg>
+    </div>
+    <div class="mb-6 text-center relative">
+        <h2 class="inline-block font-medium">{{ title }}</h2>
+        <p class="inline-block font-medium text-sm">{{ subtitle }}</p>
+    </div>
+    <div class="audio-controls{{ id }} flex space-x-1">
+        <div class="play-div{{ id }} flex-none hover:text-fail-600">{{ res.audio_loading }}</div>
+        <div class="time-div{{ id }} flex-none pr-2">00:00 | {{ length }}</div>
+        <div class="flex-auto cursor-pointer select-none mt-2">
+            <div class="progress-container{{ id }} w-full bg-primary-700 rounded-full h-2 dark:bg-neutral-200">
+                <div class="progress-bar{{ id }} bg-neutral-800 h-2 rounded-full hover:bg-fail-600" style="width: 0%"></div>
+            </div>
+        </div>
+        <div class="speaker-div{{ id }} flex-none pl-2 hover:text-fail-600"></div>
+    </div>
+    {%- if id == 1 -%}
+        <script src="{{ get_url(path='js/audio/howler.js') }}" integrity="sha384-{{ get_hash(path='js/audio/howler.js') }}"></script>
+        <script src="{{ get_url(path='js/audio/audio-player.js') }}" integrity="sha384-{{ get_hash(path='js/audio/audio-player.js') }}"></script>
+        <script src="{{ get_url(path='js/audio/audio-init.js') }}" integrity="sha384-{{ get_hash(path='js/audio/audio-init.js') }}"></script>
+    {%- endif -%}
+</div>
