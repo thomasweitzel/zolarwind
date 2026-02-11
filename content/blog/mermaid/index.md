@@ -8,7 +8,7 @@ tags = ["diagram"]
 [extra]
 math = false
 diagram = true
-image = "banner.jpg"
+image = "banner.webp"
 +++
 
 ## What are Mermaid diagrams
