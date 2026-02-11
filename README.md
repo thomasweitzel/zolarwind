@@ -75,8 +75,8 @@ This theme is not compatible with Zola v0.21.0 and earlier.
 
 ## Demo Website
 
-You can see the theme on the [demo website](https://pureandroid.com).
-The site uses the German language.
+You can see the theme on the [demo website](https://weitzel.dev).
+Additionally, there is a [demo in German](https://pureandroid.com).
 
 ---
 
@@ -353,15 +353,18 @@ Zolarwind provides some shortcodes. Use them when you want the feature, not as f
 
 ## Light/Dark Images
 
-If you want images that switch with the theme, wrap two images in a container using class `light-dark-image`.
-The first image is shown in light mode, the second in dark mode:
+If you want images that switch with the theme, there is a `light_dark_image` shortcode.
+Here is how to use it:
 
-```html
-<div class="light-dark-image">
-  <img src="example-light.webp" alt="Example image" />
-  <img src="example-dark.webp" alt="Example image" />
-</div>
+```md
+{{ light_dark_image(
+  light_src="example-light.webp",
+  dark_src="example-dark.webp",
+  alt="Example image"
+) }}
 ```
+
+It has optional parameters: `width`, `height`, and `lazy` (default `false`).
 
 ---
 
