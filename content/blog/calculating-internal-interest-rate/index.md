@@ -89,10 +89,11 @@ Here's what you see on the graph below, which plots the NPV as a function of the
   It's where our $irr$ satisfies the condition $\mathit{NPV} = 0$.
   For our data, it is somewhere between $0.35$ and $0.40$, or {% katex(inline=true) %}35\%{% end %} and {% katex(inline=true) %}40\%{% end %}.
 
-<div class="light-dark-image">
-  <img src="irr-npv-function-light.webp" alt="Plot of the NPV as a function of the rate with the values from the table" />
-  <img src="irr-npv-function-dark.webp" alt="Plot of the NPV as a function of the rate with the values from the table" />
-</div>
+{{ light_dark_image(
+  light_src="irr-npv-function-light.webp",
+  dark_src="irr-npv-function-dark.webp",
+  alt="Plot of the NPV as a function of the rate with the values from the table"
+) }}
 
 The above formula is a sum of function terms.
 Applying the [superposition principle](https://en.wikipedia.org/wiki/Superposition_principle),
