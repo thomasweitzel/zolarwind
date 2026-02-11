@@ -28,7 +28,7 @@ Localization is built-in for a single-locale build.
 
 - **Series Support**: Group posts into a series taxonomy with ordered navigation on series posts.
 
-- **Artalk Comments**: Optional integration with a self-hosted Artalk server. See [docs/artalk.md](docs/artalk.md).
+- **Artalk Comments**: Optional integration with a self-hosted Artalk server. See `docs/artalk.md`.
 
 ---
 
@@ -59,7 +59,6 @@ This theme is not compatible with Zola v0.21.0 and earlier.
   - [Fields description](#fields-description)
 - [Series](#series)
 - [Shortcodes](#shortcodes)
-- [Light/Dark Images](#lightdark-images)
 - [Search](#search)
 - [Localization](#localization)
 - [Integrating the theme folder](#integrating-the-theme-folder)
@@ -343,28 +342,13 @@ Note: If no posts use the `series` taxonomy, Zola does not generate `/series/`, 
 ## Shortcodes
 
 Zolarwind provides some shortcodes. Use them when you want the feature, not as formatting helpers.
+Full documentation with parameters and examples: `docs/shortcodes.md`.
 
-- **katex**: render math without Markdown interfering with characters like `*` or backslashes.
-  Use this when you want safe math and do not include `$`/`$$` delimiters inside the shortcode body.
-
-- **diagram**: render Mermaid diagrams. Use this when `extra.diagram = true` on the post.
-
----
-
-## Light/Dark Images
-
-If you want images that switch with the theme, there is a `light_dark_image` shortcode.
-Here is how to use it:
-
-```md
-{{ light_dark_image(
-  light_src="example-light.webp",
-  dark_src="example-dark.webp",
-  alt="Example image"
-) }}
-```
-
-It has optional parameters: `width`, `height`, and `lazy` (default `false`).
+- **katex**: render KaTeX safely when Markdown would interfere with math syntax.
+- **diagram**: render Mermaid diagrams from fenced text blocks.
+- **light_dark_image**: ship two images and automatically switch with the theme.
+- **audio_simple**: native `<audio>` player in a themed card.
+- **audio**: custom audio player using the bundled JS controls.
 
 ---
 
