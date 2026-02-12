@@ -6,70 +6,85 @@ template = "page.html"
 authors = ["Thomas Weitzel"]
 +++
 
-### Data protection
-The use of my website is possible without providing personal data.
-If you contact me by email, providing personal data is voluntary.
-These data will not be disclosed to third parties without your explicit consent.
+## General notes
 
-Data transmission in the Internet (e.g.
-in the communication by email) can have security gaps.
-A complete protection of the data from access by third parties is not possible.
-The use of contact data published in the imprint by third parties for sending me unsolicited advertising and information materials is hereby prohibited.
-I reserve the right to take legal action in the event of unsolicited promotional information, such as spam emails.
+Protecting your personal data matters. This website is a **static information site** and can be used **without providing personal data**.
 
-### Hosting
-I host my website at netcup. The provider is netcup GmbH, Daimlerstr. 25, 76185 Karlsruhe, referred to as "netcup".
+I do **not** actively collect personal data unless optional features are used, in particular:
 
-Details on netcup's privacy policy can be found on their homepage under [privacy policy](https://www.netcup.eu/kontakt/datenschutzerklaerung.php).
+- no contact forms
+- no tracking
+- no analytics or marketing services
+- no comments or user accounts without explicit consent
 
-The use of netcup is based on Article 6(1)(f) GDPR.
-I have a legitimate interest that my website is available to visitors as reliably as possible.
-If consent was requested, data processing takes place exclusively based on Article 6(1)(a) GDPR.
-Consent can be revoked at any time.
+## Responsible controller
 
-### Data processing
-I have signed a data processing contract with netcup.
-This contract is required by privacy law and guarantees, that data of visitors of my website will be processed in compliance with the GDPR.
+The responsible controller for data processing on this website is the person named in the [imprint](@/pages/imprint.md).
 
-### Responsible controller
-The person responsible for data processing on this website is the person named in the [imprint](@/pages/imprint.md).
-The "responsible controller" means the natural or legal person who decides on the processing of data (for example: name, address, or email addresses).
+## Hosting
 
-### Information, cancellation, deletion
-At any time you have the right to free information about your stored personal data, its origins, recipients, and the purpose of the data processing, as well as a right to correction or deletion of this data.
-You can contact me at any time via the address given in the imprint for further questions on the subject of your personal data.
+This website is hosted by **an internet hosting provider**.
 
-### Log files on the server
-The web server stores information in its log files, some of which your browser transmits to me.
-These are:
+The web server stores information in its log files, some of which your browser transmits:
 
-* the IP address of your computer
-* the time of the request
-* the name of the requested page
-* a status code (if the request was successful or not)
-* the referrer URL
-* the browser type, browser version and other information sent by your browser
+- IP address
+- date and time of the request
+- requested page
+- HTTP status code
+- referrer URL
+- browser and operating system information
 
-This data can not be used to identify a specific person.
-I will not merge this data with other data sources.
-I reserve the right to check this data retrospectively, if I become aware of illegal use of my website.
+These data are used only for **technical operation**, **security**, and **error analysis**.
 
-### SSL encryption
-This site uses SSL encryption for security reasons and to protect the transmission of sensitive content, such as the requests you send to me.
-An encrypted connection can be recognized by the fact that the address in the address bar of the browser starts with `https://` and a lock symbol nearby.
-If SSL encryption is enabled, the data you submit to me can not be read by third parties.
+**Legal basis:** Art. 6(1)(f) GDPR \
+**Legitimate interest:** secure and stable operation of the website
 
-### Cookies and storage {#cookies}
-This site does not use cookies.
-KaTeX and Mermaid are loaded locally and do not set cookies.
-The theme preference is stored in `sessionStorage` only after a user explicitly toggles the theme.
+The log data are stored separately and not used for profiling.
 
-### Embedded content from other websites
-This site does not embed third-party content by default.
-If I add embedded content (e.g. videos, pictures, comments, etc.), it behaves just as if you visited the other website.
-Those websites may collect information about you, use cookies, embed additional tracking services, and record your interaction with the embedded content, if you have an account and are logged in to that site.
+## Data processing
 
-### What rights do you have to your data?
-You may request that I export your personal information, including any data you have provided to me.
-In addition, you may request the deletion of any personal information I have stored about you.
-This does not include the data that I need to keep for administrative, legal, or security-related purposes.
+I have signed a data processing agreement with the hosting provider under Art. 28 GDPR.
+
+## Cookies and browser data storage {#cookies}
+
+This website does not use cookies.
+
+Browser storage is used in these cases:
+
+- After an **active click on the theme toggle**, to store the display setting (`light` or `dark`) for this session in
+  the browser (`sessionStorage`). Legal basis: Section 25(2) No. 2 TDDDG.
+- When using the comment function, to store user-provided data and technical session information for later
+  comments in the browser, e.g. username/nickname, email address, optional website (`localStorage`). Legal basis:
+  Section 25(1) TDDDG and Art. 7 GDPR.
+
+The data storage takes place exclusively locally in the browser. Entries can be deleted there at any time.
+
+## External content and services
+
+This website does **not** embed external content (e.g., YouTube, Google Fonts, tracking scripts).
+All resources (scripts, images, etc.) are served locally.
+
+## SSL/TLS encryption
+
+This website uses SSL/TLS encryption. Data transmitted during a page request cannot be read by third parties.
+
+## Rights of data subjects
+
+You have the right to:
+
+- access to stored personal data
+- correction or deletion
+- data portability where applicable
+- restriction of processing
+- objection to processing
+
+These rights mainly apply to technically necessary server log data. If you use the comment function, the data you enter
+(e.g. name/nickname, email address, optional website) and the comment content may also be processed. In that case, the
+same rights apply. On request, a comment can be deleted or anonymized unless legal retention duties prevent this.
+
+Requests can be sent via the contact address in the imprint.
+
+## Supervisory authority and right to file a complaint
+
+You have the right to file a complaint with a data protection supervisory authority. The competent authority is the
+authority of your federal state of residence or the seat of the responsible controller.
