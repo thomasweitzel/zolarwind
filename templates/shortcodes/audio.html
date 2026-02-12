@@ -39,8 +39,8 @@
         <div class="speaker-div{{ id }} flex-none pl-2 hover:text-fail-600"></div>
     </div>
     {%- if id == 1 -%}
-        <script src="{{ get_url(path='js/audio/howler.js') }}" integrity="sha384-{{ get_hash(path='js/audio/howler.js') }}"></script>
-        <script src="{{ get_url(path='js/audio/audio-player.js') }}" integrity="sha384-{{ get_hash(path='js/audio/audio-player.js') }}"></script>
-        <script src="{{ get_url(path='js/audio/audio-init.js') }}" integrity="sha384-{{ get_hash(path='js/audio/audio-init.js') }}"></script>
+        <script src="{{ get_url(path='/js/audio/howler.js') }}" integrity="sha384-{{ get_hash(path='/js/audio/howler.js') }}"></script>
+        <script src="{{ get_url(path='/js/audio/audio-player.js') }}" integrity="sha384-{{ get_hash(path='/js/audio/audio-player.js') }}"></script>
+        <script src="{{ get_url(path='/js/audio/audio-init.js') }}" integrity="sha384-{{ get_hash(path='/js/audio/audio-init.js') }}"></script>
     {%- endif -%}
 </div>
