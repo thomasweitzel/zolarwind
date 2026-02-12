@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}{{ res.series.one | capitalize }}: {{ term.name }} | {{ config.extra.title }}{% endblock title %}
+
 {% block content %}
 {% set series_pages = term.pages %}
 {% set missing_series_order = false %}

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+  {{ section.title | default(value=res.series.other | capitalize) }} | {{ config.extra.title }}
+{% endblock title %}
+
 {% block content %}
 {% set taxonomy_title = res.series.other | capitalize %}
 {% include "partials/taxonomy-terms.html" %}
