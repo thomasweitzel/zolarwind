@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% import "macros/head.html" as head %}
 
-{% block title %}{{ res.tags.one | capitalize }}: {{ term.name }} | {{ config.extra.title }}{% endblock title %}
+{% block title %}{{ head::page_title(config=config, res=res, taxonomy=taxonomy, term=term) }}{% endblock title %}
 
 {% block content %}
 {% set pages = term.pages %}

@@ -1,10 +1,9 @@
 {% extends "base.html" %}
+{% import "macros/head.html" as head %}
 
-{% block title %}
-  {{ section.title | default(value=res.series.other | capitalize) }} | {{ config.extra.title }}
-{% endblock title %}
+{% block title %}{{ head::page_title(config=config, res=res, taxonomy=taxonomy) }}{% endblock title %}
 
 {% block content %}
-{% set taxonomy_title = res.series.other | capitalize %}
+{% set taxonomy_title = head::taxonomy_label(taxonomy=taxonomy.name, res=res) %}
 {% include "partials/taxonomy-terms.html" %}
 {% endblock %}

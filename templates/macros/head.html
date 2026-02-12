@@ -1,0 +1,62 @@
+{% macro taxonomy_label(taxonomy, res) %}
+  {% if taxonomy == "tags" %}
+    {{ res.tags.other | capitalize }}
+  {% elif taxonomy == "series" %}
+    {{ res.series.other | capitalize }}
+  {% else %}
+    {{ taxonomy | capitalize }}
+  {% endif %}
+{% endmacro taxonomy_label %}
+
+{% macro taxonomy_term_label(taxonomy, term, res) %}
+  {% if taxonomy == "tags" %}
+    {{ res.tags.one | capitalize }}: {{ term.name }}
+  {% elif taxonomy == "series" %}
+    {{ res.series.one | capitalize }}: {{ term.name }}
+  {% else %}
+    {{ taxonomy | capitalize }}: {{ term.name }}
+  {% endif %}
+{% endmacro taxonomy_term_label %}
+
+{% macro page_title(config, res, page=false, section=false, taxonomy=false, term=false) %}
+  {% set title_separator = " | " %}
+  {% if page and page.title %}
+    {{ page.title }}{{ title_separator }}{{ config.extra.title }}
+  {% elif section and section.title %}
+    {{ section.title }}{{ title_separator }}{{ config.extra.title }}
+  {% elif term and taxonomy %}
+    {{ self::taxonomy_term_label(taxonomy=taxonomy.name, term=term, res=res) }}{{ title_separator }}{{ config.extra.title }}
+  {% elif taxonomy %}
+    {{ self::taxonomy_label(taxonomy=taxonomy.name, res=res) }}{{ title_separator }}{{ config.extra.title }}
+  {% else %}
+    {{ config.extra.title }}
+  {% endif %}
+{% endmacro page_title %}
+
+{% macro canonical_url(page=false, section=false, taxonomy=false, term=false, current_url="") %}
+  {% if page and page.permalink %}
+    {{ page.permalink }}
+  {% elif section and section.permalink %}
+    {{ section.permalink }}
+  {% elif term and term.permalink %}
+    {{ term.permalink }}
+  {% elif taxonomy and taxonomy.permalink %}
+    {{ taxonomy.permalink }}
+  {% elif current_url is defined and current_url %}
+    {{ current_url }}
+  {% endif %}
+{% endmacro canonical_url %}
+
+{% macro page_description(config, page=false, section=false) %}
+  {% if page and page.description %}
+    {{ page.description }}
+  {% elif page and page.summary %}
+    {{ page.summary | striptags }}
+  {% elif section and section.description %}
+    {{ section.description }}
+  {% elif config.description %}
+    {{ config.description }}
+  {% elif config.extra.site_description %}
+    {{ config.extra.site_description }}
+  {% endif %}
+{% endmacro page_description %}
