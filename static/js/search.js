@@ -40,8 +40,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const decodeEntities = (text) => {
+    if (!text) return "";
+    const doc = new DOMParser().parseFromString(text, "text/html");
+    return doc.documentElement.textContent || "";
+  };
+
   const getSummary = (doc) => {
-    const text = doc.description || doc.summary || doc.body || doc.content || "";
+    const raw = doc.description || doc.summary || doc.body || doc.content || "";
+    const text = decodeEntities(raw);
     if (text.length <= 180) return text;
     return `${text.slice(0, 177).trimEnd()}...`;
   };
@@ -80,14 +87,15 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const applyQuery = (query, page) => {
-    if (!query) {
+    const normalizedQuery = (query || "").replace(/[<>&]/g, " ").trim();
+    if (!normalizedQuery) {
       clearResults();
       setStatus("");
       clearPagination();
       return;
     }
 
-    const matches = root.searchIndex.search(query, { prefix: true });
+    const matches = root.searchIndex.search(normalizedQuery, { prefix: true });
     if (!matches.length) {
       clearResults();
       setStatus(noResultsText);
