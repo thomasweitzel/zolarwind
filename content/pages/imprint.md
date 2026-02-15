@@ -37,3 +37,5 @@ Reproduction, editing, distribution, and any kind of use outside the limits of c
 Downloads and copies of this page are permitted only for private, non-commercial use.
 If the content on this page was not created by me, the copyrights of third parties are respected and such content is marked.
 If you notice a copyright infringement, please inform me. If violations become known, I will remove such content immediately.
+
+Attributions for third-party assets used on this site are listed [here](@/pages/attributions.md).
