@@ -68,4 +68,4 @@ Some Unsplash profiles are no longer available.
 - [MiniSearch](https://lucaong.github.io/minisearch/) (MIT License) for client-side search.
 - [Artalk](https://artalk.js.org/) (MIT License) for optional comments.
 - [Giallo](https://github.com/getzola/giallo) (EUPL-1.2 License) for syntax highlighting.
-- Zola code highlighting CSS generated from the Giallo theme (EUPL-1.2 License). See [Zola syntax highlighting](https://www.getzola.org/documentation/content/syntax-highlighting/).
+
