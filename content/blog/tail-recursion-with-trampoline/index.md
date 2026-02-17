@@ -7,7 +7,7 @@ authors = ["Thomas Weitzel"]
 tags = ["javascript"]
 [extra]
 math = true
-image = "banner.jpg"
+image = "banner.webp"
 +++
 
 In case your platform lacks support for proper tail call optimization, and you want to do functional programming, you might run into stack space problems.

@@ -7,7 +7,7 @@ authors = ["Thomas Weitzel"]
 tags = ["rust", "math"]
 [extra]
 math = true
-image = "banner.jpg"
+image = "banner.webp"
 +++
 
 The internal rate of return (IRR) is a potent financial measure used in financial analysis, accounting, and portfolio management to gauge the profitability of investments.

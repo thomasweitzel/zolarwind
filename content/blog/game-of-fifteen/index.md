@@ -7,7 +7,7 @@ authors = ["Thomas Weitzel"]
 tags = ["javascript"]
 [extra]
 math = false
-image = "banner.jpg"
+image = "banner.webp"
 +++
 
 The Game of Fifteen is a sliding puzzle that consists of a square with tiles numbered from 1 to 15 in random order with one tile missing.
