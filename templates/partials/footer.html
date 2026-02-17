@@ -30,7 +30,7 @@
     {% endif %}
     {% if config.extra.copyright %}
     <div class="mt-4">
-      <p class="text-center text-base leading-6 text-neutral-500">
+      <p class="text-center text-base leading-6 text-neutral-400">
         {{ config.extra.copyright | replace(from="{year}", to=now() | date(format="%Y")) }}
       </p>
     </div>
