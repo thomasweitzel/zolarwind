@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{% set banner_path = "/img/default-banner.jpg" %}
+{% set banner_path = "/img/default-banner.webp" %}
 {% set banner_image = page.extra | get(key="image", default="") %}
 {% if banner_image | length > 0 %}
   {% set banner_path = page.path ~ banner_image %}
