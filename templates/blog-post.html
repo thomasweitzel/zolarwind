@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block head_extra %}
+  {% include "partials/highlight-css.html" %}
+{% endblock head_extra %}
+
 {% block content %}
 
 {% set banner_path = "/img/default-banner.webp" %}
@@ -16,7 +20,7 @@
       data-clipboard-error="{{ res.clipboard_error }}"
     >
       <div class="h-48 rounded-md shadow-md">
-        <img class="h-48 w-full object-cover" src="{{ get_url(path=banner_path) }}" alt="{{ page.title | default(value=res.empty_page_title) | striptags }}">
+        <img class="h-48 w-full object-cover" src="{{ get_url(path=banner_path) }}" alt="{{ page.title | default(value=res.empty_page_title) | striptags }}" fetchpriority="high" loading="eager">
       </div>
       <h1>{{ page.title | default(value=res.empty_page_title) | striptags }}</h1>
       <div>
