@@ -68,26 +68,60 @@ sequenceDiagram
 
 ---
 
-## `light_dark_image`
+## `image`
 
-Purpose: Serve two images and switch automatically with the theme.
+Purpose: Render local images with optional caption/title and light/dark variants.
 
 Parameters:
-- Required: `light_src`
-- Required: `dark_src`
-- Optional: `alt`
-- Optional: `width`
-- Optional: `height`
-- Optional: `lazy` (boolean, default `false`)
+- Required: `src` (local path)
+- Optional: `dark_src` (local path for dark mode)
+- Optional: `alt` (falls back to the file name)
+- Optional: `dark_alt` (alt text for the dark image, defaults to `alt`)
+- Optional: `title`
+- Optional: `caption`
+- Optional: `link` (URL)
+- Optional: `width` (number)
+- Optional: `height` (number)
+- Optional: `lazy` (boolean, default `true`)
+- Optional: `decoding` (string, default `async`)
 
 Notes:
-- If the page is a colocated bundle, the paths are resolved relative to the page.
+- Local paths only. Remote URLs are intentionally not supported.
+- If the page is a colocated bundle, relative paths resolve from the page directory.
 - The shortcode uses `get_url`, so it works under subpaths.
+- When `dark_src` is set, the shortcode renders light/dark variants.
 
-Example:
+Example (single image with caption):
 ```md
-{{ light_dark_image(
-  light_src="example-light.webp",
+{{ image(
+  src="diagram.webp",
+  alt="Block diagram",
+  caption="Figure 1: System overview."
+) }}
+```
+
+Example (override one dimension, keep aspect ratio):
+```md
+{{ image(
+  src="diagram.webp",
+  alt="Block diagram",
+  width=640
+) }}
+```
+
+Example (link the image):
+```md
+{{ image(
+  src="diagram.webp",
+  alt="Block diagram",
+  link="https://example.com"
+) }}
+```
+
+Example (light/dark image pair):
+```md
+{{ image(
+  src="example-light.webp",
   dark_src="example-dark.webp",
   alt="Example image"
 ) }}

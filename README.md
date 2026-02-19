@@ -347,7 +347,7 @@ Full documentation with parameters and examples: `docs/shortcodes.md`.
 
 - **katex**: render KaTeX safely when Markdown would interfere with math syntax.
 - **diagram**: render Mermaid diagrams from fenced text blocks.
-- **light_dark_image**: ship two images and automatically switch with the theme.
+- **image**: render local images with captions and optional light/dark variants.
 - **audio_simple**: native `<audio>` player in a themed card.
 - **audio**: custom audio player using the bundled JS controls.
 

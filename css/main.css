@@ -232,6 +232,9 @@
     .prose img {
         @apply my-4 rounded-md;
     }
+    .prose img.image-shortcode {
+        @apply my-0;
+    }
     .prose details {
         @apply my-4 rounded-md border border-neutral-700 bg-neutral-900/40;
     }
@@ -374,12 +377,12 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .light-dark-image img:nth-child(2) {
-  display: none;
+    display: none;
 }
 
 /* Dark mode: Show dark image, hide light image */
 html[data-theme="dark"] .light-dark-image img:nth-child(1) {
-  display: none;
+    display: none;
 }
 
 html[data-theme="dark"] .light-dark-image img:nth-child(2) {

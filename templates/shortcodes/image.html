@@ -1,0 +1,70 @@
+{%- set colocated_path = page.colocated_path | default(value="") -%}
+{%- set lazy = lazy | default(value=true) -%}
+{%- set decoding = decoding | default(value="async") -%}
+
+{%- if src is starting_with("/") -%}
+  {%- set light_path = src -%}
+{%- else -%}
+  {%- set light_path = colocated_path ~ src -%}
+{%- endif -%}
+{%- set light_meta = get_image_metadata(path=light_path, allow_missing=true) -%}
+
+{%- if dark_src -%}
+  {%- if dark_src is starting_with("/") -%}
+    {%- set dark_path = dark_src -%}
+  {%- else -%}
+    {%- set dark_path = colocated_path ~ dark_src -%}
+  {%- endif -%}
+  {%- set dark_meta = get_image_metadata(path=dark_path, allow_missing=true) -%}
+{%- endif -%}
+
+{%- if not alt -%}
+  {%- set alt = src | split(pat="/") | last | split(pat=".") | first -%}
+{%- endif -%}
+
+{%- set requested_width = width | default(value=0) | float -%}
+{%- set requested_height = height | default(value=0) | float -%}
+{%- set has_width = requested_width != 0 -%}
+{%- set has_height = requested_height != 0 -%}
+{%- set meta_width = light_meta.width | default(value=0) -%}
+{%- set meta_height = light_meta.height | default(value=0) -%}
+{%- set link = link | default(value="") -%}
+
+{%- set final_width = 0 -%}
+{%- set final_height = 0 -%}
+
+{%- if has_width and has_height -%}
+  {%- set final_width = requested_width -%}
+  {%- set final_height = requested_height -%}
+{%- elif has_width and meta_width and meta_height -%}
+  {%- set final_width = requested_width -%}
+  {%- set final_height = (requested_width * meta_height) / meta_width -%}
+{%- elif has_height and meta_width and meta_height -%}
+  {%- set final_width = (requested_height * meta_width) / meta_height -%}
+  {%- set final_height = requested_height -%}
+{%- elif meta_width and meta_height -%}
+  {%- set final_width = meta_width -%}
+  {%- set final_height = meta_height -%}
+{%- endif -%}
+
+{%- if final_width != 0 -%}{%- set final_width = final_width | round(method='floor') -%}{%- endif -%}
+{%- if final_height != 0 -%}{%- set final_height = final_height | round(method='floor') -%}{%- endif -%}
+
+
+<figure class="mt-4">
+  {%- if dark_src -%}
+    {%- if link -%}<a href="{{ link }}" class="inline-block leading-none">{%- endif -%}
+    <span class="light-dark-image inline-block">
+      <img class="block image-shortcode" src="{{ get_url(path=light_path) }}"{% if alt %} alt="{{ alt }}"{% endif %}{% if title %} title="{{ title }}"{% endif %}{% if final_width %} width="{{ final_width }}"{% endif %}{% if final_height %} height="{{ final_height }}"{% endif %}{% if lazy %} loading="lazy"{% endif %}{% if decoding %} decoding="{{ decoding }}"{% endif %}>
+      <img class="block image-shortcode" src="{{ get_url(path=dark_path) }}"{% if dark_alt %} alt="{{ dark_alt }}"{% elif alt %} alt="{{ alt }}"{% endif %}{% if title %} title="{{ title }}"{% endif %}{% if final_width %} width="{{ final_width }}"{% endif %}{% if final_height %} height="{{ final_height }}"{% endif %}{% if lazy %} loading="lazy"{% endif %}{% if decoding %} decoding="{{ decoding }}"{% endif %}>
+    </span>
+    {%- if link -%}</a>{%- endif -%}
+  {%- else -%}
+    {%- if link -%}<a href="{{ link }}" class="inline-block leading-none">{%- endif -%}
+    <img class="block image-shortcode" src="{{ get_url(path=light_path) }}"{% if alt %} alt="{{ alt }}"{% endif %}{% if title %} title="{{ title }}"{% endif %}{% if final_width %} width="{{ final_width }}"{% endif %}{% if final_height %} height="{{ final_height }}"{% endif %}{% if lazy %} loading="lazy"{% endif %}{% if decoding %} decoding="{{ decoding }}"{% endif %}>
+    {%- if link -%}</a>{%- endif -%}
+  {%- endif -%}
+  {%- if caption %}
+    <figcaption class="italic">{{ caption | safe }}</figcaption>
+  {%- endif %}
+</figure>
