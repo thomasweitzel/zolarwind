@@ -89,10 +89,11 @@ Here's what you see on the graph below, which plots the NPV as a function of the
   It's where our $irr$ satisfies the condition $\mathit{NPV} = 0$.
   For our data, it is somewhere between $0.35$ and $0.40$, or {% katex(inline=true) %}35\%{% end %} and {% katex(inline=true) %}40\%{% end %}.
 
-{{ light_dark_image(
-  light_src="irr-npv-function-light.webp",
+{{ image(
+  src="irr-npv-function-light.webp",
   dark_src="irr-npv-function-dark.webp",
-  alt="Plot of the NPV as a function of the rate with the values from the table"
+  alt="Plot of the NPV as a function of the rate with the values from the table",
+  caption="Downward-sloping NPV curve"
 ) }}
 
 The above formula is a sum of function terms.
