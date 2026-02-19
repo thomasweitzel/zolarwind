@@ -125,22 +125,22 @@
 
 @layer utilities {
     .badge {
-        @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium leading-4
+        @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium leading-4;
     }
     .badge-neutral {
-        @apply bg-neutral-800 text-neutral-100
+        @apply bg-neutral-800 text-neutral-100;
     }
     .badge-fail {
-        @apply bg-fail-800 text-fail-100
+        @apply bg-fail-800 text-fail-100;
     }
     .badge-warn {
-        @apply bg-warn-800 text-warn-100
+        @apply bg-warn-800 text-warn-100;
     }
     .badge-ok {
-        @apply bg-ok-800 text-ok-100
+        @apply bg-ok-800 text-ok-100;
     }
     .badge-primary {
-        @apply bg-primary-800 text-primary-100
+        @apply bg-primary-800 text-primary-100;
     }
 
     .prose {
@@ -204,21 +204,21 @@
         @apply mx-0.5 px-1 py-0.5 font-mono bg-neutral-700 rounded shadow-sm ring-1 ring-neutral-100/25;
     }
     .prose pre.mermaid {
-        @apply block my-4 font-mono text-sm overflow-x-auto
+        @apply block my-4 font-mono text-sm overflow-x-auto;
     }
     .prose pre:not(.mermaid) {
-        @apply block my-4 p-4 rounded-md font-mono text-sm shadow-md overflow-x-auto
+        @apply block my-4 p-4 rounded-md font-mono text-sm shadow-md overflow-x-auto;
     }
     .prose ul {
         @apply pl-4 list-disc;
-        @apply sm:pl-8
+        @apply sm:pl-8;
     }
     .prose .tags-list {
         @apply pl-0 list-none;
     }
     .prose ol {
         @apply pl-4 list-decimal;
-        @apply sm:pl-8
+        @apply sm:pl-8;
     }
     .prose td, .prose th {
         @apply px-2 py-1 border border-neutral-700;
@@ -301,7 +301,7 @@
     }
 
     body {
-        @apply text-neutral-200 bg-neutral-950 antialiased
+        @apply text-neutral-200 bg-neutral-950 antialiased;
     }
     h1 {
         @apply text-2xl font-bold;
