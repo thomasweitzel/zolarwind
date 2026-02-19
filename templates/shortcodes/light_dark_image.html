@@ -5,6 +5,6 @@
 {%- set light_url = get_url(path=light_path) -%}
 {%- set dark_url = get_url(path=dark_path) -%}
 <div class="light-dark-image">
-  <img src="{{ light_url }}"{% if alt %} alt="{{ alt }}"{% endif %}{% if width %} width="{{ width }}"{% endif %}{% if height %} height="{{ height }}"{% endif %}{% if lazy %} loading="lazy"{% endif %}>
-  <img src="{{ dark_url }}"{% if alt %} alt="{{ alt }}"{% endif %}{% if width %} width="{{ width }}"{% endif %}{% if height %} height="{{ height }}"{% endif %}{% if lazy %} loading="lazy"{% endif %}>
+  <img class="block" src="{{ light_url }}"{% if alt %} alt="{{ alt }}"{% endif %}{% if width %} width="{{ width }}"{% endif %}{% if height %} height="{{ height }}"{% endif %}{% if lazy %} loading="lazy"{% endif %}>
+  <img class="block" src="{{ dark_url }}"{% if alt %} alt="{{ alt }}"{% endif %}{% if width %} width="{{ width }}"{% endif %}{% if height %} height="{{ height }}"{% endif %}{% if lazy %} loading="lazy"{% endif %}>
 </div>

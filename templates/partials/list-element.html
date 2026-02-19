@@ -7,7 +7,7 @@
 <div class="flex flex-col rounded-md shadow-md overflow-hidden shadow-neutral-800 bg-neutral-900 border-neutral-900 border-1">
   <div class="flex-shrink-0">
     <a href="{{ page.permalink }}" aria-label="{{ page.title | default(value=res.empty_page_title) }}">
-      <img class="h-48 w-full object-cover" src="{{ get_url(path=banner_path) }}" alt="{{ page.title | default(value=res.empty_page_title) }}"
+      <img class="block h-48 w-full object-cover" src="{{ get_url(path=banner_path) }}" alt="{{ page.title | default(value=res.empty_page_title) }}"
         {% if loop.first %}fetchpriority="high" loading="eager"{% else %}loading="lazy"{% endif %}
       />
     </a>
