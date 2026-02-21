@@ -1,5 +1,5 @@
 +++
-date = 2023-09-26
+date = "2023-10-29"
 title = "Diagrams with Mermaid"
 description = "Discover Mermaid's Markdown-inspired syntax to craft diverse diagrams using simple text in your blog posts. Learn how to integrate and customize Mermaid diagrams."
 authors = ["Thomas Weitzel"]
@@ -11,7 +11,7 @@ diagram = true
 image = "banner.webp"
 +++
 
-## What are Mermaid diagrams
+## What are Mermaid diagrams?
 
 [Mermaid](https://mermaid.js.org) is a syntax similar to Markdown where you can use text to describe and automatically generate diagrams.
 With Mermaid, you can generate
@@ -72,7 +72,7 @@ diagram = true
 ```
 
 ### Configuring the Appearance
-The shortcode supports an optional `init` parameter, that allows you to specify configuration options for Mermaid,
+The shortcode supports an optional `init` parameter that allows you to specify configuration options for Mermaid,
 particularly changing the appearance of the diagrams through the theme.
 
 For example, to apply the `forest` theme:

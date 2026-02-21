@@ -1,7 +1,7 @@
 +++
 date = "2026-02-11"
 title = "Adding audio to your blog"
-description = "Learn how to create a customized HTML5 audio player using Howler.js for your blog."
+description = "Three ways to add audio to your blog: native elements, shortcodes, and Howler.js."
 authors = ["Thomas Weitzel"]
 [taxonomies]
 tags = ["audio", "javascript"]

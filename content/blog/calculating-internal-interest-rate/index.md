@@ -1,6 +1,6 @@
 +++
-date = 2023-07-29
-title = "Internal Rate of Return Calculation"
+date = "2023-07-29"
+title = "Internal rate of return calculation"
 description = "Deconstructing the math of investment: estimate the annualized rate of return with the IRR algorithm and its Rust implementation."
 authors = ["Thomas Weitzel"]
 [taxonomies]
@@ -11,7 +11,7 @@ image = "banner.webp"
 +++
 
 The internal rate of return (IRR) is a potent financial measure used in financial analysis, accounting, and portfolio management to gauge the profitability of investments.
-It's like the heartbeat of an investment -- an indicator of health, the higher it is, the better the investment.
+It's like the heartbeat of an investment - an indicator of health, the higher it is, the better the investment.
 This powerful tool can help investors compare different investment options, assisting in making informed decisions about where to allocate their capital.
 Especially when cash flows are irregular, as often is the case in real-world scenarios, IRR becomes invaluable.
 This article will first explain the concept and calculations behind IRR and then demonstrate how to implement an IRR algorithm in Rust.
@@ -25,7 +25,7 @@ While Microsoft uses the name XIRR for its Excel function, I will use the term I
 
 ## Example data and validation
 
-A crucial part of implementing a financial algorithm like IRR is validation -- that is, making sure that your algorithm is producing correct and expected results.
+A crucial part of implementing a financial algorithm like IRR is validation. That is, making sure that your algorithm is producing correct and expected results.
 One effective way to validate your implementation is by comparing its outputs to those of [Microsoft Excel's XIRR function](https://support.microsoft.com/en-gb/office/xirr-function-de1242ec-6477-445b-b11b-a303ad9adc9d).
 I will use the data from the Excel example.
 Using Excel's XIRR function to compute the internal rate of return for this specific data set yields a result of {% katex(inline=true) %}37.34\%{% end %}.
@@ -56,7 +56,7 @@ Here's the general process of the algorithm:
 1. **Compute the net present value (NPV)**: The NPV is calculated by summing the present values of the individual cash flows.
 1. **Compute the derivative of the NPV**: The derivative of the NPV with respect to the rate is created by differentiating the NPV formula and summing these values. 
 1. **Update the guess**: The next guess for the rate is calculated by subtracting the ratio of the NPV to its derivative from the current guess.
-1. **Iterate until convergence**: These steps are repeated until the change in guesses is below a certain tolerance, or until a maximum number of iterations is reached.
+1. **Iterate until convergence**: These steps are repeated until the change in guesses is below a certain tolerance or until a maximum number of iterations is reached.
    At this point, the guess for the rate is considered to be the IRR.
 
 
@@ -70,7 +70,7 @@ I have pre-calculated it in the table above:
 $$y_i = \frac{d_i - d_1}{365}$$
 
 The NPV is the sum of all payments, where the correct interest rate $irr$ is applied.
-Its value is 0 after all transaction have been concluded:
+Its value is 0 after all transactions have been concluded:
 
 $$\mathit{NPV} = \sum_{i = 1}^{m} \frac{p_i}{(1 + irr)^{y_i}}$$
 
@@ -144,26 +144,26 @@ In practice, it's rare that you would come across this scenario.
 We can now apply the [basic differentiation rules](https://www.wolframalpha.com/input?i=derivative+of+a+%2F+%28%281+%2B+x%29%5Eb%29) to get the derivative of $f_i(x)$.
 It represents the derivative of the NPV for a single cash flow, also the $i$-th one:
 
-$$f_i'(x) = \frac{-y_i \cdot p_i}{(1 + x)^{y_i + 1}}$$
+$$f_i^\prime(x) = \frac{-y_i \cdot p_i}{(1 + x)^{y_i + 1}}$$
 
 ## Update the guess
 
 The [Newton-Raphson method](https://en.wikipedia.org/wiki/Newton%27s_method) is an iterative process used to locate the roots of a differentiable function, i.e. a solution for $x$ where $f(x) = 0$.
 The method begins with an initial estimate $x_n$, which is then refined into a more accurate guess, $x_{n+1}$.
 This stage is where the NPV and its derivative come into play.
-Instead of solely employing $f_i(x_n)$ and $f_i'(x_n)$ for a single cash flow, we incorporate all the cash flows by adding up the NPV terms and derivative terms respectively:
+Instead of solely employing $f_i(x_n)$ and $f_i^\prime(x_n)$ for a single cash flow, we incorporate all the cash flows by adding up the NPV terms and derivative terms respectively:
 
-$$x_{n+1} = x_{n} - \frac{\sum_{i = 1}^{m} f_i(x_n)}{\sum_{i = 1}^{m} f_i'(x_n)} $$
+$$x_{n+1} = x_{n} - \frac{\sum_{i = 1}^{m} f_i(x_n)}{\sum_{i = 1}^{m} f_i^\prime(x_n)} $$
 
 ## Iterate until convergence
 
 Instead of improving the result indefinitely, you stop when the difference between $x_n$ and $x_{n+1}$ is smaller than or equal to a given $\epsilon$, i.e. $\left| x_n - x_{n+1} \right| \le \epsilon$.
-It's usually a very small number, like $0.000001$ ($1.0 e^{-6}$).
+It's usually a tiny number, like $0.000001$ ($1.0 e^{-6}$).
 This is the value used in Microsoft Excel's XIRR function.
 
 It's also worth noting that despite using the exact derivative, the IRR algorithm is still an approximation method.
 It may not always converge to a solution, especially for cash flow series that have multiple changes in sign.
-In these cases, it may be necessary to provide a good initial guess for the rate, or to use a different method to compute the internal rate of return.
+In these cases, it may be necessary to provide a good initial guess for the rate or to use a different method to compute the internal rate of return.
 
 ## Implementation in Rust
 
@@ -197,7 +197,7 @@ fn calculate_irr(transactions: &[(f64, f64)], initial_guess: f64) -> f64 {
         let (fx, dfx) = transactions.iter()
             .map(|(years, amount)| {
                 let fx = amount / (1_f64 + x).powf(*years);                  // NPV of the cash flow
-                let dfx = (-years * amount) / (1_f64 + x).powf(years + 1.0); // Derivative of NPV                                                       
+                let dfx = (-years * amount) / (1_f64 + x).powf(years + 1.0); // Derivative of NPV
                 (fx, dfx)                                                    // Return both values for a single cash flow
             })
             // Sum up all NPVs and derivatives for all cash flows (reduce to a tuple of two sums)
@@ -254,10 +254,10 @@ The main function uses an example transaction set and calls our `calculate_irr` 
 
 JavaScript runs natively in all modern browsers and is the _lingua franca_ of the web.
 By translating the Rust code into JavaScript, the IRR calculation will be easily usable on virtually any device, regardless of operating system or hardware.
-This way, it should be possible to use it in a web application, or even in a mobile app using a framework like [React Native](https://reactnative.dev).
+This way, it should be possible to use it in a web application or even in a mobile app using a framework like [React Native](https://reactnative.dev).
 Maybe you want to write a financial app that runs on iOS, Android, and the web?
 
-```js
+```javascript
 // Function to calculate the number of days between two dates
 function daysBetween(start, end) {
   const millisecondsPerDay = 1000 * 60 * 60 * 24;

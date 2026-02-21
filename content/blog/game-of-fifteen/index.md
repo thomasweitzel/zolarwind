@@ -1,5 +1,5 @@
 +++
-date = 2020-06-11
+date = "2020-06-11"
 title = "The Game of Fifteen"
 description = "A playable online game. Not every possible starting position is solvable, so we have to take special care."
 authors = ["Thomas Weitzel"]
@@ -71,7 +71,7 @@ Because we do not want to present an unsolvable game.
 
 Here is a fragment of source code that calculates the parity and checks if it's even for the examples from above.
 
-``` js
+```javascript
 // for (let i = 0; i < limit; i += 1) {...} vs
 // range0(limit).forEach((i) => {...})
 const range0 = (limit) => [...Array(limit).keys()];

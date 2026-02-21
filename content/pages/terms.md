@@ -13,7 +13,7 @@ authors = ["Thomas Weitzel"]
 This website is a **private, non-commercial blog** with mostly informational content. It can be used **without registration**
 and **without providing personal data**.
 
-The following notes are for transparency and clarification. They are **not general terms and conditions** and **not a contract**
+The following notes are for transparency and clarity. They are **not general terms and conditions** and **not a contract**
 in a legal sense.
 
 ## Content and opinions
@@ -42,7 +42,7 @@ If legal violations become known, the links will be removed promptly.
 
 The content and works published on this website are subject to German copyright law.
 
-Unless stated otherwise, **copying and redistribution** are permitted **as long as the author notice remains** and the use is not commercial.
+Unless stated otherwise, **copying and redistribution** are permitted **as long as the author's attribution notice remains** and the use is not commercial.
 
 Any further use requires my prior consent.
 

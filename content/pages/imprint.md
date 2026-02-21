@@ -16,7 +16,7 @@ Copyright Thomas Weitzel.
 
 ## Liability for content
 
-As a service provider I am responsible under the general laws (DDG) for my own content on these pages.
+As a service provider, I am responsible under the general laws (DDG) for my own content on these pages.
 However, I am not obliged to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity.
 Obligations to remove or block the use of information under the general laws remain unaffected.
 Liability is only possible from the time of knowledge of a specific infringement.
@@ -27,7 +27,7 @@ If I become aware of violations, I will remove the content immediately.
 This website contains links to external websites of third parties. I have no influence on their content.
 The provider or operator of the linked pages is always responsible.
 At the time of linking, no illegal content was apparent.
-A permanent control of the content of the linked pages is not reasonable without concrete evidence of an infringement.
+Permanent monitoring of the content of the linked pages is not reasonable without concrete evidence of an infringement.
 If I become aware of violations, I will remove such links immediately.
 
 ## Copyright

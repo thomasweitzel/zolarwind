@@ -34,7 +34,7 @@ The web server stores information in its log files, some of which your browser t
 - referrer URL
 - browser and operating system information
 
-These data are used only for **technical operation**, **security**, and **error analysis**.
+This data is used only for **technical operation**, **security**, and **error analysis**.
 
 **Legal basis:** Art. 6(1)(f) GDPR \
 **Legitimate interest:** secure and stable operation of the website
@@ -80,7 +80,7 @@ You have the right to:
 
 These rights mainly apply to technically necessary server log data. If you use the comment function, the data you enter
 (e.g. name/nickname, email address, optional website) and the comment content may also be processed. In that case, the
-same rights apply. On request, a comment can be deleted or anonymized unless legal retention duties prevent this.
+same rights apply. On request, a comment can be deleted or anonymized unless statutory retention obligations prevent this.
 
 Requests can be sent via the contact address in the imprint.
 

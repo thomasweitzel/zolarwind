@@ -1,6 +1,6 @@
 +++
-date = 2019-03-16
-title = "Tail Recursion with Trampoline"
+date = "2019-03-16"
+title = "Tail recursion with trampoline"
 description = "Node.js does not support tail call optimization, but a trampoline has the same effect."
 authors = ["Thomas Weitzel"]
 [taxonomies]
@@ -10,12 +10,12 @@ math = true
 image = "banner.webp"
 +++
 
-In case your platform lacks support for proper tail call optimization, and you want to do functional programming, you might run into stack space problems.
+In case your platform lacks support for proper tail call optimization and you want to do functional programming, you might run into stack space problems.
 This can be mitigated, but you have to find a way yourself to make it work.
 The specific platform I'm writing about here is [Node.js](https://nodejs.org/en/about).
 After a little introduction, I show one well-known solution to the problem.
 
-In functional programming, recursion is a fundamental concept to handle mutability.
+In functional programming, recursion is a fundamental concept for handling mutability.
 Pure functional languages like Haskell do not allow mutation of variables, so you have to come up with a different solution to the problem.
 What you do is called [update as you copy](https://alvinalexander.com/scala/functional-programming-simplified-book).
 You create new variables by calculating their values from the values of existing ones.
@@ -33,9 +33,9 @@ In order to write a useful recursive function, you have to make sure that it:
 * calls itself
 
 By using these criteria for a recursive function, you can see that it has to either call itself or terminate.
-When it terminates, it's done, and you have a value.
-Otherwise, it will call itself, and you get another stack frame with this call.
-Depending on the number of calls this function makes to itself, the used stack space grows, and you might eventually run out of stack space.
+When it terminates, it's done and you have a value.
+Otherwise it will call itself, and you get another stack frame with this call.
+Depending on the number of calls this function makes to itself, the used stack space grows and you might eventually run out of stack space.
 This is not a good thing!
 
 ## Tail recursion
@@ -50,9 +50,9 @@ Now you have what's called a tail-recursive function.
 
 Once you have made sure that your function is tail-recursive, your runtime environment or compiler can optimize the calls in such a way,
 that the existing stack frame is reused by the next call.
-The stack thereby never grows, and you have eliminated the potential for a stack overflow.
+The stack thereby never grows and you have eliminated the potential for a stack overflow.
 But it's not enough that it can be optimized, it has to be actually done.
-And that's where the problem starts.
+That's where the problem starts.
 
 Not every runtime environment or compiler performs tail call optimization.
 As of this writing two of the platforms that I use do not support tail call optimization out-of-the-box:
@@ -62,7 +62,7 @@ As of this writing two of the platforms that I use do not support tail call opti
 
 The JVM does support tail call optimization when used with Kotlin or Scala though.
 
-Not all is lost: were tail call optimization is not directly supported you can implement a workaround that is straight forward.
+Not all is lost: where tail call optimization is not directly supported you can implement a workaround that is straightforward.
 It's effective in saving you from stack overflow errors.
 The rest of this article shows you how to implement it.
 It's known under the name [trampoline device](https://en.wikipedia.org/wiki/Tail_call#Through_trampolining).
@@ -77,12 +77,12 @@ Let's start.
 
 ## Loop
 
-If you're an [imperative programmer](https://en.wikipedia.org/wiki/Imperative_programming) you would implement the factorial function with a loop.
+If you're an [imperative programmer](https://en.wikipedia.org/wiki/Imperative_programming), you would implement the factorial function with a loop.
 You start with a variable `result` that has the value `1` and then have a for-loop that starts at `2` and goes up to `n`.
 In the body of the for-loop you modify `result` and set it to a value that was its previous value multiplied by whatever value your loop-variable has.
 If you are done with the loop you return the `result`.
 
-```js
+```javascript
 const loopFactorial = (n) => {
   let result = 1;
   for (let i = 2; i <= n; i += 1) result *= i;
@@ -106,7 +106,7 @@ To calculate the factorial of `n` you multiply `n` with the factorial of `n - 1`
 You now have to calculate the factorial of `n - 1`.
 And so on.
 
-```js
+```javascript
 const stackFactorial = (n) => {
   if (n > 1) return n * stackFactorial(n - 1);
   return 1;
@@ -129,7 +129,7 @@ The solution is to pass all required information on to the next recursive call.
 
 An extra parameter is needed to hold this information.
 It's commonly called an aggregator, or `agg` for short.
-For multiplication, you start at `1` (identity, `n * 1 === n` and `1 * n === n`).
+For multiplication you start at `1` (identity, `n * 1 === n` and `1 * n === n`).
 Along the way, you multiply the aggregator with the current value of `n`, thereby keeping track of how far you've come with the product.
 The aggregator will look like this over time:
 
@@ -141,7 +141,7 @@ The aggregator will look like this over time:
 
 When you finally hit `1` for `n`, you simply return the aggregator, because it already contains the correct result.
 
-```js
+```javascript
 const tailFactorial = (n, agg = 1) => {
   if (n > 1) return tailFactorial(n - 1, agg * n);
   return agg;
@@ -160,7 +160,7 @@ Because nobody should mess with `agg`, it's better to hide it.
 Wrap it with a function that only allows the parameter `n` and make it an inner function of that wrapper function.
 Within that wrapper function, pass the call on to the inner function.
 
-```js
+```javascript
 // Alternative way (not exposing the aggregator)
 const tailFactorialAlt = (n) => {
   const innerTailFactorial = (x, agg = 1) => {
@@ -180,10 +180,10 @@ Still, I highly recommend that you do not expose parameters in your function int
 Instead of having the tail-recursive function make the tail call itself, it returns a function (with no arguments) that can call the recursive function with all arguments already in place.
 This is called a [thunk](https://en.wikipedia.org/wiki/Thunk#Functional_programming).
 You then simply have someone to call that thunk, because the tail call is no longer made by the function.
-If that's returning another function, you call it again. And again.
+If it returns another function, you call it again. And again.
 Until the final value is returned.
 
-```js
+```javascript
 const thunkFactorial = (n, agg = 1) => {
   if (n > 1) return () => thunkFactorial(n - 1, agg * n);
   return agg;
@@ -191,17 +191,17 @@ const thunkFactorial = (n, agg = 1) => {
 ```
 
 Since the function returns either a value or another function without calling it, it is neither recursive nor tail-recursive anymore.
-The stack cannot grow, and you will not run out of it.
+The stack cannot grow and you will not run out of it.
 But if your first call does not give you the final result, you end up with just another function and not with the result.
 
 ## Device for pulling out functions and calling them
 
 Since you simply pull functions/thunks out of your factorial function until the final value is returned (instead of yet another function), you have to set up a device that's doing just that.
-The device is called a trampoline, and it is handed a function that returns either thunks or a final value.
+The device is called a trampoline and it is handed a function that returns either thunks or a final value.
 If a call to that function results in another function, it is called for as long as the returned type is a function.
-Otherwise, it returns the final result.
+Otherwise it returns the final result.
 
-```js
+```javascript
 const trampoline = fn => (...args) => {
   let res = fn(...args);
   while (res instanceof Function) res = res();
@@ -214,7 +214,7 @@ const trampoline = fn => (...args) => {
 You have two things right now, a function that is returning thunks and another function that can call these thunks for as long as needed, i.e. the final result is returned.
 The last thing that's left to do is to join these two functions together.
 
-```js
+```javascript
 const trampolineFactorial = trampoline(thunkFactorial);
 
 // Example call
@@ -238,7 +238,7 @@ Interestingly, `n` is used as a counter, going down to `1`, but the function wor
 For each call, the `previous` value becomes the `current` value from the previous call, while the `current` value is set to `current + previous`.
 Until the function terminates for `n === 1`.
 
-```js
+```javascript
 const F = (n, previous = 0, current = 1) => {
   if (n === 0) return previous;
   if (n === 1) return current;
