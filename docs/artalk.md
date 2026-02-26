@@ -35,7 +35,7 @@ site = "example"
 
 ### 1.3 Optional Artalk settings
 
-All options are in `zola.toml` under `[extra.comments.artalk]`.
+All options are in `zola.toml` under `extra.comments.artalk`.
 Each option has an inline comment that explains its purpose.
 Start with defaults and only override what you need.
 
