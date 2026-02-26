@@ -292,6 +292,18 @@
     .prose p.inline-block img {
         @apply inline-block;
     }
+    .toc ul {
+        @apply list-disc ml-4;
+    }
+    .toc ol {
+        @apply list-decimal ml-4;
+    }
+    .toc li + li {
+        @apply mt-1;
+    }
+    .toc h2 {
+        @apply mt-0;
+    }
     /* Since Zola v0.22.0: needed for `extra_grammars` and/or `extra_themes` */
     .prose .giallo-l {
         @apply inline-block w-full min-h-[1lh];
@@ -332,6 +344,7 @@ html {
     --scrollbar-thumb: var(--color-neutral-700);
     --scrollbar-thumb-hover: var(--color-neutral-500);
     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
+    scroll-padding-top: 4rem;
 }
 
 input[type="search"] {

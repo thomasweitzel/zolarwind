@@ -4,6 +4,8 @@ title = "Privacy Policy"
 description = "My privacy rules"
 template = "page.html"
 authors = ["Thomas Weitzel"]
+[extra]
+toc = true
 +++
 
 ## General notes

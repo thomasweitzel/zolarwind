@@ -214,6 +214,15 @@ The `[extra]` section is where you can place any custom variables you want to be
   An array of social media links.
   Each link has a name, a boolean indicating if it's enabled, a URL, and an SVG icon.
 
+- **toc**: Optional.
+  Default toggle for the in-page table of contents when a page does not set `extra.toc` in front matter.
+  Defaults to `false` when omitted.
+
+- **toc_levels**: Optional.
+  Default heading level range for the in-page table of contents.
+  Defaults to `{ min = 2, max = 3 }` when omitted.
+  Valid range is `1..6` and `min` must be `<= max` (values are clamped to this range).
+
 - **displaymode.sun** and **displaymode.moon**: Optional.
   Inline SVG icons used by the dark/light mode toggle.
   Define both to enable the toggle; if either is missing, the toggle is not rendered.
@@ -307,6 +316,16 @@ image = "banner.jpg"
   Controls loading of the necessary JavaScript to render the Mermaid diagram.
   If set to `true`, the post will be rendered with Mermaid support for displaying diagrams
   by using the `diagram()` shortcode.
+
+- **extra.toc**: either `false` (default) or `true`.
+  Enables the in-page table of contents for this post/page.
+  If omitted, the global `extra.toc` default is used.
+  For a consistent TOC, start content headings at `##` and then nest only in ascending order (`##` → `###` → `####` → `#####` → `######`).
+
+- **extra.toc_levels**: Optional.
+  Per-page override for the heading level range used by the table of contents.
+  When omitted, the global `extra.toc_levels` default is used.
+  Values outside `1..6` are clamped.
 
 - **extra.image**: an optional image for the post.
   If omitted, a default image is used instead.

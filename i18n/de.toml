@@ -39,6 +39,7 @@ comments_consent_label = "Ich stimme zu, Kommentare zu laden und Daten auf diese
 comments_consent_no_js = "Kommentare benötigen JavaScript."
 audio_loading = "Laden ..."
 audio_no_element = "Ihr Browser unterstützt das Audio-Element nicht."
+toc_title = "Inhaltsverzeichnis"
 
 # Phrases with singular/plural variants
 search_results_one = "{count} Ergebnis gefunden"
