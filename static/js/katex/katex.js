@@ -3921,6 +3921,10 @@ defineSymbol(math, main, rel, "\u220b", "\\owns");
 // Punctuation
 defineSymbol(math, main, punct, "\u002e", "\\ldotp");
 defineSymbol(math, main, punct, "\u22c5", "\\cdotp");
+// The KaTeX fonts do not contain U+00B7. Use the centered dot glyph at U+22C5
+// in both modes, but keep math-mode punctuation spacing only in math mode.
+defineSymbol(math, main, punct, "\u22c5", "\u00b7");
+defineSymbol(symbols_text, main, textord, "\u22c5", "\u00b7");
 
 // Misc Symbols
 defineSymbol(math, main, textord, "\u0023", "\\#");
@@ -14881,11 +14885,6 @@ defineMacro("\u2128", "\\mathfrak{Z}");
 // Define \Bbbk with a macro that works in both HTML and MathML.
 defineMacro("\\Bbbk", "\\Bbb{k}");
 
-// Unicode middle dot
-// The KaTeX fonts do not contain U+00B7. Instead, \cdotp displays
-// the dot at U+22C5 and gives it punct spacing.
-defineMacro("\u00b7", "\\cdotp");
-
 // \llap and \rlap render their contents in text mode
 defineMacro("\\llap", "\\mathllap{\\textrm{#1}}");
 defineMacro("\\rlap", "\\mathrlap{\\textrm{#1}}");
@@ -17659,7 +17658,7 @@ const renderToHTMLTree = function (expression, options) {
     return renderError(error, expression, settings);
   }
 };
-const version = "0.16.38";
+const version = "0.16.40";
 const __domTree = {
   Span: Span,
   Anchor: Anchor,
