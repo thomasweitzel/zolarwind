@@ -3732,10 +3732,8 @@ function getGlobalMetrics(size) {
     var metrics = fontMetricsBySizeIndex[sizeIndex] = {
       cssEmPerMu: sigmasAndXis.quad[sizeIndex] / 18
     };
-    for (var key in sigmasAndXis) {
-      if (sigmasAndXis.hasOwnProperty(key)) {
-        metrics[key] = sigmasAndXis[key][sizeIndex];
-      }
+    for (var key of Object.keys(sigmasAndXis)) {
+      metrics[key] = sigmasAndXis[key][sizeIndex];
     }
   }
   return fontMetricsBySizeIndex[sizeIndex];
@@ -4803,12 +4801,10 @@ var makeOrd = function makeOrd(group, options) {
   var mode = group.mode;
   var text = group.text;
   var classes = ["mord"];
-  var {
-    font,
-    fontFamily,
-    fontWeight,
-    fontShape
-  } = options;
+  var font = options.font,
+    fontFamily = options.fontFamily,
+    fontWeight = options.fontWeight,
+    fontShape = options.fontShape;
   // Math mode or Old font (i.e. \rm)
   var useFont = mode === "math" || mode === "text" && !!font;
   var fontOrFamily = useFont ? font : fontFamily;
@@ -4838,7 +4834,7 @@ var makeOrd = function makeOrd(group, options) {
     }
     if (lookupSymbol(text, fontName, mode).metrics) {
       return makeSymbol(text, fontName, mode, options, classes.concat(fontClasses));
-    } else if (ligatures.hasOwnProperty(text) && fontName.slice(0, 10) === "Typewriter") {
+    } else if (Object.prototype.hasOwnProperty.call(ligatures, text) && fontName.slice(0, 10) === "Typewriter") {
       // Deconstruct ligatures in monospace fonts (\texttt, \tt).
       var parts = [];
       for (var i = 0; i < text.length; i++) {
@@ -5057,10 +5053,9 @@ var getVListChildrenAndDepth = function getVListChildrenAndDepth(params) {
  * See VListParam documentation above.
  */
 var makeVList = function makeVList(params, options) {
-  var {
-    children,
-    depth
-  } = getVListChildrenAndDepth(params);
+  var _getVListChildrenAndD = getVListChildrenAndDepth(params),
+    children = _getVListChildrenAndD.children,
+    depth = _getVListChildrenAndD.depth;
   // Create a strut that is taller than any list item. The strut is added to
   // each item, where it will determine the item's baseline. Since it has
   // `overflow:hidden`, the strut's top edge will sit on the item's line box's
@@ -5252,7 +5247,10 @@ var svgData = {
 };
 var staticSvg = function staticSvg(value, options) {
   // Create a span with inline SVG for the element.
-  var [pathName, width, height] = svgData[value];
+  var _svgData$value = svgData[value],
+    pathName = _svgData$value[0],
+    width = _svgData$value[1],
+    height = _svgData$value[2];
   var path = new PathNode(pathName);
   var svgNode = new SvgNode([path], {
     "width": makeEm(width),
@@ -5262,7 +5260,7 @@ var staticSvg = function staticSvg(value, options) {
     "viewBox": "0 0 " + 1000 * width + " " + 1000 * height,
     "preserveAspectRatio": "xMinYMin"
   });
-  var span = makeSvgSpan(["overlay"], [svgNode], options);
+  var span = makeSvgSpan(["katex-overlay"], [svgNode], options);
   span.height = height;
   span.style.height = makeEm(height);
   span.style.width = makeEm(width);
@@ -5381,12 +5379,10 @@ var _htmlGroupBuilders = {};
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 var _mathmlGroupBuilders = {};
 function defineFunction(data) {
-  var {
-    type,
-    names,
-    htmlBuilder,
-    mathmlBuilder
-  } = data;
+  var type = data.type,
+    names = data.names,
+    htmlBuilder = data.htmlBuilder,
+    mathmlBuilder = data.mathmlBuilder;
   for (var i = 0; i < names.length; ++i) {
     // To avoid destructuring and rebuilding an object,
     // we store the entire FunctionDefSpec object,
@@ -5408,11 +5404,9 @@ function defineFunction(data) {
  * stand-alone handler provided to `defineFunction`).
  */
 function defineFunctionBuilders(_ref) {
-  var {
-    type,
-    htmlBuilder,
-    mathmlBuilder
-  } = _ref;
+  var type = _ref.type,
+    htmlBuilder = _ref.htmlBuilder,
+    mathmlBuilder = _ref.mathmlBuilder;
   if (htmlBuilder) {
     _htmlGroupBuilders[type] = htmlBuilder;
   }
@@ -5570,7 +5564,7 @@ var _traverseNonSpaceNodes = function traverseNonSpaceNodes(nodes, callback, pre
     }
     if (nonspace) {
       prev.node = node;
-    } else if (isRoot && node.hasClass("newline")) {
+    } else if (isRoot && node.hasClass("katex-newline")) {
       prev.node = makeSpan(["leftmost"]); // treat like beginning of line
     }
     prev.insertAfter = (index => n => {
@@ -5650,17 +5644,17 @@ var buildGroup$1 = function buildGroup(group, options, baseOptions) {
 };
 /**
  * Combine an array of HTML DOM nodes (e.g., the output of `buildExpression`)
- * into an unbreakable HTML node of class .base, with proper struts to
+ * into an unbreakable HTML node of class .katex-base, with proper struts to
  * guarantee correct vertical extent.  `buildHTML` calls this repeatedly to
  * make up the entire expression as a sequence of unbreakable units.
  */
 function buildHTMLUnbreakable(children, options) {
   // Compute height and depth of this chunk.
-  var body = makeSpan(["base"], children, options);
+  var body = makeSpan(["katex-base"], children, options);
   // Add strut, which ensures that the top of the HTML element falls at
   // the height of the expression, and the bottom of the HTML element
   // falls at the depth of the expression.
-  var strut = makeSpan(["strut"]);
+  var strut = makeSpan(["katex-strut"]);
   strut.style.height = makeEm(body.height + body.depth);
   if (body.depth) {
     strut.style.verticalAlign = makeEm(-body.depth);
@@ -5682,7 +5676,7 @@ function buildHTML(tree, options) {
   // Build the expression contained in the tree
   var expression = buildExpression$1(tree, options, "root");
   var eqnNum;
-  if (expression.length === 2 && expression[1].hasClass("tag")) {
+  if (expression.length === 2 && expression[1].hasClass("katex-tag")) {
     // An environment with automatic equation numbers, e.g. {gather}.
     eqnNum = expression.pop();
   }
@@ -5700,7 +5694,7 @@ function buildHTML(tree, options) {
       // Put any post-operator glue on same line as operator.
       // Watch for \nobreak along the way, and stop at \newline.
       var nobreak = false;
-      while (i < expression.length - 1 && expression[i + 1].hasClass("mspace") && !expression[i + 1].hasClass("newline")) {
+      while (i < expression.length - 1 && expression[i + 1].hasClass("mspace") && !expression[i + 1].hasClass("katex-newline")) {
         i++;
         parts.push(expression[i]);
         if (expression[i].hasClass("nobreak")) {
@@ -5712,7 +5706,7 @@ function buildHTML(tree, options) {
         children.push(buildHTMLUnbreakable(parts, options));
         parts = [];
       }
-    } else if (expression[i].hasClass("newline")) {
+    } else if (expression[i].hasClass("katex-newline")) {
       // Write the line except the newline
       parts.pop();
       if (parts.length > 0) {
@@ -5730,7 +5724,7 @@ function buildHTML(tree, options) {
   var tagChild;
   if (tag) {
     tagChild = buildHTMLUnbreakable(buildExpression$1(tag, options, true), options);
-    tagChild.classes = ["tag"];
+    tagChild.classes = ["katex-tag"];
     children.push(tagChild);
   } else if (eqnNum) {
     children.push(eqnNum);
@@ -5795,10 +5789,10 @@ class MathNode {
    */
   toNode() {
     var node = document.createElementNS("http://www.w3.org/1998/Math/MathML", this.type);
-    for (var attr in this.attributes) {
-      if (Object.prototype.hasOwnProperty.call(this.attributes, attr)) {
-        node.setAttribute(attr, this.attributes[attr]);
-      }
+    for (var _ref2 of Object.entries(this.attributes)) {
+      var attr = _ref2[0];
+      var value = _ref2[1];
+      node.setAttribute(attr, value);
     }
     if (this.classes.length > 0) {
       node.className = createClass(this.classes);
@@ -5824,12 +5818,12 @@ class MathNode {
   toMarkup() {
     var markup = "<" + this.type;
     // Add the attributes
-    for (var attr in this.attributes) {
-      if (Object.prototype.hasOwnProperty.call(this.attributes, attr)) {
-        markup += " " + attr + "=\"";
-        markup += escape(this.attributes[attr]);
-        markup += "\"";
-      }
+    for (var _ref4 of Object.entries(this.attributes)) {
+      var attr = _ref4[0];
+      var value = _ref4[1];
+      markup += " " + attr + "=\"";
+      markup += escape(value);
+      markup += "\"";
     }
     if (this.classes.length > 0) {
       markup += " class =\"" + escape(createClass(this.classes)) + "\"";
@@ -5959,7 +5953,8 @@ var rowLikeTypes = new Set(["mrow", "mtable"]);
  * optional replacement from symbols.js.
  */
 var makeText = function makeText(text, mode, options) {
-  if (symbols[mode][text] && symbols[mode][text].replace && text.charCodeAt(0) !== 0xD835 && !(ligatures.hasOwnProperty(text) && options && (options.fontFamily && options.fontFamily.slice(4, 6) === "tt" || options.font && options.font.slice(4, 6) === "tt"))) {
+  var _options$fontFamily, _options$font;
+  if (symbols[mode][text] && symbols[mode][text].replace && text.charCodeAt(0) !== 0xD835 && !(Object.prototype.hasOwnProperty.call(ligatures, text) && ((options == null || (_options$fontFamily = options.fontFamily) == null ? void 0 : _options$fontFamily.slice(4, 6)) === "tt" || (options == null || (_options$font = options.font) == null ? void 0 : _options$font.slice(4, 6)) === "tt"))) {
     text = symbols[mode][text].replace;
   }
   return new TextNode(text);
@@ -6422,7 +6417,7 @@ class Options {
    */
   sizingClasses(oldOptions) {
     if (oldOptions.size !== this.size) {
-      return ["sizing", "reset-size" + oldOptions.size, "size" + this.size];
+      return ["katex-sizing", "reset-size" + oldOptions.size, "size" + this.size];
     } else {
       return [];
     }
@@ -6433,7 +6428,7 @@ class Options {
    */
   baseSizingClasses() {
     if (this.size !== Options.BASESIZE) {
-      return ["sizing", "reset-size" + this.size, "size" + Options.BASESIZE];
+      return ["katex-sizing", "reset-size" + this.size, "size" + Options.BASESIZE];
     } else {
       return [];
     }
@@ -6670,7 +6665,9 @@ var stretchySvg = function stretchySvg(group, options) {
       if (!data) {
         throw new Error("No SVG data for \"" + label + "\".");
       }
-      var [paths, _minWidth, _viewBoxHeight] = data;
+      var paths = data[0],
+        _minWidth = data[1],
+        _viewBoxHeight = data[2];
       var _height2 = _viewBoxHeight / 1000;
       var numSvgChildren = paths.length;
       var widthClasses;
@@ -6711,17 +6708,16 @@ var stretchySvg = function stretchySvg(group, options) {
         }
       }
       return {
-        span: makeSpan(["stretchy"], spans, options),
+        span: makeSpan(["katex-stretchy"], spans, options),
         minWidth: _minWidth,
         height: _height2
       };
     }
   } // buildSvgSpan_()
-  var {
-    span,
-    minWidth,
-    height
-  } = buildSvgSpan_();
+  var _buildSvgSpan_ = buildSvgSpan_(),
+    span = _buildSvgSpan_.span,
+    minWidth = _buildSvgSpan_.minWidth,
+    height = _buildSvgSpan_.height;
   // Note that we are returning span.depth = 0.
   // Any adjustments relative to the baseline must be done in buildHTML.
   span.height = height;
@@ -6736,7 +6732,7 @@ var stretchyEnclose = function stretchyEnclose(inner, label, topPad, bottomPad, 
   var img;
   var totalHeight = inner.height + inner.depth + topPad + bottomPad;
   if (/fbox|color|angl/.test(label)) {
-    img = makeSpan(["stretchy", label], [], options);
+    img = makeSpan(["katex-stretchy", label], [], options);
     if (label === "fbox") {
       var color = options.color && options.getColor();
       if (color) {
@@ -6782,27 +6778,12 @@ var stretchyEnclose = function stretchyEnclose(inner, label, topPad, bottomPad, 
  * `symbols.ts` so that consumers (notably `contrib/render-a11y-string`) can
  * pull in `isAtom` without dragging in the ~870-line symbol tables.
  */
-// Some of these have a "-token" suffix since these are also used as `ParseNode`
-// types for raw text tokens, and we want to avoid conflicts with higher-level
-// `ParseNode` types. These `ParseNode`s are constructed within `Parser` by
-// looking up the `symbols` map.
-var ATOMS = {
-  "bin": 1,
-  "close": 1,
-  "inner": 1,
-  "open": 1,
-  "punct": 1,
-  "rel": 1
-};
-var NON_ATOMS = {
-  "accent-token": 1,
-  "mathord": 1,
-  "op-token": 1,
-  "spacing": 1,
-  "textord": 1
-};
+var atomList = ["bin", "close", "inner", "open", "punct", "rel"];
+var nonAtomList = ["accent-token", "mathord", "op-token", "spacing", "textord"];
+var Atoms = new Set(atomList);
+var NonAtoms = new Set(nonAtomList);
 function isAtom(value) {
-  return value in ATOMS;
+  return Atoms.has(value);
 }
 
 /**
@@ -6831,7 +6812,7 @@ function assertSymbolNodeType(node) {
  * returns null.
  */
 function checkSymbolNodeType(node) {
-  if (node && (node.type === "atom" || NON_ATOMS.hasOwnProperty(node.type))) {
+  if (node.type === "atom" || NonAtoms.has(node.type)) {
     return node;
   }
   return null;
@@ -6933,7 +6914,7 @@ var htmlBuilder$a = (grp, options) => {
     }
     // Shift the accent over by the skew.
     var left = skew;
-    // CSS defines `.katex .accent .accent-body:not(.accent-full) { width: 0 }`
+    // CSS defines `.katex .katex-accent .accent-body:not(.accent-full) { width: 0 }`
     // so that the accent doesn't contribute to the bounding box.
     // We need to shift the character by its width (effectively half
     // its width) to compensate.
@@ -6977,7 +6958,7 @@ var htmlBuilder$a = (grp, options) => {
       }]
     });
   }
-  var accentWrap = makeSpan(["mord", "accent"], [accentBody], options);
+  var accentWrap = makeSpan(["mord", "katex-accent"], [accentBody], options);
   if (supSubGroup) {
     // Here, we replace the "base" child of the supsub with our newly
     // generated accent.
@@ -7053,10 +7034,8 @@ defineFunction({
   names: ["\\underleftarrow", "\\underrightarrow", "\\underleftrightarrow", "\\undergroup", "\\underlinesegment", "\\utilde"],
   numArgs: 1,
   handler: (_ref, args) => {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     var base = args[0];
     return {
       type: "accentUnder",
@@ -7115,10 +7094,8 @@ defineFunction({
   numArgs: 1,
   numOptionalArgs: 1,
   handler(_ref, args, optArgs) {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     return {
       type: "xArrow",
       mode: parser.mode,
@@ -7263,10 +7240,8 @@ defineFunction({
   numArgs: 1,
   primitive: true,
   handler(_ref, args) {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     var body = args[0];
     return {
       type: "mclass",
@@ -7298,9 +7273,7 @@ defineFunction({
   names: ["\\@binrel"],
   numArgs: 2,
   handler(_ref2, args) {
-    var {
-      parser
-    } = _ref2;
+    var parser = _ref2.parser;
     return {
       type: "mclass",
       mode: parser.mode,
@@ -7316,10 +7289,8 @@ defineFunction({
   names: ["\\stackrel", "\\overset", "\\underset"],
   numArgs: 2,
   handler(_ref3, args) {
-    var {
-      parser,
-      funcName
-    } = _ref3;
+    var parser = _ref3.parser,
+      funcName = _ref3.funcName;
     var baseArg = args[1];
     var shiftedArg = args[0];
     var mclass;
@@ -7370,9 +7341,7 @@ defineFunction({
   numArgs: 1,
   allowedInText: true,
   handler(_ref, args) {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     return {
       type: "pmb",
       mode: parser.mode,
@@ -7616,10 +7585,8 @@ defineFunction({
   names: ["\\\\cdleft", "\\\\cdright"],
   numArgs: 1,
   handler(_ref, args) {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     return {
       type: "cdlabel",
       mode: parser.mode,
@@ -7659,9 +7626,7 @@ defineFunction({
   names: ["\\\\cdparent"],
   numArgs: 1,
   handler(_ref2, args) {
-    var {
-      parser
-    } = _ref2;
+    var parser = _ref2.parser;
     return {
       type: "cdlabelparent",
       mode: parser.mode,
@@ -7690,9 +7655,7 @@ defineFunction({
   numArgs: 1,
   allowedInText: true,
   handler(_ref, args) {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     var arg = assertNodeType(args[0], "ordgroup");
     var group = arg.body;
     var number = "";
@@ -7744,9 +7707,7 @@ defineFunction({
   allowedInText: true,
   argTypes: ["color", "original"],
   handler(_ref, args) {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     var color = assertNodeType(args[0], "color-token").color;
     var body = args[1];
     return {
@@ -7766,10 +7727,8 @@ defineFunction({
   allowedInText: true,
   argTypes: ["color"],
   handler(_ref2, args) {
-    var {
-      parser,
-      breakOnTokenText
-    } = _ref2;
+    var parser = _ref2.parser,
+      breakOnTokenText = _ref2.breakOnTokenText;
     var color = assertNodeType(args[0], "color-token").color;
     // Set macro \current@color in current namespace to store the current
     // color, mimicking the behavior of color.sty.
@@ -7796,9 +7755,7 @@ defineFunction({
   numOptionalArgs: 0,
   allowedInText: true,
   handler(_ref, args, optArgs) {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     var size = parser.gullet.future().text === "[" ? parser.parseSizeGroup(true) : null;
     var newLine = !parser.settings.displayMode || !parser.settings.useStrictBehavior("newLineInDisplayMode", "In LaTeX, \\\\ or \\newline " + "does nothing in display mode");
     return {
@@ -7813,7 +7770,7 @@ defineFunction({
   htmlBuilder(group, options) {
     var span = makeSpan(["mspace"], [], options);
     if (group.newLine) {
-      span.classes.push("newline");
+      span.classes.push("katex-newline");
       if (group.size) {
         span.style.marginTop = makeEm(calculateSize(group.size, options));
       }
@@ -7888,10 +7845,8 @@ defineFunction({
   numArgs: 0,
   allowedInText: true,
   handler(_ref) {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     parser.consumeSpaces();
     var token = parser.fetch();
     if (globalMap[token.text]) {
@@ -7915,10 +7870,8 @@ defineFunction({
   allowedInText: true,
   primitive: true,
   handler(_ref2) {
-    var {
-      parser,
-      funcName
-    } = _ref2;
+    var parser = _ref2.parser,
+      funcName = _ref2.funcName;
     var tok = parser.gullet.popToken();
     var name = tok.text;
     if (/^(?:[\\{}$&#^_]|EOF)$/.test(name)) {
@@ -7958,9 +7911,8 @@ defineFunction({
       }
     }
     // replacement text, enclosed in '{' and '}' and properly nested
-    var {
-      tokens
-    } = parser.gullet.consumeArg();
+    var _parser$gullet$consum = parser.gullet.consumeArg(),
+      tokens = _parser$gullet$consum.tokens;
     if (insert) {
       tokens.unshift(insert);
     }
@@ -7992,10 +7944,8 @@ defineFunction({
   allowedInText: true,
   primitive: true,
   handler(_ref3) {
-    var {
-      parser,
-      funcName
-    } = _ref3;
+    var parser = _ref3.parser,
+      funcName = _ref3.funcName;
     var name = checkControlSequence(parser.gullet.popToken());
     parser.gullet.consumeSpaces();
     var tok = getRHS(parser);
@@ -8015,10 +7965,8 @@ defineFunction({
   allowedInText: true,
   primitive: true,
   handler(_ref4) {
-    var {
-      parser,
-      funcName
-    } = _ref4;
+    var parser = _ref4.parser,
+      funcName = _ref4.funcName;
     var name = checkControlSequence(parser.gullet.popToken());
     var middle = parser.gullet.popToken();
     var tok = parser.gullet.popToken();
@@ -8986,7 +8934,7 @@ var htmlBuilder$7 = (group, options) => {
   // subjects that should get the "tall" treatment.
   var isSingleChar = isCharacterBox(group.body);
   if (label === "sout") {
-    img = makeSpan(["stretchy", "sout"]);
+    img = makeSpan(["katex-stretchy", "katex-sout"]);
     img.height = options.fontMetrics().defaultRuleThickness / scale;
     imgShift = -0.5 * options.fontMetrics().xHeight;
   } else if (label === "phase") {
@@ -9165,10 +9113,8 @@ defineFunction({
   allowedInText: true,
   argTypes: ["color", "hbox"],
   handler(_ref, args, optArgs) {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     var color = assertNodeType(args[0], "color-token").color;
     var body = args[1];
     return {
@@ -9189,10 +9135,8 @@ defineFunction({
   allowedInText: true,
   argTypes: ["color", "color", "hbox"],
   handler(_ref2, args, optArgs) {
-    var {
-      parser,
-      funcName
-    } = _ref2;
+    var parser = _ref2.parser,
+      funcName = _ref2.funcName;
     var borderColor = assertNodeType(args[0], "color-token").color;
     var backgroundColor = assertNodeType(args[1], "color-token").color;
     var body = args[2];
@@ -9213,9 +9157,7 @@ defineFunction({
   argTypes: ["hbox"],
   allowedInText: true,
   handler(_ref3, args) {
-    var {
-      parser
-    } = _ref3;
+    var parser = _ref3.parser;
     return {
       type: "enclose",
       mode: parser.mode,
@@ -9229,10 +9171,8 @@ defineFunction({
   names: ["\\cancel", "\\bcancel", "\\xcancel", "\\phase"],
   numArgs: 1,
   handler(_ref4, args) {
-    var {
-      parser,
-      funcName
-    } = _ref4;
+    var parser = _ref4.parser,
+      funcName = _ref4.funcName;
     var body = args[0];
     return {
       type: "enclose",
@@ -9248,10 +9188,8 @@ defineFunction({
   numArgs: 1,
   allowedInText: true,
   handler(_ref5, args) {
-    var {
-      parser,
-      funcName
-    } = _ref5;
+    var parser = _ref5.parser,
+      funcName = _ref5.funcName;
     if (parser.mode === "math") {
       parser.settings.reportNonstrict("mathVsSout", "LaTeX's \\sout works only in text mode");
     }
@@ -9271,9 +9209,7 @@ defineFunction({
   argTypes: ["hbox"],
   allowedInText: false,
   handler(_ref6, args) {
-    var {
-      parser
-    } = _ref6;
+    var parser = _ref6.parser;
     return {
       type: "enclose",
       mode: parser.mode,
@@ -9290,14 +9226,12 @@ defineFunction({
  */
 var _environments = {};
 function defineEnvironment(_ref) {
-  var {
-    type,
-    names,
-    props,
-    handler,
-    htmlBuilder,
-    mathmlBuilder
-  } = _ref;
+  var type = _ref.type,
+    names = _ref.names,
+    props = _ref.props,
+    handler = _ref.handler,
+    htmlBuilder = _ref.htmlBuilder,
+    mathmlBuilder = _ref.mathmlBuilder;
   // Set default values of environments.
   var data = {
     type,
@@ -9450,18 +9384,16 @@ function getAutoTag(name) {
  * ("text", "display", etc.), then each cell is cast into that style.
  */
 function parseArray(parser, _ref, style) {
-  var {
-    hskipBeforeAndAfter,
-    addJot,
-    cols,
-    arraystretch,
-    colSeparationType,
-    autoTag,
-    singleRow,
-    emptySingleRow,
-    maxNumCols,
-    leqno
-  } = _ref;
+  var hskipBeforeAndAfter = _ref.hskipBeforeAndAfter,
+    addJot = _ref.addJot,
+    cols = _ref.cols,
+    arraystretch = _ref.arraystretch,
+    colSeparationType = _ref.colSeparationType,
+    autoTag = _ref.autoTag,
+    singleRow = _ref.singleRow,
+    emptySingleRow = _ref.emptySingleRow,
+    maxNumCols = _ref.maxNumCols,
+    leqno = _ref.leqno;
   parser.gullet.beginGroup();
   if (!singleRow) {
     // \cr is equivalent to \\ without the optional size argument (see below)
@@ -9820,8 +9752,8 @@ var htmlBuilder$6 = function htmlBuilder(group, options) {
   var tableBody = makeSpan(["mtable"], cols);
   // Add \hline(s), if any.
   if (hlines.length > 0) {
-    var line = makeLineSpan("hline", options, ruleThickness);
-    var dashes = makeLineSpan("hdashline", options, ruleThickness);
+    var line = makeLineSpan("katex-hline", options, ruleThickness);
+    var dashes = makeLineSpan("katex-hdashline", options, ruleThickness);
     var vListElems = [{
       type: "elem",
       elem: tableBody,
@@ -9856,7 +9788,7 @@ var htmlBuilder$6 = function htmlBuilder(group, options) {
       positionType: "individualShift",
       children: tagSpans
     });
-    var tagCol = makeSpan(["tag"], [eqnNumCol], options);
+    var tagCol = makeSpan(["katex-tag"], [eqnNumCol], options);
     return makeFragment([tableBody, tagCol]);
   }
 };
@@ -10398,10 +10330,8 @@ defineFunction({
   numArgs: 1,
   argTypes: ["text"],
   handler(_ref, args) {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     var nameGroup = args[0];
     if (nameGroup.type !== "ordgroup") {
       throw new ParseError("Invalid environment name", nameGroup);
@@ -10412,16 +10342,15 @@ defineFunction({
     }
     if (funcName === "\\begin") {
       // begin...end is similar to left...right
-      if (!environments.hasOwnProperty(envName)) {
+      if (!Object.prototype.hasOwnProperty.call(environments, envName)) {
         throw new ParseError("No such environment: " + envName, nameGroup);
       }
       // Build the environment object. Arguments and other information will
       // be made available to the begin and end methods using properties.
       var env = environments[envName];
-      var {
-        args: _args,
-        optArgs
-      } = parser.parseArguments("\\begin{" + envName + "}", env);
+      var _parser$parseArgument = parser.parseArguments("\\begin{" + envName + "}", env),
+        _args = _parser$parseArgument.args,
+        optArgs = _parser$parseArgument.optArgs;
       var context = {
         mode: parser.mode,
         envName,
@@ -10477,10 +10406,8 @@ defineFunction({
   numArgs: 1,
   allowedInArgument: true,
   handler: (_ref, args) => {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     var body = normalizeArgument(args[0]);
     var func = funcName in fontAliases ? fontAliases[funcName] : funcName;
     return {
@@ -10498,9 +10425,7 @@ defineFunction({
   names: ["\\boldsymbol", "\\bm"],
   numArgs: 1,
   handler: (_ref2, args) => {
-    var {
-      parser
-    } = _ref2;
+    var parser = _ref2.parser;
     var body = args[0];
     // amsbsy.sty's \boldsymbol uses \binrel spacing to inherit the
     // argument's bin|rel|ord status
@@ -10525,14 +10450,10 @@ defineFunction({
   numArgs: 0,
   allowedInText: true,
   handler: (_ref3, args) => {
-    var {
-      parser,
-      funcName,
-      breakOnTokenText
-    } = _ref3;
-    var {
-      mode
-    } = parser;
+    var parser = _ref3.parser,
+      funcName = _ref3.funcName,
+      breakOnTokenText = _ref3.breakOnTokenText;
+    var mode = parser.mode;
     var body = parser.parseExpression(true, breakOnTokenText);
     return {
       type: "font",
@@ -10728,10 +10649,8 @@ defineFunction({
   numArgs: 2,
   allowedInArgument: true,
   handler: (_ref, args) => {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     var numer = args[0];
     var denom = args[1];
     var hasBarLine;
@@ -10797,11 +10716,9 @@ defineFunction({
   numArgs: 0,
   infix: true,
   handler(_ref2) {
-    var {
-      parser,
-      funcName,
-      token
-    } = _ref2;
+    var parser = _ref2.parser,
+      funcName = _ref2.funcName,
+      token = _ref2.token;
     var replaceWith;
     switch (funcName) {
       case "\\over":
@@ -10846,9 +10763,7 @@ defineFunction({
   allowedInArgument: true,
   argTypes: ["math", "math", "size", "text", "math", "math"],
   handler(_ref3, args) {
-    var {
-      parser
-    } = _ref3;
+    var parser = _ref3.parser;
     var numer = args[4];
     var denom = args[5];
     // Look into the parse nodes to get the desired delimiters.
@@ -10901,11 +10816,9 @@ defineFunction({
   argTypes: ["size"],
   infix: true,
   handler(_ref4, args) {
-    var {
-      parser,
-      funcName,
-      token
-    } = _ref4;
+    var parser = _ref4.parser;
+      _ref4.funcName;
+      var token = _ref4.token;
     return {
       type: "infix",
       mode: parser.mode,
@@ -10921,10 +10834,8 @@ defineFunction({
   numArgs: 3,
   argTypes: ["math", "size", "math"],
   handler: (_ref5, args) => {
-    var {
-      parser,
-      funcName
-    } = _ref5;
+    var parser = _ref5.parser;
+      _ref5.funcName;
     var numer = args[0];
     var barSize = assertNodeType(args[1], "infix").size;
     if (!barSize) {
@@ -11053,10 +10964,8 @@ defineFunction({
   names: ["\\overbrace", "\\underbrace", "\\overbracket", "\\underbracket"],
   numArgs: 1,
   handler(_ref, args) {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     return {
       type: "horizBrace",
       mode: parser.mode,
@@ -11076,9 +10985,7 @@ defineFunction({
   argTypes: ["url", "original"],
   allowedInText: true,
   handler: (_ref, args) => {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     var body = args[1];
     var href = assertNodeType(args[0], "url").url;
     if (!parser.settings.isTrusted({
@@ -11114,9 +11021,7 @@ defineFunction({
   argTypes: ["url"],
   allowedInText: true,
   handler: (_ref2, args) => {
-    var {
-      parser
-    } = _ref2;
+    var parser = _ref2.parser;
     var href = assertNodeType(args[0], "url").url;
     if (!parser.settings.isTrusted({
       command: "\\url",
@@ -11163,9 +11068,7 @@ defineFunction({
   allowedInText: true,
   primitive: true,
   handler(_ref, args) {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     return {
       type: "hbox",
       mode: parser.mode,
@@ -11188,11 +11091,9 @@ defineFunction({
   argTypes: ["raw", "original"],
   allowedInText: true,
   handler: (_ref, args) => {
-    var {
-      parser,
-      funcName,
-      token
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
+      _ref.token;
     var value = assertNodeType(args[0], "raw").string;
     var body = args[1];
     if (parser.settings.strict) {
@@ -11224,9 +11125,26 @@ defineFunction({
         break;
       case "\\htmlData":
         {
-          var data = value.split(",");
-          for (var i = 0; i < data.length; i++) {
-            var item = data[i];
+          // `{,}` escapes a literal comma. Braces are used rather than a
+          // backslash because `\,` is a macro (a thin space) that expands
+          // away before this raw argument is ever read.
+          var ESCAPED_COMMA = "{,}";
+          var data = [];
+          var current = "";
+          for (var i = 0; i < value.length; i++) {
+            if (value.startsWith(ESCAPED_COMMA, i)) {
+              current += ",";
+              i += ESCAPED_COMMA.length - 1;
+            } else if (value[i] === ",") {
+              data.push(current);
+              current = "";
+            } else {
+              current += value[i];
+            }
+          }
+          data.push(current);
+          for (var _i = 0; _i < data.length; _i++) {
+            var item = data[_i];
             var firstEquals = item.indexOf("=");
             if (firstEquals < 0) {
               throw new ParseError("\\htmlData key/value '" + item + "'" + " missing equals sign");
@@ -11261,9 +11179,11 @@ defineFunction({
       classes.push(...group.attributes.class.trim().split(/\s+/));
     }
     var span = makeSpan(classes, elements, options);
-    for (var attr in group.attributes) {
-      if (attr !== "class" && group.attributes.hasOwnProperty(attr)) {
-        span.setAttribute(attr, group.attributes[attr]);
+    for (var _ref3 of Object.entries(group.attributes)) {
+      var attr = _ref3[0];
+      var value = _ref3[1];
+      if (attr !== "class") {
+        span.setAttribute(attr, value);
       }
     }
     return span;
@@ -11280,9 +11200,7 @@ defineFunction({
   allowedInArgument: true,
   allowedInText: true,
   handler: (_ref, args) => {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     return {
       type: "htmlmathml",
       mode: parser.mode,
@@ -11331,9 +11249,7 @@ defineFunction({
   argTypes: ["raw", "url"],
   allowedInText: false,
   handler: (_ref, args, optArgs) => {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     var width = {
       number: 0,
       unit: "em"
@@ -11450,10 +11366,8 @@ defineFunction({
   primitive: true,
   allowedInText: true,
   handler(_ref, args) {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     var size = assertNodeType(args[0], "size");
     if (parser.settings.strict) {
       var mathFunction = funcName[1] === 'm'; // \mkern, \mskip
@@ -11494,10 +11408,8 @@ defineFunction({
   numArgs: 1,
   allowedInText: true,
   handler: (_ref, args) => {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     var body = args[0];
     return {
       type: "lap",
@@ -11512,19 +11424,19 @@ defineFunction({
     if (group.alignment === "clap") {
       // ref: https://www.math.lsu.edu/~aperlis/publications/mathclap/
       inner = makeSpan([], [buildGroup$1(group.body, options)]);
-      // wrap, since CSS will center a .clap > .inner > span
-      inner = makeSpan(["inner"], [inner], options);
+      // wrap, since CSS will center a .clap > .katex-inner > span
+      inner = makeSpan(["katex-inner"], [inner], options);
     } else {
-      inner = makeSpan(["inner"], [buildGroup$1(group.body, options)]);
+      inner = makeSpan(["katex-inner"], [buildGroup$1(group.body, options)]);
     }
-    var fix = makeSpan(["fix"], []);
+    var fix = makeSpan(["katex-fix"], []);
     var node = makeSpan([group.alignment], [inner, fix], options);
     // At this point, we have correctly set horizontal alignment of the
     // two items involved in the lap.
     // Next, use a strut to set the height of the HTML bounding box.
     // Otherwise, a tall argument may be misplaced.
     // This code resolved issue #1153
-    var strut = makeSpan(["strut"]);
+    var strut = makeSpan(["katex-strut"]);
     strut.style.height = makeEm(node.height + node.depth);
     if (node.depth) {
       strut.style.verticalAlign = makeEm(-node.depth);
@@ -11532,8 +11444,8 @@ defineFunction({
     node.children.unshift(strut);
     // Next, prevent vertical misplacement when next to something tall.
     // This code resolves issue #1234
-    node = makeSpan(["thinbox"], [node], options);
-    return makeSpan(["mord", "vbox"], [node], options);
+    node = makeSpan(["katex-thinbox"], [node], options);
+    return makeSpan(["mord", "katex-vbox"], [node], options);
   },
   mathmlBuilder: (group, options) => {
     // mathllap, mathrlap, mathclap
@@ -11555,10 +11467,8 @@ defineFunction({
   allowedInText: true,
   allowedInMath: false,
   handler(_ref, args) {
-    var {
-      funcName,
-      parser
-    } = _ref;
+    var funcName = _ref.funcName,
+      parser = _ref.parser;
     var outerMode = parser.mode;
     parser.switchMode("math");
     var close = funcName === "\\(" ? "\\)" : "$";
@@ -11607,9 +11517,7 @@ defineFunction({
   numArgs: 4,
   primitive: true,
   handler: (_ref, args) => {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     return {
       type: "mathchoice",
       mode: parser.mode,
@@ -11902,10 +11810,8 @@ defineFunction({
   names: ["\\coprod", "\\bigvee", "\\bigwedge", "\\biguplus", "\\bigcap", "\\bigcup", "\\intop", "\\prod", "\\sum", "\\bigotimes", "\\bigoplus", "\\bigodot", "\\bigsqcup", "\\smallint", "\u220F", "\u2210", "\u2211", "\u22c0", "\u22c1", "\u22c2", "\u22c3", "\u2a00", "\u2a01", "\u2a02", "\u2a04", "\u2a06"],
   numArgs: 0,
   handler: (_ref, args) => {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     var fName = funcName;
     if (fName.length === 1) {
       fName = singleCharBigOps[fName];
@@ -11928,9 +11834,7 @@ defineFunction({
   numArgs: 1,
   primitive: true,
   handler: (_ref2, args) => {
-    var {
-      parser
-    } = _ref2;
+    var parser = _ref2.parser;
     var body = args[0];
     return {
       type: "op",
@@ -11959,10 +11863,8 @@ defineFunction({
   names: ["\\arcsin", "\\arccos", "\\arctan", "\\arctg", "\\arcctg", "\\arg", "\\ch", "\\cos", "\\cosec", "\\cosh", "\\cot", "\\cotg", "\\coth", "\\csc", "\\ctg", "\\cth", "\\deg", "\\dim", "\\exp", "\\hom", "\\ker", "\\lg", "\\ln", "\\log", "\\sec", "\\sin", "\\sinh", "\\sh", "\\tan", "\\tanh", "\\tg", "\\th"],
   numArgs: 0,
   handler(_ref3) {
-    var {
-      parser,
-      funcName
-    } = _ref3;
+    var parser = _ref3.parser,
+      funcName = _ref3.funcName;
     return {
       type: "op",
       mode: parser.mode,
@@ -11979,10 +11881,8 @@ defineFunction({
   names: ["\\det", "\\gcd", "\\inf", "\\lim", "\\max", "\\min", "\\Pr", "\\sup"],
   numArgs: 0,
   handler(_ref4) {
-    var {
-      parser,
-      funcName
-    } = _ref4;
+    var parser = _ref4.parser,
+      funcName = _ref4.funcName;
     return {
       type: "op",
       mode: parser.mode,
@@ -12000,10 +11900,8 @@ defineFunction({
   numArgs: 0,
   allowedInArgument: true,
   handler(_ref5) {
-    var {
-      parser,
-      funcName
-    } = _ref5;
+    var parser = _ref5.parser,
+      funcName = _ref5.funcName;
     var fName = funcName;
     if (fName.length === 1) {
       fName = singleCharIntegrals[fName];
@@ -12128,10 +12026,8 @@ defineFunction({
   names: ["\\operatorname@", "\\operatornamewithlimits"],
   numArgs: 1,
   handler: (_ref, args) => {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     var body = args[0];
     return {
       type: "operatorname",
@@ -12165,9 +12061,7 @@ defineFunction({
   names: ["\\overline"],
   numArgs: 1,
   handler(_ref, args) {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     var body = args[0];
     return {
       type: "overline",
@@ -12199,7 +12093,7 @@ defineFunction({
         size: defaultRuleThickness
       }]
     });
-    return makeSpan(["mord", "overline"], [vlist], options);
+    return makeSpan(["mord", "katex-overline"], [vlist], options);
   },
   mathmlBuilder(group, options) {
     var operator = new MathNode("mo", [new TextNode("\u203e")]);
@@ -12216,9 +12110,7 @@ defineFunction({
   numArgs: 1,
   allowedInText: true,
   handler: (_ref, args) => {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     var body = args[0];
     return {
       type: "phantom",
@@ -12244,9 +12136,7 @@ defineFunction({
   numArgs: 1,
   allowedInText: true,
   handler: (_ref2, args) => {
-    var {
-      parser
-    } = _ref2;
+    var parser = _ref2.parser;
     var body = args[0];
     return {
       type: "vphantom",
@@ -12255,8 +12145,8 @@ defineFunction({
     };
   },
   htmlBuilder: (group, options) => {
-    var inner = makeSpan(["inner"], [buildGroup$1(group.body, options.withPhantom())]);
-    var fix = makeSpan(["fix"], []);
+    var inner = makeSpan(["katex-inner"], [buildGroup$1(group.body, options.withPhantom())]);
+    var fix = makeSpan(["katex-fix"], []);
     return makeSpan(["mord", "rlap"], [inner, fix], options);
   },
   mathmlBuilder: (group, options) => {
@@ -12276,9 +12166,7 @@ defineFunction({
   argTypes: ["size", "hbox"],
   allowedInText: true,
   handler(_ref, args) {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     var amount = assertNodeType(args[0], "size").value;
     var body = args[1];
     return {
@@ -12315,9 +12203,7 @@ defineFunction({
   allowedInText: true,
   allowedInArgument: true,
   handler(_ref) {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     return {
       type: "internal",
       mode: parser.mode
@@ -12334,9 +12220,7 @@ defineFunction({
   allowedInMath: true,
   argTypes: ["size", "size", "size"],
   handler(_ref, args, optArgs) {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     var shift = optArgs[0];
     var width = assertNodeType(args[0], "size");
     var height = assertNodeType(args[1], "size");
@@ -12350,7 +12234,7 @@ defineFunction({
   },
   htmlBuilder(group, options) {
     // Make an empty span for the rule
-    var rule = makeSpan(["mord", "rule"], [], options);
+    var rule = makeSpan(["mord", "katex-rule"], [], options);
     // Calculate the shift, width, and height of the rule, and account for units
     var width = calculateSize(group.width, options);
     var height = calculateSize(group.height, options);
@@ -12396,7 +12280,7 @@ function sizingGroup(value, options, baseOptions) {
   // Add size-resetting classes to the inner list and set maxFontSize
   // manually. Handle nested size changes.
   for (var i = 0; i < inner.length; i++) {
-    var pos = inner[i].classes.indexOf("sizing");
+    var pos = inner[i].classes.indexOf("katex-sizing");
     if (pos < 0) {
       Array.prototype.push.apply(inner[i].classes, options.sizingClasses(baseOptions));
     } else if (inner[i].classes[pos + 1] === "reset-size" + options.size) {
@@ -12424,11 +12308,9 @@ defineFunction({
   numArgs: 0,
   allowedInText: true,
   handler: (_ref, args) => {
-    var {
-      breakOnTokenText,
-      funcName,
-      parser
-    } = _ref;
+    var breakOnTokenText = _ref.breakOnTokenText,
+      funcName = _ref.funcName,
+      parser = _ref.parser;
     var body = parser.parseExpression(false, breakOnTokenText);
     return {
       type: "sizing",
@@ -12461,9 +12343,7 @@ defineFunction({
   numOptionalArgs: 1,
   allowedInText: true,
   handler: (_ref, args, optArgs) => {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     var smashHeight = false;
     var smashDepth = false;
     var tbArg = optArgs[0] && assertNodeType(optArgs[0], "ordgroup");
@@ -12511,7 +12391,7 @@ defineFunction({
     }
     if (group.smashHeight && group.smashDepth) {
       // Symmetric \smash can stay in inline layout.
-      return makeSpan(["mord", "smash"], [node], options);
+      return makeSpan(["mord", "katex-smash"], [node], options);
     }
     // In order to influence makeVList for asymmetric smashing, we have to
     // reset the children.
@@ -12557,9 +12437,7 @@ defineFunction({
   numArgs: 1,
   numOptionalArgs: 1,
   handler(_ref, args, optArgs) {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     var index = optArgs[0];
     var body = args[0];
     return {
@@ -12592,11 +12470,10 @@ defineFunction({
     var lineClearance = theta + phi / 4;
     var minDelimiterHeight = inner.height + inner.depth + lineClearance + theta;
     // Create a sqrt SVG of the required minimum size
-    var {
-      span: img,
-      ruleWidth,
-      advanceWidth
-    } = makeSqrtImage(minDelimiterHeight, options);
+    var _makeSqrtImage = makeSqrtImage(minDelimiterHeight, options),
+      img = _makeSqrtImage.span,
+      ruleWidth = _makeSqrtImage.ruleWidth,
+      advanceWidth = _makeSqrtImage.advanceWidth;
     var delimDepth = img.height - ruleWidth;
     // Adjust the clearance based on the delimiter size
     if (delimDepth > inner.height + inner.depth + lineClearance) {
@@ -12644,15 +12521,13 @@ defineFunction({
       });
       // Add a class surrounding it so we can add on the appropriate
       // kerning
-      var rootVListWrap = makeSpan(["root"], [rootVList]);
+      var rootVListWrap = makeSpan(["katex-root"], [rootVList]);
       return makeSpan(["mord", "sqrt"], [rootVListWrap, body], options);
     }
   },
   mathmlBuilder(group, options) {
-    var {
-      body,
-      index
-    } = group;
+    var body = group.body,
+      index = group.index;
     return index ? new MathNode("mroot", [buildGroup(body, options), buildGroup(index, options)]) : new MathNode("msqrt", [buildGroup(body, options)]);
   }
 });
@@ -12673,11 +12548,9 @@ defineFunction({
   allowedInText: true,
   primitive: true,
   handler(_ref, args) {
-    var {
-      breakOnTokenText,
-      funcName,
-      parser
-    } = _ref;
+    var breakOnTokenText = _ref.breakOnTokenText,
+      funcName = _ref.funcName,
+      parser = _ref.parser;
     // parse out the implicit body
     var body = parser.parseExpression(true, breakOnTokenText);
     // TODO: Refactor to avoid duplicating styleMap in multiple places (e.g.
@@ -12767,11 +12640,9 @@ defineFunctionBuilders({
     if (builderDelegate) {
       return builderDelegate(group, options);
     }
-    var {
-      base: valueBase,
-      sup: valueSup,
-      sub: valueSub
-    } = group;
+    var valueBase = group.base,
+      valueSup = group.sup,
+      valueSub = group.sub;
     var base = buildGroup$1(valueBase, options);
     var supm;
     var subm;
@@ -13012,33 +12883,26 @@ defineFunctionBuilders({
 });
 
 // A map of CSS-based spacing functions to their CSS class.
-var cssSpace = {
-  "\\nobreak": "nobreak",
-  "\\allowbreak": "allowbreak"
-};
+var cssSpace = new Map([["\\nobreak", "nobreak"], ["\\allowbreak", "allowbreak"]]);
 // A lookup table to determine whether a spacing function/symbol should be
 // treated like a regular space character.  If a symbol or command is a key
 // in this table, then it should be a regular space character.  Furthermore,
 // the associated value may have a `className` specifying an extra CSS class
 // to add to the created `span`.
-var regularSpace = {
-  " ": {},
-  "\\ ": {},
-  "~": {
-    className: "nobreak"
-  },
-  "\\space": {},
-  "\\nobreakspace": {
-    className: "nobreak"
-  }
-};
+var regularSpace = new Map([[" ", {}], ["\\ ", {}], ["~", {
+  className: "nobreak"
+}], ["\\space", {}], ["\\nobreakspace", {
+  className: "nobreak"
+}]]);
 // ParseNode<"spacing"> created in Parser.js from the "spacing" symbol Groups in
 // src/symbols.js.
 defineFunctionBuilders({
   type: "spacing",
   htmlBuilder(group, options) {
-    if (regularSpace.hasOwnProperty(group.text)) {
-      var className = regularSpace[group.text].className || "";
+    var regularSpaceItem = regularSpace.get(group.text);
+    var cssSpaceClass = cssSpace.get(group.text);
+    if (regularSpaceItem) {
+      var className = regularSpaceItem.className || "";
       // Spaces are generated by adding an actual space. Each of these
       // things has an entry in the symbols table, so these will be turned
       // into appropriate outputs.
@@ -13049,18 +12913,18 @@ defineFunctionBuilders({
       } else {
         return makeSpan(["mspace", className], [mathsym(group.text, group.mode, options)], options);
       }
-    } else if (cssSpace.hasOwnProperty(group.text)) {
+    } else if (cssSpaceClass) {
       // Spaces based on just a CSS class.
-      return makeSpan(["mspace", cssSpace[group.text]], [], options);
+      return makeSpan(["mspace", cssSpaceClass], [], options);
     } else {
       throw new ParseError("Unknown type of space \"" + group.text + "\"");
     }
   },
   mathmlBuilder(group, options) {
     var node;
-    if (regularSpace.hasOwnProperty(group.text)) {
+    if (regularSpace.has(group.text)) {
       node = new MathNode("mtext", [new TextNode("\u00a0")]);
-    } else if (cssSpace.hasOwnProperty(group.text)) {
+    } else if (cssSpace.has(group.text)) {
       // CSS-based MathML spaces (\nobreak, \allowbreak) are ignored
       return new MathNode("mspace");
     } else {
@@ -13135,10 +12999,8 @@ defineFunction({
   allowedInArgument: true,
   allowedInText: true,
   handler(_ref, args) {
-    var {
-      parser,
-      funcName
-    } = _ref;
+    var parser = _ref.parser,
+      funcName = _ref.funcName;
     var body = args[0];
     return {
       type: "text",
@@ -13164,9 +13026,7 @@ defineFunction({
   numArgs: 1,
   allowedInText: true,
   handler(_ref, args) {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     return {
       type: "underline",
       mode: parser.mode,
@@ -13198,7 +13058,7 @@ defineFunction({
         elem: innerGroup
       }]
     });
-    return makeSpan(["mord", "underline"], [vlist], options);
+    return makeSpan(["mord", "katex-underline"], [vlist], options);
   },
   mathmlBuilder(group, options) {
     var operator = new MathNode("mo", [new TextNode("\u203e")]);
@@ -13218,9 +13078,7 @@ defineFunction({
   // In LaTeX, \vcenter can act only on a box.
   allowedInText: false,
   handler(_ref, args) {
-    var {
-      parser
-    } = _ref;
+    var parser = _ref.parser;
     return {
       type: "vcenter",
       mode: parser.mode,
@@ -13443,13 +13301,11 @@ class Namespace {
       throw new ParseError("Unbalanced namespace destruction: attempt " + "to pop global namespace; please report this as a bug");
     }
     var undefs = this.undefStack.pop();
-    for (var undef in undefs) {
-      if (undefs.hasOwnProperty(undef)) {
-        if (undefs[undef] == null) {
-          delete this.current[undef];
-        } else {
-          this.current[undef] = undefs[undef];
-        }
+    for (var key of Object.keys(undefs)) {
+      if (undefs[key] === undefined) {
+        delete this.current[key];
+      } else {
+        this.current[key] = undefs[key];
       }
     }
   }
@@ -13467,7 +13323,7 @@ class Namespace {
    * `get(name) != null`.
    */
   has(name) {
-    return this.current.hasOwnProperty(name) || this.builtins.hasOwnProperty(name);
+    return Object.prototype.hasOwnProperty.call(this.current, name) || Object.prototype.hasOwnProperty.call(this.builtins, name);
   }
   /**
    * Get the current value of a name, or `undefined` if there is no value.
@@ -13478,7 +13334,7 @@ class Namespace {
    * `if (namespace.has(...))`.
    */
   get(name) {
-    if (this.current.hasOwnProperty(name)) {
+    if (Object.prototype.hasOwnProperty.call(this.current, name)) {
       return this.current[name];
     } else {
       return this.builtins[name];
@@ -13511,7 +13367,7 @@ class Namespace {
       // unless an undo is already in place, in which case that older
       // value is the correct one.
       var top = this.undefStack[this.undefStack.length - 1];
-      if (top && !top.hasOwnProperty(name)) {
+      if (top && !Object.prototype.hasOwnProperty.call(top, name)) {
         top[name] = this.current[name];
       }
     }
@@ -14526,16 +14382,14 @@ class MacroExpander {
         return null;
       }
       start = this.popToken(); // don't include [ in tokens
-      ({
-        tokens,
-        end
-      } = this.consumeArg(["]"]));
+      var _this$consumeArg = this.consumeArg(["]"]);
+      tokens = _this$consumeArg.tokens;
+      end = _this$consumeArg.end;
     } else {
-      ({
-        tokens,
-        start,
-        end
-      } = this.consumeArg());
+      var _this$consumeArg2 = this.consumeArg();
+      tokens = _this$consumeArg2.tokens;
+      start = _this$consumeArg2.start;
+      end = _this$consumeArg2.end;
     }
     // indicate the end of an argument
     this.pushToken(new Token("EOF", end.loc));
@@ -14833,14 +14687,17 @@ class MacroExpander {
    * `implicitCommands`.
    */
   isDefined(name) {
-    return this.macros.has(name) || functions.hasOwnProperty(name) || symbols.math.hasOwnProperty(name) || symbols.text.hasOwnProperty(name) || implicitCommands.hasOwnProperty(name);
+    return this.macros.has(name) || Object.prototype.hasOwnProperty.call(functions, name) || Object.prototype.hasOwnProperty.call(symbols.math, name) || Object.prototype.hasOwnProperty.call(symbols.text, name) || Object.prototype.hasOwnProperty.call(implicitCommands, name);
   }
   /**
    * Determine whether a command is expandable.
    */
   isExpandable(name) {
     var macro = this.macros.get(name);
-    return macro != null ? typeof macro === "string" || typeof macro === "function" || !macro.unexpandable : functions.hasOwnProperty(name) && !functions[name].primitive;
+    if (macro != null) {
+      return typeof macro === "string" || typeof macro === "function" || !macro.unexpandable;
+    }
+    return Object.prototype.hasOwnProperty.call(functions, name) && !functions[name].primitive;
   }
 }
 
@@ -15791,10 +15648,9 @@ class Parser {
     } else if (this.mode === "math" && funcData.allowedInMath === false) {
       throw new ParseError("Can't use function '" + func + "' in math mode", token);
     }
-    var {
-      args,
-      optArgs
-    } = this.parseArguments(func, funcData);
+    var _this$parseArguments = this.parseArguments(func, funcData),
+      args = _this$parseArguments.args,
+      optArgs = _this$parseArguments.optArgs;
     return this.callFunction(func, args, optArgs, token, breakOnTokenText);
   }
   /**
@@ -16116,7 +15972,7 @@ class Parser {
       // If there exists a function with this name, parse the function.
       // Otherwise, just return a nucleus
       result = this.parseFunction(breakOnTokenText, name) || this.parseSymbol();
-      if (result == null && text[0] === "\\" && !implicitCommands.hasOwnProperty(text)) {
+      if (result == null && text[0] === "\\" && !Object.prototype.hasOwnProperty.call(implicitCommands, text)) {
         if (this.settings.throwOnError) {
           throw new ParseError("Undefined control sequence: " + text, firstToken);
         }
@@ -16206,7 +16062,7 @@ class Parser {
     }
     // At this point, we should have a symbol, possibly with accents.
     // First expand any accented base symbol according to unicodeSymbols.
-    if (unicodeSymbols.hasOwnProperty(text[0]) && !symbols[this.mode][text[0]]) {
+    if (Object.prototype.hasOwnProperty.call(unicodeSymbols, text[0]) && !symbols[this.mode][text[0]]) {
       // This behavior is not strict (XeTeX-compatible) in math mode.
       if (this.settings.strict && this.mode === "math") {
         this.settings.reportNonstrict("unicodeTextInMathMode", "Accented Unicode text character \"" + text[0] + "\" used in " + "math mode", nucleus);
@@ -16406,7 +16262,7 @@ var renderToHTMLTree = function renderToHTMLTree(expression, options) {
     return renderError(error, expression, settings);
   }
 };
-var version = "0.17.0";
+var version = "0.18.1";
 var __domTree = {
   Span,
   Anchor,
