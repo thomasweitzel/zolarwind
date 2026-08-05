@@ -1,9 +1,7 @@
 {% extends "base.html" %}
-{% import "macros/head.html" as head %}
 
-{% block title %}{{ head::page_title(config=config, res=res, taxonomy=taxonomy) }}{% endblock title %}
+{% block title %}{{<head.page_title config={config} res={res} page={false} section={false} taxonomy={taxonomy} term={false} />}}{% endblock title %}
 
 {% block content %}
-{% set taxonomy_title = head::taxonomy_label(taxonomy=taxonomy.name, res=res) %}
 {% include "partials/taxonomy-terms.html" %}
 {% endblock %}

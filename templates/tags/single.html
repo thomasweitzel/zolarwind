@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-{% import "macros/head.html" as head %}
 
-{% block title %}{{ head::page_title(config=config, res=res, taxonomy=taxonomy, term=term) }}{% endblock title %}
+{% block title %}{{<head.page_title config={config} res={res} page={false} section={false} taxonomy={taxonomy} term={term} />}}{% endblock title %}
 
 {% block content %}
 {% set pages = term.pages %}
