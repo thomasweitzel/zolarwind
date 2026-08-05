@@ -8,7 +8,7 @@
   <div class="flex-shrink-0">
     <a href="{{ page.permalink }}" aria-label="{{ page.title | default(value=res.empty_page_title) }}">
       <img class="block h-48 w-full object-cover" src="{{ get_url(path=banner_path) }}" alt="{{ page.title | default(value=res.empty_page_title) }}"
-        {% if loop.first %}fetchpriority="high" loading="eager"{% else %}loading="lazy"{% endif %}
+        {% if is_first %}fetchpriority="high" loading="eager"{% else %}loading="lazy"{% endif %}
       />
     </a>
   </div>

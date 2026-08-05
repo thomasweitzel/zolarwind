@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% import "macros/toc.html" as toc %}
 
 {% block head_extra %}
   {% include "partials/highlight-css.html" %}
@@ -34,7 +33,7 @@
           {% include "partials/tags.html" %}
         </div>
       </div>
-      {{ toc::render_block(page=page, res=res) }}
+      {{<toc.render_block config={config} page={page} res={res} />}}
       <div>
         {{ page.content | safe }}
       </div>

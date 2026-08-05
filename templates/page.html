@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% import "macros/toc.html" as toc %}
 
 {% block head_extra %}
   {% include "partials/highlight-css.html" %}
@@ -14,7 +13,7 @@
     data-clipboard-error="{{ res.clipboard_error }}"
   >
     <h1>{{ page.title | default(value=res.empty_page_title) }}</h1>
-    {{ toc::render_block(page=page, res=res) }}
+    {{<toc.render_block config={config} page={page} res={res} />}}
     <div>
       {{ page.content | safe }}
     </div>

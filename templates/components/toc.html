@@ -1,35 +1,29 @@
-{%- macro render_items(items, min_level, max_level) -%}
+{%- component toc.render_items(items, min_level, max_level) -%}
   {%- for item in items -%}
-    {%- set children = "" -%}
     {%- if item.children and item.children | length > 0 -%}
-      {%- set children = self::render_items(items=item.children, min_level=min_level, max_level=max_level) -%}
+      {%- set has_children = true -%}
+    {%- else -%}
+      {%- set has_children = false -%}
     {%- endif -%}
     {%- set in_range = item.level >= min_level and item.level <= max_level -%}
     {%- if in_range -%}
       <li>
         <a href="#{{ item.id }}">{{ item.title | striptags }}</a>
-        {%- if children | trim | length > 0 -%}
+        {%- if has_children -%}
           <ul>
-            {{ children | safe }}
+            {{<toc.render_items items={item.children} min_level={min_level} max_level={max_level} />}}
           </ul>
         {%- endif -%}
       </li>
     {%- else -%}
-      {{ children | safe }}
+      {%- if has_children -%}
+        {{<toc.render_items items={item.children} min_level={min_level} max_level={max_level} />}}
+      {%- endif -%}
     {%- endif -%}
   {%- endfor -%}
-{%- endmacro -%}
+{%- endcomponent toc.render_items -%}
 
-{%- macro render_list(items, min_level, max_level) -%}
-  {%- set items_html = self::render_items(items=items, min_level=min_level, max_level=max_level) -%}
-  {%- if items_html | trim | length > 0 -%}
-    <ul>
-      {{ items_html | safe }}
-    </ul>
-  {%- endif -%}
-{%- endmacro -%}
-
-{%- macro render_block(page, res) -%}
+{%- component toc.render_block(config, page, res) -%}
   {%- set show_toc = page.extra.toc | default(value=config.extra.toc | default(value=false)) -%}
   {%- if show_toc and page.toc and page.toc | length > 0 -%}
     {%- set min_level = 2 -%}
@@ -55,14 +49,18 @@
     {%- if max_level > 6 -%}{%- set max_level = 6 -%}{%- endif -%}
     {%- if min_level > max_level -%}{%- set max_level = min_level -%}{%- endif -%}
 
-    {%- set toc_body = self::render_list(items=page.toc, min_level=min_level, max_level=max_level) -%}
+    {%- set toc_body -%}
+      {{<toc.render_items items={page.toc} min_level={min_level} max_level={max_level} />}}
+    {%- endset -%}
     {%- if toc_body | trim | length > 0 -%}
       <nav class="toc mt-6 mb-8 rounded-md border border-neutral-800 bg-neutral-900/40 p-4" aria-label="{{ res.toc_title }}">
         <h2 class="mt-0 text-neutral-100">{{ res.toc_title }}</h2>
         <div class="mt-2 text-neutral-300">
-          {{ toc_body | safe }}
+          <ul>
+            {{ toc_body | safe }}
+          </ul>
         </div>
       </nav>
     {%- endif -%}
   {%- endif -%}
-{%- endmacro -%}
+{%- endcomponent toc.render_block -%}

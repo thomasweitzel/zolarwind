@@ -1,3 +1,4 @@
+{% component audio_simple(config, title="", artist="", label="", year="", src="") %}
 {%- set title = title | default(value="") -%}
 {%- set artist = artist | default(value="") -%}
 {%- set label = label | default(value="") -%}
@@ -5,12 +6,6 @@
 {%- set src = src | default(value="") -%}
 
 {%- set res = load_data(path=config.extra.path_language_resources ~ config.default_language ~ '.toml') -%}
-
-{%- set parts = [] -%}
-{%- if artist %}{%- set parts = parts | concat(with=[artist]) -%}{%- endif -%}
-{%- if label %}{%- set parts = parts | concat(with=[label]) -%}{%- endif -%}
-{%- if year %}{%- set parts = parts | concat(with=[year]) -%}{%- endif -%}
-{%- set subtitle = parts | join(sep=" | ") -%}
 
 <div class="container max-w-md my-6 py-6 px-6 text-black dark:text-black bg-gradient-to-tr from-ok-600 to-primary-800 rounded-2xl overflow-hidden">
     <div class="text-center relative">
@@ -20,7 +15,8 @@
     </div>
     <div class="mb-6 text-center relative">
         <h2 class="inline-block font-medium">{{ title }}</h2>
-        <p class="inline-block font-medium text-sm">{{ subtitle }}</p>
+        <p class="inline-block font-medium text-sm">{{ artist }}{% if artist and label %} | {% endif %}{{ label }}{% if (artist or label) and year %} | {% endif %}{{ year }}</p>
     </div>
     <audio controls src="{{ src }}" style="width: 100%">{{ res.audio_no_element }}</audio>
 </div>
+{% endcomponent audio_simple %}

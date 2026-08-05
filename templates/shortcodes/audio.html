@@ -1,3 +1,4 @@
+{% component audio(config, id=1, title="", artist="", label="", year="", src="", length="") %}
 {%- set id = id | default(value=1) -%}
 {%- set title = title | default(value="") -%}
 {%- set artist = artist | default(value="") -%}
@@ -7,12 +8,6 @@
 {%- set length = length | default(value="") -%}
 
 {%- set res = load_data(path=config.extra.path_language_resources ~ config.default_language ~ '.toml') -%}
-
-{%- set parts = [] -%}
-{%- if artist %}{%- set parts = parts | concat(with=[artist]) -%}{%- endif -%}
-{%- if label %}{%- set parts = parts | concat(with=[label]) -%}{%- endif -%}
-{%- if year %}{%- set parts = parts | concat(with=[year]) -%}{%- endif -%}
-{%- set subtitle = parts | join(sep=" | ") -%}
 
 <div
   class="container max-w-md my-6 py-6 px-6 text-black dark:text-black bg-gradient-to-tr from-primary-600 to-warn-800 rounded-2xl overflow-hidden"
@@ -26,7 +21,7 @@
     </div>
     <div class="mb-6 text-center relative">
         <h2 class="inline-block font-medium">{{ title }}</h2>
-        <p class="inline-block font-medium text-sm">{{ subtitle }}</p>
+        <p class="inline-block font-medium text-sm">{{ artist }}{% if artist and label %} | {% endif %}{{ label }}{% if (artist or label) and year %} | {% endif %}{{ year }}</p>
     </div>
     <div class="audio-controls{{ id }} flex space-x-1">
         <div class="play-div{{ id }} flex-none hover:text-fail-600">{{ res.audio_loading }}</div>
@@ -44,3 +39,4 @@
         <script src="{{ get_url(path='/js/audio/audio-init.js') }}" integrity="sha384-{{ get_hash(path='/js/audio/audio-init.js') }}"></script>
     {%- endif -%}
 </div>
+{% endcomponent audio %}

@@ -1,6 +1,6 @@
 <div class="max-w-7xl mx-auto pt-8 px-4 sm:px-6 lg:px-8">
   <h1 class="text-center lg:text-left">
-    {{ taxonomy_title }}
+    {{<head.taxonomy_label taxonomy={taxonomy.name} res={res} />}}
   </h1>
   <div class="mx-auto py-4">
     {% for term in terms %}

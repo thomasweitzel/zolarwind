@@ -1,6 +1,8 @@
+{% component diagram(init="") %}
 <pre class="mermaid">
   {% if init %}
     %%{ init: {{ init | safe }} }%%
   {% endif %}
   {{ body | safe }}
 </pre>
+{% endcomponent diagram %}

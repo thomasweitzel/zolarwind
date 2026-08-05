@@ -1,0 +1,62 @@
+{% component head.taxonomy_label(taxonomy, res) %}
+  {% if taxonomy == "tags" %}
+    {{ res.tags.other | capitalize }}
+  {% elif taxonomy == "series" %}
+    {{ res.series.other | capitalize }}
+  {% else %}
+    {{ taxonomy | capitalize }}
+  {% endif %}
+{% endcomponent head.taxonomy_label %}
+
+{% component head.taxonomy_term_label(taxonomy, term, res) %}
+  {% if taxonomy == "tags" %}
+    {{ res.tags.one | capitalize }}: {{ term.name }}
+  {% elif taxonomy == "series" %}
+    {{ res.series.one | capitalize }}: {{ term.name }}
+  {% else %}
+    {{ taxonomy | capitalize }}: {{ term.name }}
+  {% endif %}
+{% endcomponent head.taxonomy_term_label %}
+
+{% component head.page_title(config, res, page, section, taxonomy, term) %}
+  {% set title_separator = " | " %}
+  {% if page and page.title %}
+    {{ page.title }}{{ title_separator }}{{ config.extra.title }}
+  {% elif section and section.title %}
+    {{ section.title }}{{ title_separator }}{{ config.extra.title }}
+  {% elif term and taxonomy %}
+    {{<head.taxonomy_term_label taxonomy={taxonomy.name} term={term} res={res} />}}{{ title_separator }}{{ config.extra.title }}
+  {% elif taxonomy %}
+    {{<head.taxonomy_label taxonomy={taxonomy.name} res={res} />}}{{ title_separator }}{{ config.extra.title }}
+  {% else %}
+    {{ config.extra.title }}
+  {% endif %}
+{% endcomponent head.page_title %}
+
+{% component head.canonical_link(page, section, taxonomy, term, current_url) %}
+  {% if page and page.permalink %}
+    <link rel="canonical" href="{{ page.permalink }}" />
+  {% elif section and section.permalink %}
+    <link rel="canonical" href="{{ section.permalink }}" />
+  {% elif term and term.permalink %}
+    <link rel="canonical" href="{{ term.permalink }}" />
+  {% elif taxonomy and taxonomy.permalink %}
+    <link rel="canonical" href="{{ taxonomy.permalink }}" />
+  {% elif current_url is defined and current_url %}
+    <link rel="canonical" href="{{ current_url }}" />
+  {% endif %}
+{% endcomponent head.canonical_link %}
+
+{% component head.description_meta(config, page, section) %}
+  {% if page and page.description %}
+    <meta name="description" content="{{ page.description }}">
+  {% elif page and page.summary %}
+    <meta name="description" content="{{ page.summary | striptags }}">
+  {% elif section and section.description %}
+    <meta name="description" content="{{ section.description }}">
+  {% elif config.description %}
+    <meta name="description" content="{{ config.description }}">
+  {% elif config.extra.site_description %}
+    <meta name="description" content="{{ config.extra.site_description }}">
+  {% endif %}
+{% endcomponent head.description_meta %}

@@ -1,8 +1,9 @@
+{% component image(page, src, dark_src="", alt="", dark_alt="", title="", width=0, height=0, link="", lazy=true, decoding="async", caption="") %}
 {%- set colocated_path = page.colocated_path | default(value="") -%}
 {%- set lazy = lazy | default(value=true) -%}
 {%- set decoding = decoding | default(value="async") -%}
 
-{%- if src is starting_with("/") -%}
+{%- if src is starting_with(pat="/") -%}
   {%- set light_path = src -%}
 {%- else -%}
   {%- set light_path = colocated_path ~ src -%}
@@ -10,7 +11,7 @@
 {%- set light_meta = get_image_metadata(path=light_path, allow_missing=true) -%}
 
 {%- if dark_src -%}
-  {%- if dark_src is starting_with("/") -%}
+  {%- if dark_src is starting_with(pat="/") -%}
     {%- set dark_path = dark_src -%}
   {%- else -%}
     {%- set dark_path = colocated_path ~ dark_src -%}
@@ -68,3 +69,4 @@
     <figcaption class="italic">{{ caption | safe }}</figcaption>
   {%- endif %}
 </figure>
+{% endcomponent image %}

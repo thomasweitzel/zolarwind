@@ -1,4 +1,3 @@
-{% import "macros/head.html" as head %}
 <!DOCTYPE html>
 <html dir="ltr" lang="{{ config.default_language }}">
 <head>
@@ -17,21 +16,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="generator" content="{{ config.extra.generator | default(value='Zola') }}">
 
-  {% set description = head::page_description(config=config, page=page_value, section=section_value) | trim %}
-  {% if description %}
-    <meta name="description" content="{{ description }}">
-  {% endif %}
+  {{<head.description_meta config={config} page={page_value} section={section_value} />}}
 
   <title>
     {% block title %}
-      {{ head::page_title(config=config, res=res, page=page_value, section=section_value, taxonomy=taxonomy_value, term=term_value) }}
+      {{<head.page_title config={config} res={res} page={page_value} section={section_value} taxonomy={taxonomy_value} term={term_value} />}}
     {% endblock title %}
   </title>
-  {% set current_url_value = current_url | default(value="") %}
-  {% set canonical_url = head::canonical_url(page=page_value, section=section_value, taxonomy=taxonomy_value, term=term_value, current_url=current_url_value) | trim %}
-  {% if canonical_url %}
-    <link rel="canonical" href="{{ canonical_url }}" />
-  {% endif %}
+  {{<head.canonical_link page={page_value} section={section_value} taxonomy={taxonomy_value} term={term_value} current_url={current_url | default(value="")} />}}
   <link rel="stylesheet" href="{{ get_url(path='/css/generated.css') }}">
   {% block head_extra %}{% endblock head_extra %}
   {% if config.extra.favicon_svg %}
