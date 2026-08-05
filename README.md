@@ -168,7 +168,7 @@ Configuration settings used by this theme:
 
 - **style**: How to highlight code. Options are either `class` or `inline`. Here, we use the setting `class`.
 
-- **extra_grammars**: array of additional syntax highlighting configuration files in JSON format for languages not directly supported by Zola/Giallo.
+- **extra_grammars**: array of additional TextMate grammar files in JSON format for languages not bundled with Zola/Giallo. This theme includes the [upstream Caddyfile grammar](https://github.com/caddyserver/vscode-caddyfile) in `syntaxes/caddyfile.tmLanguage.json` as a working example; its MIT license is in `syntaxes/caddyfile.LICENSE`.
 
 ### Extra Configuration:
 

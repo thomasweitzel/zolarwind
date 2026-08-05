@@ -27,10 +27,9 @@ light_theme = "github-light-default"
 dark_theme = "ayu-dark"
 error_on_missing_language = true
 style = "class"
-# If the language you want to highlight is not supported, add additional syntax in this directory
+# Additional grammars for languages not bundled with Zola/Giallo.
 extra_grammars = [
-    "syntaxes/verilog.tmLanguage.json",
-    "syntaxes/vhdl.tmLanguage.json",
+    "syntaxes/caddyfile.tmLanguage.json",
 ]
 
 [extra]
