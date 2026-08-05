@@ -58,7 +58,7 @@ This theme is not compatible with Zola v0.21.0 and earlier.
   - [Example Front Matter](#example-front-matter)
   - [Fields description](#fields-description)
 - [Series](#series)
-- [Shortcodes](#shortcodes)
+  - [Markdown components](#markdown-components)
 - [Search](#search)
 - [Localization](#localization)
 - [Integrating the theme folder](#integrating-the-theme-folder)
@@ -157,12 +157,11 @@ Configuration settings used by this theme:
 ### Markdown Highlighting Configuration:
 
 - **light_theme** and **dark_theme**: The themes used for code highlighting in light and dark mode.
-  Zola writes `giallo-light.css` and `giallo-dark.css` into `static/`.
-  Templates load both files and switch them based on the selected theme.
+  Zola generates `giallo-light.css` and `giallo-dark.css` in the build output.
+  Templates load both files and the theme toggle enables the matching stylesheet.
   If you want the same style in both modes, set both to the same theme.
   Zolarwind expects both values to be set, because the highlight files are loaded on templates that render Markdown content (posts/pages).
   If you add code blocks directly in other templates, include the highlight files there as well.
-  Note: If you change `light_theme` or `dark_theme`, delete `static/giallo-light.css` and `static/giallo-dark.css` and run `zola build` to regenerate them; Zola does not overwrite existing giallo files.
 
 - **error_on_missing_language**: If the language to be highlighted is not found, how should Zola handle this? Set to `true` so missing languages cause a build error.
 
@@ -304,18 +303,17 @@ image = "banner.jpg"
 - **extra.math**: either `false` (default) or `true`.
   If set to `true`, the post will be rendered with KaTeX support for displaying math formulas.
   If the entry is omitted or set to `false`, the post will not have KaTeX support.
-  Markdown is parsed before KaTeX, so characters like `*` and backslashes inside `$...$` are interpreted by Markdown first, which can alter formulas.
-  To avoid this, use the safe KaTeX shortcode and omit `$`/`$$` delimiters inside the shortcode body:
+  Use `$...$` for inline math. Because Markdown processes backslashes first, write `\\%` when KaTeX must receive `\%` for a percent sign.
+  Use the KaTeX component for display math and omit `$$` delimiters inside its body:
 
   ```text
-  {% katex() %} a^2 + b^2 {% end %}
-  {% katex(inline=true) %} 1*2+3*4 {% end %}
+  {% <katex> %} a^2 + b^2 {% </katex> %}
   ```
 
 - **extra.diagram**: either `false` (default) or `true`.
   Controls loading of the necessary JavaScript to render the Mermaid diagram.
   If set to `true`, the post will be rendered with Mermaid support for displaying diagrams
-  by using the `diagram()` shortcode.
+  by using the `diagram` component.
 
 - **extra.toc**: either `false` (default) or `true`.
   Enables the in-page table of contents for this post/page.
@@ -359,12 +357,12 @@ Note: If no posts use the `series` taxonomy, Zola does not generate `/series/`, 
 
 ---
 
-## Shortcodes
+## Markdown components
 
-Zolarwind provides some shortcodes. Use them when you want the feature, not as formatting helpers.
+Zolarwind provides Markdown-facing components, stored in `templates/shortcodes/`. Use them when you want the feature, not as formatting helpers.
 Full documentation with parameters and examples: `docs/shortcodes.md`.
 
-- **katex**: render KaTeX safely when Markdown would interfere with math syntax.
+- **katex**: render display KaTeX math.
 - **diagram**: render Mermaid diagrams from fenced text blocks.
 - **image**: render local images with captions and optional light/dark variants.
 - **audio_simple**: native `<audio>` player in a themed card.
@@ -473,9 +471,7 @@ This is the directory structure of the standalone site, where the theme is in th
 ├── static
 │   ├── css
 │   ├── img
-│   ├── js
-│   ├── giallo-dark.css
-│   └── giallo-light.css
+│   └── js
 ├── syntaxes
 ├── templates
 └── theme.toml
@@ -486,9 +482,7 @@ Create a new directory `themes/zolarwind` and move the theme-specific files ther
 ```
 /
 ├── static
-│   ├── css
-│   ├── giallo-dark.css
-│   └── giallo-light.css
+│   └── css
 ├── syntaxes
 └── themes
     └── zolarwind
@@ -509,7 +503,7 @@ It will stay in its original location.
 Zola always serves the site’s `static/` directory, even when a theme is used.
 This file is generated from the file `css/main.css`, which is the input for the CSS generation.
 
-The `giallo-dark.css` and `giallo-light.css` files also stay in the root `static/` directory, because templates load them from there.
+Zola generates `giallo-light.css` and `giallo-dark.css` in the build output from the configured highlighting themes; they are not source files that need moving during integration.
 
 The generation process can be triggered with a script in the `package.json` file.
 You **only** need to adjust and run the script in `package.json` if you make changes to the theme's template files or use new Tailwind CSS classes directly in your content files.

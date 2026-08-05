@@ -32,17 +32,15 @@ require_path "i18n" "dir"
 require_path "templates" "dir"
 require_path "static" "dir"
 require_path "static/css" "dir"
-require_path "static/giallo-light.css" "file"
-require_path "static/giallo-dark.css" "file"
 require_path "theme.toml" "file"
 
 if [[ -e "themes/zolarwind" ]]; then
   die "Target directory 'themes/zolarwind' already exists. Remove it or choose a clean working tree."
 fi
 
-# Only static/img and static/js move into the theme; static/css and giallo-*.css must stay in the site root.
+# Only static/img and static/js move into the theme; static/css stays in the site root.
 if [[ ! -d "static/img" || ! -d "static/js" ]]; then
-  die "Expected 'static/img' and 'static/js' to exist. Only 'static/css' and 'static/giallo-*.css' should stay in the site root."
+  die "Expected 'static/img' and 'static/js' to exist. Only 'static/css' should stay in the site root."
 fi
 
 info "Creating themes/zolarwind structure."
