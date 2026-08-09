@@ -34,9 +34,9 @@ Localization is built-in for a single-locale build.
 
 ## Important Note
 
-As of Zola v0.22.0 from 2026-01-09, color syntax highlighting has changed and requires a different configuration.
-The theme reflects this change.
-This theme is not compatible with Zola v0.21.0 and earlier.
+As of Zola v0.23.2 from 2026-08-07, Giallo dark/light theme CSS generation works correctly again.
+The theme needs this to work properly.
+This theme is not compatible with Zola v0.23.1 and earlier.
 
 ---
 
