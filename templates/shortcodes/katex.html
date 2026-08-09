@@ -1,15 +1,40 @@
-{# KaTeX shortcode
-   Usage:
-     {% <katex> %} ... {% </katex> %}
+{# KaTeX component
+  Usage:
+    Block:  {% <katex> %} ... {% </katex> %}
+    Inline: {% <katex inline={true}> %} ... {% </katex> %}
 
-   Notes:
-     - This component renders display math. Use $...$ directly in Markdown for inline math.
-     - We wrap the body in $$...$$ so KaTeX auto-render picks it up.
-     - Do not include delimiters inside the shortcode body.
-     - We intentionally do NOT use |safe to keep HTML escaping intact.
+  Rendering pipeline:
+  | Tera2 component
+  → generated text
+  → CommonMark parser (pulldown-cmark)
+  → HTML
+  → KaTeX (JS in the Browser)
+
+  The component is rendered before Markdown.
+  Markdown-sensitive characters in the KaTeX source are therefore
+  encoded as HTML character references before Markdown sees them.
+
+  The browser decodes those references back into the original text
+  before KaTeX auto-render processes the DOM.
 #}
 
-{% component katex(class="") %}
-{% set content = body | trim %}
-<div class="math math-display{% if class %} {{ class }}{% endif %}">$${{ content }}$$</div>
-{% endcomponent katex %}
+{% component katex(inline: bool = false, class = "") -%}
+{%- set content = body
+    | trim
+    | escape_html
+    | replace(from=`\\`, to=`&#92;` )
+    | replace(from=`_`,  to=`&#95;` )
+    | replace(from=`*`,  to=`&#42;` )
+    | replace(from="`",  to=`&#96;` )
+    | replace(from=`~`,  to=`&#126;`)
+    | replace(from=`[`,  to=`&#91;` )
+    | replace(from=`]`,  to=`&#93;` )
+    | replace(from=`|`,  to=`&#124;`)
+-%}
+
+{%- if inline -%}
+<span class="math math-inline{% if class %} {{ class | escape_html }}{% endif %}" role="math">&#92;({{ content | safe }}&#92;)</span> {# needs to be in one line for CommonMark parser #}
+{%- else -%}
+<div class="math math-display{% if class %} {{ class | escape_html }}{% endif %}" role="math">&#92;[{{ content | safe }}&#92;]</div> {# needs to be in one line for CommonMark parser #}
+{%- endif %}
+{%- endcomponent katex %}
