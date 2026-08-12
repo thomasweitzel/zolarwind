@@ -2,6 +2,7 @@
   Usage:
     Block:  {% <katex> %} ... {% </katex> %}
     Inline: {% <katex inline={true}> %} ... {% </katex> %}
+    Class:  {% <katex class="my-math"> %} ... {% </katex> %}
 
   Rendering pipeline:
   | Tera2 component
@@ -33,8 +34,8 @@
 -%}
 
 {%- if inline -%}
-<span class="math math-inline{% if class %} {{ class | escape_html }}{% endif %}" role="math">&#92;({{ content | safe }}&#92;)</span> {# needs to be in one line for CommonMark parser #}
+<span class="math math-inline{% if class %} {{ class | escape_html }}{% endif %}" role="math">&#92;({{ content | safe }}&#92;)</span>
 {%- else -%}
-<div class="math math-display{% if class %} {{ class | escape_html }}{% endif %}" role="math">&#92;[{{ content | safe }}&#92;]</div> {# needs to be in one line for CommonMark parser #}
+<div class="math math-display{% if class %} {{ class | escape_html }}{% endif %}" role="math">&#92;[{{ content | safe }}&#92;]</div>
 {%- endif %}
 {%- endcomponent katex %}

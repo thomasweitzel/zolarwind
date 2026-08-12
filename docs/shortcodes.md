@@ -6,23 +6,19 @@ Zolarwind's Markdown-facing components are stored in `templates/shortcodes/`. Us
 
 ## `katex`
 
-Purpose: Render display KaTeX math.
+Purpose: Render inline or display KaTeX math.
 
 Parameters:
+- Optional: `inline` (boolean, default `false`)
 - Optional: `class` (string)
 
 Notes:
-- The component is block-level. Do not include `$$` inside the body; it adds the delimiters.
-- Use `$...$` directly in Markdown for inline math. Markdown processes backslashes first, so write `\\%` when KaTeX must receive `\%` for a percent sign.
+- The default is display math; set `inline={true}` for inline math.
+- Do not include `$`, `$$`, `\(`, or `\[` delimiters in the body; the component adds them.
+- The component protects Markdown-sensitive characters in its body before Markdown is parsed.
+- `class` is added to the generated `<div>` or `<span>` wrapper.
 
-Example:
-```md
-{% <katex> %}
-\int_0^1 x^2 \, dx
-{% </katex> %}
-```
-
-Display-math example:
+Display example:
 ```md
 {% <katex> %}
 \mathbf{A} * \mathbf{B} = \sum_{i=1}^n a_i b_i
@@ -31,7 +27,14 @@ Display-math example:
 
 Inline example:
 ```md
-$E = mc^2$
+{% <katex inline={true}> %}E = mc^2{% </katex> %}
+```
+
+Custom class example:
+```md
+{% <katex class="my-math"> %}
+\int_0^1 x^2 \, dx
+{% </katex> %}
 ```
 
 ---
