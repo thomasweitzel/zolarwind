@@ -1,7 +1,7 @@
 # Global settings
 settings_locale = "en"
 settings_date_locale = "en_US"
-settings_date_format = "%B %d, %Y"
+settings_date_format = "MMMM d, yyyy"
 
 # Simple language resources
 empty_page_title = "Empty title"

@@ -3,9 +3,9 @@
 <head>
   {# Initialize language resources #}
   {% set res         = load_data(path=config.extra.path_language_resources ~ config.default_language ~ '.toml') %}
-  {% set locale      = res.settings_locale      | default(value="en")        %}
-  {% set date_locale = res.settings_date_locale | default(value="en_US")     %}
-  {% set date_format = res.settings_date_format | default(value="%B %d, %Y") %}
+  {% set locale      = res.settings_locale      | default(value="en")           %}
+  {% set date_locale = res.settings_date_locale | default(value="en_US")        %}
+  {% set date_format = res.settings_date_format | default(value="MMMM d, yyyy") %}
   {% set page_value = page | default(value=false) %}
   {% set section_value = section | default(value=false) %}
   {% set taxonomy_value = taxonomy | default(value=false) %}

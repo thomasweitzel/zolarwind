@@ -13,6 +13,13 @@ All notable changes to the *Zolarwind* theme for the Zola static site generator 
 ### Fixed
 - nothing yet
 
+## 2026-09-12
+
+### Fixed
+
+- Updated locale-specific date formats from `strftime` to UTS-35 patterns for compatibility with Zola v0.23.5 and Tera
+  v2.3.0. This makes this version of Zolarwind incompatible with earlier Zola versions.
+
 ## 2026-01-10
 
 ### Fixed
